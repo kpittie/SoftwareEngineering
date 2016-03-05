@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title> Add Engineer </title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+  <form class="form-horizontal">
+  <fieldset>
+
+  <!-- Form Name -->
+  <legend>Add Engineers / Project Managers</legend>
+
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="name">Engineer Name</label>  
+    <div class="col-md-4">
+    <input id="name" name="name" type="text" placeholder="" class="form-control input-md" required="">
+    <span class="help-block">Enter the Engineers Name</span>  
+    </div>
+  </div>
+
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="id">Engineer ID</label>  
+    <div class="col-md-4">
+    <input id="id" name="id" type="text" placeholder="" class="form-control input-md" required="">
+    <span class="help-block">Enter the Engineers Name</span>  
+    </div>
+  </div>
+
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="project">Project</label>  
+    <div class="col-md-4">
+    <input id="project" name="project" type="text" placeholder="" class="form-control input-md" required="">
+    <span class="help-block">Enter the Project name</span>  
+    </div>
+  </div>
+
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="module">Associated Module</label>  
+    <div class="col-md-4">
+    <input id="module" name="module" type="text" placeholder="" class="form-control input-md" required="">
+    <span class="help-block">Enter the module associated with the Engineer</span>  
+    </div>
+  </div>
+
+  <!-- Multiple Radios (inline) -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="pmanager">Project Manager</label>
+    <div class="col-md-4"> 
+      <label class="radio-inline" for="pmanager-0">
+        <input type="radio" name="pmanager" id="pmanager-0" value="Y" checked="checked">
+        Yes
+      </label> 
+      <label class="radio-inline" for="pmanager-1">
+        <input type="radio" name="pmanager" id="pmanager-1" value="N">
+        No
+      </label>
+    </div>
+  </div>
+
+  <!-- Button -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="add"></label>
+    <div class="col-md-4">
+      <button id="add" name="add" class="btn btn-primary">Add</button>
+    </div>
+  </div>
+
+  </fieldset>
+  </form>
+</div>
+</body>
+
+</html>

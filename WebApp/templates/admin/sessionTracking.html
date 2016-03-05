@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title> Session Tracking </title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+
+<body>  
+<div class="container">
+  <form class="form-horizontal">
+  <fieldset>
+
+  <!-- Form Name -->
+  <legend>Select Engineers from Drop Down List</legend>
+
+  <!-- Button Drop Down -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="buttondropdown"></label>
+    <div class="col-md-6">
+      <div class="input-group">
+        <input id="buttondropdown" name="buttondropdown" class="form-control" placeholder="Select Engineer from Drop Down List " type="text">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            View
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="#">Engineer One</a></li>
+            <li><a href="#">Engineer Two</a></li>
+            <li><a href="#">Engineer Three</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Button -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="submit"></label>
+    <div class="col-md-4">
+      <button id="submit" name="submit" class="btn btn-primary">Show</button>
+    </div>
+  </div>
+
+  </fieldset>
+  </form>
+</div>
+</html>
