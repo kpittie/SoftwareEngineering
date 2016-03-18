@@ -1,3 +1,15 @@
 #unassigned-complaints-button {
 	width: 25%;	
 }
+
+.small-button {
+	width: 5%;
+}
+
+#first-input {
+	margin-left: 81px;
+}
+
+.dynamic-inputs {
+	margin-top: -5px;
+}

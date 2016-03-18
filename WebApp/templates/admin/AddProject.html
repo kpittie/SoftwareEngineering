@@ -1,11 +1,14 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title> Delete Project </title>
+	<title> Add Project </title>
 	<!-- Importing the CSS and the font for the website donot alter the section below -->
 	<link rel="stylesheet" type="text/css" href="../../styles/prettify.css">
 	<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
 	<!-- Importing ends here -->
+
+	<link rel="stylesheet" type="text/css" href="../../styles/admin.css">
+	<script src="../../scripts/js-admin-add-project.js"> </script>
 </head>
 
 <body>
@@ -34,10 +37,14 @@
 
 	<!-- This is the section where you'll add the main content of the page -->
 	<div id="main">
-		<h1 class="main-heading"> Delete Project </h1>
+		<h1 class="main-heading"> Add Project </h1>
 		<form>
-			<input type="text" placeholder="Project ID" id="project-id">
-			<input type="submit" value="Delete" class="submit-delete-button">
+			<input type="text" placeholder="Project" id="project-name"> <br/>
+			<div id="dynamicInput">
+          		<input type="text" name="myInputs[]" placeholder="Module1" id="first-input">
+          		<input type="button" value="+" onClick="addInput('dynamicInput');" class="small-button">
+     		</div>
+			<input type="submit" value="Add Project" class="submit-delete-button">
 		</form>
 	</div>
 	<!-- The main content ends -->
