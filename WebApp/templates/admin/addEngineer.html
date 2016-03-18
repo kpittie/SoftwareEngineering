@@ -1,86 +1,54 @@
 <!DOCTYPE HTML>
 <html>
-
 <head>
-    <title> Add Engineer </title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<title> Add Engineer </title>
+	<!-- Importing the CSS and the font for the website donot alter the section below -->
+	<link rel="stylesheet" type="text/css" href="../../styles/prettify.css">
+	<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+	<!-- Importing ends here -->
 </head>
 
 <body>
-<div class="container">
-  <form class="form-horizontal">
-  <fieldset>
+<div id="container">	
+	<!-- This is the top nav bar donot make changes here -->
+	<nav id="top-nav">
+		<ul id="top-nav-list">
+			<li class="top-nav-item" id="logo"> <img src="../../images/logo.png" alt="logo" id="logo-image"> </li> 
+			<li class="top-nav-item" id="logout-button"> <a id="logout-link" href="#"> Logout </a> </li>
+		</ul>
+	</nav>
+	<!-- Top Nav Bar ends here -->
 
-  <!-- Form Name -->
-  <legend>Add Engineers / Project Managers</legend>
+	<!-- Side bar is below make changes to li(id), li(content) rest should not be changed and donot remove any classes or ids except for the ones that contain the names of the list items -->
+	<aside id="side-nav">
+		<ul id="side-nav-list">
+			<li id="add-project" class="side-nav-items"> <a href="#" class="nav-link"> Add Project </a> </li>
+			<li id="delete-project" class="side-nav-items"> <a href="DeleteProject.html" class="nav-link"> Delete Project </a> </li>
+			<li id="add-client" class="side-nav-items"> <a href="AddClient.html" class="nav-link"> Add Client </a> </li>
+			<li id="add-engineer" class="side-nav-items"> <a href="AddEngineer.html" class="nav-link"> Add Engineer / Project Manager </a> </li>
+			<li id="session-tracking" class="side-nav-items"> <a href="SessionTracking.html" class="nav-link"> Session Tracking </a> </li>
+			<li id="complaint-status" class="side-nav-items"> <a href="ComplaintStatus.html" class="nav-link"> Complaint Status </a> </li>
+		</ul>
+	</aside>
+	<!-- Side bar ends here -->
 
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="name">Engineer Name</label>  
-    <div class="col-md-4">
-    <input id="name" name="name" type="text" placeholder="" class="form-control input-md" required="">
-    <span class="help-block">Enter the Engineers Name</span>  
-    </div>
-  </div>
-
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="id">Engineer ID</label>  
-    <div class="col-md-4">
-    <input id="id" name="id" type="text" placeholder="" class="form-control input-md" required="">
-    <span class="help-block">Enter the Engineers Name</span>  
-    </div>
-  </div>
-
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="project">Project</label>  
-    <div class="col-md-4">
-    <input id="project" name="project" type="text" placeholder="" class="form-control input-md" required="">
-    <span class="help-block">Enter the Project name</span>  
-    </div>
-  </div>
-
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="module">Associated Module</label>  
-    <div class="col-md-4">
-    <input id="module" name="module" type="text" placeholder="" class="form-control input-md" required="">
-    <span class="help-block">Enter the module associated with the Engineer</span>  
-    </div>
-  </div>
-
-  <!-- Multiple Radios (inline) -->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="pmanager">Project Manager</label>
-    <div class="col-md-4"> 
-      <label class="radio-inline" for="pmanager-0">
-        <input type="radio" name="pmanager" id="pmanager-0" value="Y" checked="checked">
-        Yes
-      </label> 
-      <label class="radio-inline" for="pmanager-1">
-        <input type="radio" name="pmanager" id="pmanager-1" value="N">
-        No
-      </label>
-    </div>
-  </div>
-
-  <!-- Button -->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="add"></label>
-    <div class="col-md-4">
-      <button id="add" name="add" class="btn btn-primary">Add</button>
-    </div>
-  </div>
-
-  </fieldset>
-  </form>
+	<!-- This is the section where you'll add the main content of the page -->
+	<div id="main">
+		<h1 class="main-heading"> Add Engineer / Project Manager </h1>
+		<form>
+			<input type="text" placeholder="User ID" id="user-id"> <br/>
+			<input type="text" placeholder="User ID" id="user-id"> <br/>
+			<select>
+				<option> Project </option>
+			</select> <br/>
+			<select>
+				<option> Module </option>
+			</select> <br/>
+			<label id="radio-label"> Project Manager: <input type="radio" class="radio-input" value="y">Yes <input type="radio" class="radio-input" value="n">No </label> <br/> 			
+			<input type="submit" value="Add Client" class="submit-delete-button">
+		</form>
+	</div>
+	<!-- The main content ends -->
 </div>
 </body>
-
-</html>
+</html>	
