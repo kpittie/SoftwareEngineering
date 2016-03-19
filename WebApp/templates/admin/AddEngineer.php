@@ -1,14 +1,11 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title> Add Project </title>
+	<title> Add Engineer </title>
 	<!-- Importing the CSS and the font for the website donot alter the section below -->
 	<link rel="stylesheet" type="text/css" href="../../styles/prettify.css">
 	<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
 	<!-- Importing ends here -->
-
-	<link rel="stylesheet" type="text/css" href="../../styles/admin.css">
-	<script src="../../scripts/js-admin-add-project.js"> </script>
 </head>
 
 <body>
@@ -16,7 +13,7 @@
 	<!-- This is the top nav bar donot make changes here -->
 	<nav id="top-nav">
 		<ul id="top-nav-list">
-			<li class="top-nav-item" id="logo"> <img src="../../images/logo.png" alt="logo" id="logo-image"> </li> 
+			<li class="top-nav-item" id="logo"> <img src="../../images/logo.png" alt="logo" id="logo-image"> </li>
 			
 			<li class="top-nav-item" id="logout-button"> <a id="logout-link" href="#"> Logout </a> </li>
 		</ul>
@@ -38,15 +35,37 @@
 
 	<!-- This is the section where you'll add the main content of the page -->
 	<div id="main">
-		<h1 class="main-heading"> Add Project </h1>
-		<p class="message"></p><br/>
-		<form method="post" action="../../scripts/admin/AddProject.php">
-			<input type="text" placeholder="Project" id="project-name" name="project-name"> <br/>
-			<div id="dynamicInput">
-          		<input type="text" name="Modules[]" placeholder="Module1" id="first-input">
-          		<input type="button" value="+" onClick="addInput('dynamicInput');" class="small-button">
-     		</div>
-			<input type="submit" value="Add Project" class="submit-delete-button">
+		<h1 class="main-heading"> Add Engineer / Project Manager </h1>
+		<form>
+			<input type="text" placeholder="Engineer Name" id="engineer-name"> <br/>
+			<input type="text" placeholder="Engineer ID" id="engineer-id"> <br/>
+			<select>
+				<?php
+						$dbhost = 'localhost';
+						$dbuser = 'root';
+						$dbpass = '';
+						$dbname = 'cmt';
+
+						$conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
+						
+						$sql = "SELECT * FROM project";
+						$result = $conn->query($sql);
+						
+						echo "<h1>Hello</h1>";
+						
+						while($project = $result->fetch_assoc());
+						{
+							echo "<option value=" . $project['name']. ">" . $project['name']. "</option>";
+						}
+						
+						$conn->close();
+				?>
+			</select> <br/>
+			<select>
+				<option> Module </option>
+			</select> <br/>
+			<label id="radio-label"> Project Manager: <input type="radio" class="radio-input" value="y">Yes <input type="radio" class="radio-input" value="n">No </label> <br/> 			
+			<input type="submit" value="Add Client" class="submit-delete-button">
 		</form>
 	</div>
 	<!-- The main content ends -->

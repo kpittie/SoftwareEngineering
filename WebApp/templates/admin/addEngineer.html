@@ -37,10 +37,23 @@
 	<div id="main">
 		<h1 class="main-heading"> Add Engineer / Project Manager </h1>
 		<form>
-			<input type="text" placeholder="User ID" id="user-id"> <br/>
-			<input type="text" placeholder="User ID" id="user-id"> <br/>
+			<input type="text" placeholder="Engineer Name" id="engineer-name"> <br/>
+			<input type="text" placeholder="Engineer ID" id="engineer-id"> <br/>
 			<select>
-				<option> Project </option>
+				<?php
+						$dbhost = 'localhost';
+						$dbuser = 'root';
+						$dbpass = '';
+						$dbname = 'cmt';
+
+						$conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
+						$sql = "SELECT * FROM project";
+						$result = $conn->query($sql);
+						while($project = $result->fetch_assoc());
+						{
+							echo "<option value=" . $project["name"]. ">" . $project["name"]. "</option>";
+						}
+				?>
 			</select> <br/>
 			<select>
 				<option> Module </option>

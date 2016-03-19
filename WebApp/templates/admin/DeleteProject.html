@@ -36,8 +36,8 @@
 	<!-- This is the section where you'll add the main content of the page -->
 	<div id="main">
 		<h1 class="main-heading"> Delete Project </h1>
-		<form>
-			<input type="text" placeholder="Project ID" id="project-id">
+		<form method="post" action="../../scripts/admin/DeleteProject.php">
+			<input type="text" placeholder="Project ID" id="project-id" name="project-id">
 			<input type="submit" value="Delete" class="submit-delete-button">
 		</form>
 	</div>
