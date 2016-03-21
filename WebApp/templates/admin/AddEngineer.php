@@ -39,29 +39,32 @@
 		<form>
 			<input type="text" placeholder="Engineer Name" id="engineer-name"> <br/>
 			<input type="text" placeholder="Engineer ID" id="engineer-id"> <br/>
-			<select>
+		
 				<?php
+
 						$dbhost = 'localhost';
 						$dbuser = 'root';
 						$dbpass = '';
 						$dbname = 'cmt';
 
-						$conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
-						
-						$sql = "SELECT * FROM project";
-						$result = $conn->query($sql);
-						
-						echo "<h1>Hello</h1>";
-						
-						while($project = $result->fetch_assoc());
-						{
-							echo "<option value=" . $project['name']. ">" . $project['name']. "</option>";
-						}
-						
+                                                 
+                                                  $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
+                                                    $sql = "select * from  project";         
+                                                  $result = $conn->query($sql);
+
+
+                                             echo "<select name='DROP DOWN NAME'>"; 
+
+                                          while ($row = mysqli_fetch_array($result)) {
+                                             echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';
+                                                     }      
+
+                                               echo '</select>';
+                                                 //
 						$conn->close();
 				?>
-			</select> <br/>
-			<select>
+                           </br>
+                          <select>
 				<option> Module </option>
 			</select> <br/>
 			<label id="radio-label"> Project Manager: <input type="radio" class="radio-input" value="y">Yes <input type="radio" class="radio-input" value="n">No </label> <br/> 			
