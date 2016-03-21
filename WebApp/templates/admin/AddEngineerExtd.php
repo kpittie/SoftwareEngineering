@@ -49,21 +49,38 @@
 	<!-- This is the section where you'll add the main content of the page -->
 	<div id="main">
 		<h1 class="main-heading"> Add Engineer / Project Manager </h1>
-		<form method="post" action="AddEngineerExtd.php">
+		<form method="post">
 				<?php
 
 					$dbhost = 'localhost';
 					$dbuser = 'root';
 					$dbpass = '';
-					$dbname = 'cmt';                           
-		              $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
-		              $sql = "select * from  project";         
-		              $result = $conn->query($sql);
+					$dbname = 'cmt';
+					$id = $_POST['project-name'];                         
+		            $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
+		            $sql = "select * from  project";         
+		            $result = $conn->query($sql);
 
+		            echo "<select name='project-name' id='project-name'>"; 
 
-                 	echo "<select name='project-name' id='project-name'>"; 
+		            while ($row = mysqli_fetch_array($result)) 
+		            {
+			            if($row['id']==$id)
+			            {
+			            	echo '<option value="'.$row['id'].'" selected>'.$row['name'].'</option>';
+			            }
+			            else
+			            {
+			            	echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';		            	
+			            }
+					}      
+		           	echo '</select>';
+		           	echo '<br/>';
 
-		            while ($row = mysqli_fetch_array($result)) {
+		           	$sql = "select * from  module where project_id=$id";         
+		            $result = $conn->query($sql);
+                 	echo "<select name='module-name' id='module-name'>";
+                 	while ($row = mysqli_fetch_array($result)) {
 		            echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';
 		            }      
 
@@ -71,9 +88,49 @@
 		           	$conn->close();
                 ?>
 				</br>
-			<input type="submit" value="Project Select" class="submit-delete-button">
+			<input type="text" placeholder="Engineer ID" id="engineer-id" name="engineer-id"> <br/>
+			<input type="password" placeholder="Password" id="password" name="password"> <br/>
+			<label id="radio-label"> Project Manager: <input type="radio" class="radio-input" name="pmanager" value="y">Yes <input type="radio" name="pmanager" class="radio-input" value="n">No </label> <br/> 			
+			<input type="submit" value="Add Client" class="submit-delete-button">
 		</form>
 	</div>
+	<?php
+		$dbhost = 'localhost';
+		$dbuser = 'root';
+		$dbpass = '';
+		$dbname = 'cmt';
+
+		$conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
+
+		if($conn->connect_error)
+		{
+			die("connection failed: ". $conn->connect_error);
+		}
+
+		if(isset($_POST['engineer-id'])) :
+			$pid = $_POST["project-name"];
+			$mid = $_POST["module-name"];
+			$id = $_POST["engineer-id"];
+			$pass = $_POST["password"];
+			$pmanager = $_POST["pmanager"];
+
+			$sql = "INSERT INTO engineer (id,password,project_id,module_id,project_manager) VALUES ('$id','$pass','$pid','$mid','$pmanager')";
+			
+			if (mysqli_query($conn, $sql)) {
+		    echo "<p class='create-message'> New engineer created successfully </p>";
+			} 
+
+			if($pmanager == 'y')
+			{
+			$sql = "UPDATE project SET manager_id = $id WHERE id = $pid";
+				if (mysqli_query($conn, $sql)) 
+				{
+			    	echo "<p class='create-message'> New engineer created successfully </p>";
+				}
+			}
+			endif;
+		mysqli_close($conn);
+	?>
 	<!-- The main content ends -->
 </div>
 </body>

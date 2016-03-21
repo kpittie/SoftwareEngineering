@@ -1,14 +1,11 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title> Add Project </title>
+	<title> Delete Project </title>
 	<!-- Importing the CSS and the font for the website donot alter the section below -->
 	<link rel="stylesheet" type="text/css" href="../../styles/prettify.css">
 	<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
 	<!-- Importing ends here -->
-
-	<link rel="stylesheet" type="text/css" href="../../styles/admin.css">
-	<script src="../../scripts/js-admin-add-project.js"> </script>
 </head>
 
 <body>
@@ -38,16 +35,40 @@
 
 	<!-- This is the section where you'll add the main content of the page -->
 	<div id="main">
-		<h1 class="main-heading"> Add Project </h1>
-		<p class="message"></p><br/>
-		<form method="post" action="../../scripts/admin/AddProject.php">
-			<input type="text" placeholder="Project" id="project-name" name="project-name"> <br/>
-			<div id="dynamicInput">
-          		<input type="text" name="Modules[]" placeholder="Module1" id="first-input">
-          		<input type="button" value="+" onClick="addInput('dynamicInput');" class="small-button">
-     		</div>
-			<input type="submit" value="Add Project" class="submit-delete-button">
+		<h1 class="main-heading"> Delete Project </h1>
+		<form method="post">
+			<input type="text" placeholder="Project ID" id="project-id" name="project-id">
+			<input type="submit" value="Delete" class="submit-delete-button">
 		</form>
+		<div id="message">
+				<?php
+					$dbhost = 'localhost';
+					$dbuser = 'root';
+					$dbpass = '';
+					$dbname = 'cmt';
+
+					$conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
+
+					if($conn->connect_error)
+					{
+						die("connection failed: ". $conn->connect_error);
+					}
+
+					if($_POST) :
+  							$id = !isset($_POST['project-id']) ? 0 : $_POST['project-id'];
+							$sql = "DELETE FROM project WHERE id=$id";	
+							if(mysqli_query($conn, $sql))
+							{
+								echo "<p class='delete-message'> The project was deleted </p>";
+							}
+							$sql = "DELETE FROM module WHERE project_id=$id";
+							if(mysqli_query($conn, $sql))
+							{
+								echo "<p class='delete-message'> The associated modules have been deleted </p>";
+							}
+						mysqli_close($conn);
+					endif;
+				?>
 	</div>
 	<!-- The main content ends -->
 </div>

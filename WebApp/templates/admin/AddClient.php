@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title> Session Tracking </title>
+	<title> Add Client </title>
 	<!-- Importing the CSS and the font for the website donot alter the section below -->
 	<link rel="stylesheet" type="text/css" href="../../styles/prettify.css">
 	<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
@@ -35,13 +35,71 @@
 
 	<!-- This is the section where you'll add the main content of the page -->
 	<div id="main">
-		<h1 class="main-heading"> Session Tracking </h1>
-		<form>
-			<select>
-				<option> Engineer </option>
-			</select> <br/> 			
-			<input type="submit" value="Show" class="submit-delete-button">
+		<h1 class="main-heading"> Add Client </h1>
+		<form method="post">
+			<input type="text" placeholder="User ID" name="user-id"> <br/>
+			<input type="text" placeholder="User Name" name="user-name"> <br/>
+			<input type="password" placeholder="Password" name="pass"> <br/>
+				<?php
+					$dbhost = 'localhost';
+					$dbuser = 'root';
+					$dbpass = '';
+					$dbname = 'cmt';
+
+	                $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
+	                $sql = "select * from  project";         
+	                $result = $conn->query($sql);
+						echo "<select name='project-name'>"; 
+					while ($row = mysqli_fetch_array($result)) {
+	             		echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';
+	                }      
+
+	               	echo '</select>';
+					$conn->close();
+				?>
+            </br>
+			<input type="submit" value="Add Client" class="submit-delete-button">
 		</form>
+		<?php
+			$dbhost = 'localhost';
+			$dbuser = 'root';
+			$dbpass = '';
+			$dbname = 'cmt';
+
+	        $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
+	        
+	        if($conn->connect_error)
+			{
+				die("connection failed: ". $conn->connect_error);
+			}
+
+			if($_POST) :
+				$id = $_POST['user-id'];
+				$pass = $_POST['pass'];
+				$name = $_POST['user-name'];
+				$pname = $_POST['project-name'];
+
+				$sql = "INSERT INTO user (id,name,password) VALUES ($id,'$name','$pass')";
+
+				if (mysqli_query($conn, $sql)) {
+		    		echo "<p class='create-message'> New client created successfully </p>";
+				}
+
+				else {
+					echo "DIE MOTHERFUCKER!";
+				}
+
+				$sql = "UPDATE project SET client_id=$id WHERE name='$pname'";
+
+				if(mysqli_query($conn, $sql)) {
+					echo "<p class='create-message'> New project client created successfully </p>";
+				}
+				else {
+					echo "DIE MOTHERFUCKER";
+				}
+			endif;
+		mysqli_close($conn);
+		?>
 	</div>
 	<!-- The main content ends -->
 </div>

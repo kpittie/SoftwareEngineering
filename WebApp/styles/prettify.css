@@ -121,3 +121,11 @@ input, select {
 #radio-label {
 	margin-left: -75px;
 }
+
+.delete-message {
+	color: red;
+}
+
+.create-message {
+	color: green;
+}

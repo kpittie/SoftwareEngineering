@@ -1,11 +1,14 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title> Add Engineer </title>
+	<title> Add Project </title>
 	<!-- Importing the CSS and the font for the website donot alter the section below -->
 	<link rel="stylesheet" type="text/css" href="../../styles/prettify.css">
 	<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
 	<!-- Importing ends here -->
+
+	<link rel="stylesheet" type="text/css" href="../../styles/admin.css">
+	<script src="../../scripts/js-admin-add-project.js"> </script>
 </head>
 
 <body>
@@ -13,7 +16,7 @@
 	<!-- This is the top nav bar donot make changes here -->
 	<nav id="top-nav">
 		<ul id="top-nav-list">
-			<li class="top-nav-item" id="logo"> <img src="../../images/logo.png" alt="logo" id="logo-image"> </li>
+			<li class="top-nav-item" id="logo"> <img src="../../images/logo.png" alt="logo" id="logo-image"> </li> 
 			
 			<li class="top-nav-item" id="logout-button"> <a id="logout-link" href="#"> Logout </a> </li>
 		</ul>
@@ -35,32 +38,55 @@
 
 	<!-- This is the section where you'll add the main content of the page -->
 	<div id="main">
-		<h1 class="main-heading"> Add Engineer / Project Manager </h1>
-		<form>
-			<input type="text" placeholder="Engineer Name" id="engineer-name"> <br/>
-			<input type="text" placeholder="Engineer ID" id="engineer-id"> <br/>
-			<select>
-				<?php
-						$dbhost = 'localhost';
-						$dbuser = 'root';
-						$dbpass = '';
-						$dbname = 'cmt';
-
-						$conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
-						$sql = "SELECT * FROM project";
-						$result = $conn->query($sql);
-						while($project = $result->fetch_assoc());
-						{
-							echo "<option value=" . $project["name"]. ">" . $project["name"]. "</option>";
-						}
-				?>
-			</select> <br/>
-			<select>
-				<option> Module </option>
-			</select> <br/>
-			<label id="radio-label"> Project Manager: <input type="radio" class="radio-input" value="y">Yes <input type="radio" class="radio-input" value="n">No </label> <br/> 			
-			<input type="submit" value="Add Client" class="submit-delete-button">
+		<h1 class="main-heading"> Add Project </h1>
+		<p class="message"></p><br/>
+		<form method="post">
+			<input type="text" placeholder="Project" id="project-name" name="project-name"> <br/>
+			<div id="dynamicInput">
+          		<input type="text" name="Modules[]" placeholder="Module1" id="first-input">
+          		<input type="button" value="+" onClick="addInput('dynamicInput');" class="small-button">
+     		</div>
+			<input type="submit" value="Add Project" class="submit-delete-button">
 		</form>
+
+		<?php
+		$dbhost = 'localhost';
+		$dbuser = 'root';
+		$dbpass = '';
+		$dbname = 'cmt';
+
+		$conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
+
+		if($conn->connect_error)
+		{
+			die("connection failed: ". $conn->connect_error);
+		}
+
+		if($_POST) :
+			$name = $_POST["project-name"];
+			$sql = "INSERT INTO project (name) VALUES ('$name')";
+			
+			if (mysqli_query($conn, $sql)) {
+		    echo "<p class='create-message'> New project created successfully </p>";
+			} 
+
+			$sql = "SELECT id FROM project WHERE name='$name'";
+			$result = $conn->query($sql);
+			$ide = $result->fetch_assoc();
+			$id = $ide["id"];
+
+			$modules = $_POST["Modules"];
+			
+			foreach ($modules as $module)
+			{
+				$sql = "INSERT INTO module (name,project_id) VALUES ('$module',$id)";
+				if (mysqli_query($conn, $sql)) {
+			    echo "<p class='create-message'> New modules created successfully </p>";
+				}
+			}
+			endif;	
+		mysqli_close($conn);
+	?>
 	</div>
 	<!-- The main content ends -->
 </div>
