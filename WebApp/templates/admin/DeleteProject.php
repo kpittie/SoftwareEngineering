@@ -23,12 +23,12 @@
 	<!-- Side bar is below make changes to li(id), li(content) rest should not be changed and donot remove any classes or ids except for the ones that contain the names of the list items -->
 	<aside id="side-nav">
 		<ul id="side-nav-list">
-			<li id="add-project" class="side-nav-items"> <a href="AddProject.html" class="nav-link"> Add Project </a> </li>
-			<li id="delete-project" class="side-nav-items"> <a href="DeleteProject.html" class="nav-link"> Delete Project </a> </li>
-			<li id="add-client" class="side-nav-items"> <a href="AddClient.html" class="nav-link"> Add Client </a> </li>
-			<li id="add-engineer" class="side-nav-items"> <a href="AddEngineer.html" class="nav-link"> Add Engineer / Project Manager </a> </li>
-			<li id="session-tracking" class="side-nav-items"> <a href="SessionTracking.html" class="nav-link"> Session Tracking </a> </li>
-			<li id="complaint-status" class="side-nav-items"> <a href="ComplaintStatus.html" class="nav-link"> Complaint Status </a> </li>
+			<li id="add-project" class="side-nav-items"> <a href="http://localhost:80/SoftwareEngineering/WebApp/templates/admin/AddProject.php" class="nav-link"> Add Project </a> </li>
+			<li id="delete-project" class="side-nav-items"> <a href="http://localhost:80/SoftwareEngineering/WebApp/templates/admin/DeleteProject.php" class="nav-link"> Delete Project </a> </li>
+			<li id="add-client" class="side-nav-items"> <a href="http://localhost:80/SoftwareEngineering/WebApp/templates/admin/AddClient.php" class="nav-link"> Add Client </a> </li>
+			<li id="add-engineer" class="side-nav-items"> <a href="http://localhost:80/SoftwareEngineering/WebApp/templates/admin/AddEngineer.php" class="nav-link"> Add Engineer / Project Manager </a> </li>
+			<li id="session-tracking" class="side-nav-items"> <a href="http://localhost:80/SoftwareEngineering/WebApp/templates/admin/SessionTracking.php" class="nav-link"> Session Tracking </a> </li>
+			<li id="complaint-status" class="side-nav-items"> <a href="http://localhost:80/SoftwareEngineering/WebApp/templates/admin/ComplaintStatus.php" class="nav-link"> Complaint Status </a> </li>
 		</ul>
 	</aside>
 	<!-- Side bar ends here -->
