@@ -15,7 +15,7 @@
 		<ul id="top-nav-list">
 			<li class="top-nav-item" id="logo"> <img src="../../images/logo.png" alt="logo" id="logo-image"> </li> 
 			
-			<li class="top-nav-item" id="logout-button"> <a id="logout-link" href="#"> Logout </a> </li>
+			<li class="top-nav-item" id="logout-button"> <a id="logout-link" href="login.html"> Logout </a> </li>
 		</ul>
 	</nav>
 	<!-- Top Nav Bar ends here -->
