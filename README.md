@@ -12,3 +12,5 @@ JS PHP (and other script files) -> WebApp\Admin\scripts
 If at all any plugins are being used then they will be stored globally irrespective of the user you are working on in the folder named WebApp\plugins.
 
 If any doubt then first discuss with the team and then proceed.
+
+cmt.sql is the updated sql file consisting of all the table that are necessary for the coding. However the foreign key constraints have not yet been added so that has to be done.
