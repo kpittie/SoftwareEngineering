@@ -10,6 +10,25 @@
   <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script>
+    function show(){
+      var navv = document.getElementById("sub-nav");
+      if(navv.style.display == 'none')
+      {
+        navv.style.display = 'block';
+        navv.style.position = 'absolute';
+      }
+      else
+      {
+        navv.style.display = 'none';
+      }
+    }
+  </script>
+  <script>
+      $("#sub-nav").on("click",function(){
+      $("#sub-nav").toggleClass("active");
+    });
+  </script>
   <style>
   body {
       font: 400 15px Lato, sans-serif;
@@ -188,6 +207,10 @@
         font-size: 150px;
     }
   }
+
+  #sub-nav{
+    background-color: #8080ff; 
+  }
   </style>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
@@ -208,6 +231,14 @@
         <li><a href="#services">SERVICES</a></li>
         <li><a href="#portfolio">PORTFOLIO</a></li>
         <li><a href="#contact">CONTACT</a></li>
+        <li><a href="#login" onclick="show()">LOGIN</a>
+            <ul class="nav" id="sub-nav" style="display:none;">
+              <li><a href="#administrator"> Administrator </a></li>
+              <li><a href="#client"> Client </a></li>
+              <li><a href="#engineer"> Engineer </a></li>
+              <li><a href="#projectmanager"> Project Manager </a></li>
+            </ul>
+          </li>
       </ul>
     </div>
   </div>
