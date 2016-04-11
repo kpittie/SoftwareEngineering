@@ -8,16 +8,27 @@
 	<!-- Importing ends here -->
 
 	<script>
-		function trig(val) {
- 			var xmlhttp = new XMLHttpRequest();
-        	xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("project-name").innerHTML = xmlhttp.responseText;
-            }
-        };
-        xmlhttp.open("GET", "getmodule.php?q=" + val, true);
-        xmlhttp.send();		
-    }
+		function trig(pid) {
+		    if (pid == "") {
+		        document.getElementById("module-name").innerHTML = "";
+		        return;
+		    } else { 
+		        if (window.XMLHttpRequest) {
+		            // code for IE7+, Firefox, Chrome, Opera, Safari
+		            xmlhttp = new XMLHttpRequest();
+		        } else {
+		            // code for IE6, IE5
+		            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		        }
+		        xmlhttp.onreadystatechange = function() {
+		            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+		                document.getElementById("module-name").innerHTML = xmlhttp.responseText;
+		            }
+		        };
+		        xmlhttp.open("GET","fetch_modules.php?q="+pid,true);
+		        xmlhttp.send();
+		    }
+		}
 	</script>
 </head>
 
@@ -49,7 +60,8 @@
 	<!-- This is the section where you'll add the main content of the page -->
 	<div id="main">
 		<h1 class="main-heading"> Add Engineer / Project Manager </h1>
-		<form method="post" action="AddEngineerExtd.php">
+		<form method="post" action="">
+			<select name="project-name" id="project-name" onchange="trig(this.value)"> 
 				<?php
 
 					$dbhost = 'localhost';
@@ -59,20 +71,57 @@
 		              $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
 		              $sql = "select * from  project";         
 		              $result = $conn->query($sql);
-
-
-                 	echo "<select name='project-name' id='project-name'>"; 
-
 		            while ($row = mysqli_fetch_array($result)) {
 		            echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';
 		            }      
-
-		           	echo '</select>';
-		           	$conn->close();
+		            echo '</select>';
+		            $conn->close();
                 ?>
 				</br>
-			<input type="submit" value="Project Select" class="submit-delete-button">
+			<select id="module-name" name="module-name">
+			</select> <br/>
+			<input type="text" placeholder="Engineer ID" id="engineer-id" name="engineer-id"> <br/>
+			<input type="password" placeholder="Password" id="password" name="password"> <br/>
+			<label id="radio-label"> Project Manager: <input type="radio" class="radio-input" name="pmanager" value="y">Yes <input type="radio" name="pmanager" class="radio-input" value="n">No </label> <br/> 			
+			<input type="submit" value="Add Engineer" class="submit-delete-button">
 		</form>
+	<?php
+		$dbhost = 'localhost';
+		$dbuser = 'root';
+		$dbpass = '';
+		$dbname = 'cmt';
+
+		$conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
+
+		if($conn->connect_error)
+		{
+			die("connection failed: ". $conn->connect_error);
+		}
+
+		if(isset($_POST['engineer-id'])) :
+			$pid = $_POST["project-name"];
+			$mid = $_POST["module-name"];
+			$id = $_POST["engineer-id"];
+			$pass = $_POST["password"];
+			$pmanager = $_POST["pmanager"];
+
+			$sql = "INSERT INTO engineer (id,password,project_id,module_id,project_manager) VALUES ('$id','$pass','$pid','$mid','$pmanager')";
+			
+			if (mysqli_query($conn, $sql)) {
+		    echo "<p class='create-message'> New engineer created successfully </p>";
+			} 
+
+			if($pmanager == 'y')
+			{
+			$sql = "UPDATE project SET manager_id = $id WHERE id = $pid";
+				if (mysqli_query($conn, $sql)) 
+				{
+			    	echo "<p class='create-message'> New engineer created successfully </p>";
+				}
+			}
+			endif;
+		mysqli_close($conn);
+	?>
 	</div>
 	<!-- The main content ends -->
 </div>
