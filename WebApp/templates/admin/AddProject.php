@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -18,7 +21,7 @@
 		<ul id="top-nav-list">
 			<li class="top-nav-item" id="logo"> <img src="../../images/logo.png" alt="logo" id="logo-image"> </li> 
 			
-			<li class="top-nav-item" id="logout-button"> <a id="logout-link" href="login.html"> Logout </a> </li>
+			<li class="top-nav-item" id="logout-button"> <a id="logout-link" href="login.php?logout=1"> Logout </a> </li>
 		</ul>
 	</nav>
 	<!-- Top Nav Bar ends here -->
@@ -38,6 +41,9 @@
 
 	<!-- This is the section where you'll add the main content of the page -->
 	<div id="main">
+		<?php
+			if(isset($_SESSION['user-name'])){
+		?>
 		<h1 class="main-heading"> Add Project </h1>
 		<p class="message"></p><br/>
 		<form method="post">
@@ -86,6 +92,13 @@
 			}
 			endif;	
 		mysqli_close($conn);
+	?>
+	<?php
+		}
+		else
+		{
+			echo "<p class='delete-message'> You must be logged in to see this page </p>";
+		}
 	?>
 	</div>
 	<!-- The main content ends -->

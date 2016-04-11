@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -24,34 +27,55 @@
 		<h1> Administrator Login </h1>
 		<form  method="post">
 			<input type="text" placeholder="Admin ID" name="admin"> <br/>
-			<input type="password" placeholder="password" name="pass"> <br/>
+			<input type="password" placeholder="Password" name="pass"> <br/>
 			<input type="submit" value="Sign In" class="submit-delete-button">
 		</form>
+		<?php
+			if(isset($_GET['logout'])){
+				session_unset();
+				session_destroy();
+				header("Location: Login.php");
+			}
+		?>
 	</div>
+	<?php   
+	    $dbhost = 'localhost';
+		$dbuser = 'root';
+		$dbpass = '';
+		$dbname = 'cmt';
+		$flag=0;
+
+	    $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
+	    if($_POST) :
+	    $pass=$_POST['pass'];
+	    $name=$_POST['admin'];
+	    $sqll = "select id from admin";
+	    $result_id = $conn->query($sqll);
+	    while ($row_id = mysqli_fetch_array($result_id))
+	    {
+	    	if($row_id['id']==$name)
+	    	{
+	    		$flag = 1;
+				$sql="select password from admin where id='$name'";
+	    		$result = $conn->query($sql);
+	    		$row = mysqli_fetch_array($result);
+	    			if (strcmp($pass,$row['name'])) {
+	    				$_SESSION['user-name'] = $name;
+	    				header("Location: Welcome.php");
+	    			}
+	    			else {
+	    				echo "<p class='delete-message'>Invalid Password</p>";
+	    			}
+	    	}
+	    }
+	    if($flag == 0)
+	    {
+	    	echo "<p class='delete-message'>Invalid ID</p>";
+	    }
+	    endif;
+	    $conn->close();	
+	?>
 	<!-- The main content ends -->
 </div>
-<?php   
-
-
-                    $dbhost = 'localhost';
-					$dbuser = 'root';
-					$dbpass = '';
-					$dbname = 'cmt';
-
-	                $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
-	                $pass=$_POST['pass'];
-	                $name=$_POST['admin'];
-	                $sql="select password from admin where id='$name'";
-	                $result = $conn->query($sql);
-	                $row = mysqli_fetch_array($result);
-	                if (strcmp($pass,$row['name'])) {
-	                	header("Location: AddEngineer.php");
-	                	# code...
-	                }
-
-
-
-
-?>
 </body>
 </html>	

@@ -4,13 +4,14 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title> Complaint Status</title>
+	<title> Add Project </title>
 	<!-- Importing the CSS and the font for the website donot alter the section below -->
 	<link rel="stylesheet" type="text/css" href="../../styles/prettify.css">
 	<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
 	<!-- Importing ends here -->
 
 	<link rel="stylesheet" type="text/css" href="../../styles/admin.css">
+	<script src="../../scripts/js-admin-add-project.js"> </script>
 </head>
 
 <body>
@@ -18,7 +19,7 @@
 	<!-- This is the top nav bar donot make changes here -->
 	<nav id="top-nav">
 		<ul id="top-nav-list">
-			<li class="top-nav-item" id="logo"> <img src="../../images/logo.png" alt="logo" id="logo-image"> </li>
+			<li class="top-nav-item" id="logo"> <img src="../../images/logo.png" alt="logo" id="logo-image"> </li> 
 			
 			<li class="top-nav-item" id="logout-button"> <a id="logout-link" href="login.php?logout=1"> Logout </a> </li>
 		</ul>
@@ -43,59 +44,14 @@
 		<?php
 			if(isset($_SESSION['user-name'])){
 		?>
-		<h1 class="main-heading"> Complaint Status </h1>
-		<form method="post">		
-			<input type="submit" value="Unassigned Complaints" class="unassigned-complaints-button" name="unassigned-button">
-		</form>
-
-		<?php
-		$dbhost = 'localhost';
-		$dbuser = 'root';
-		$dbpass = '';
-		$dbname = 'cmt';
-
-		$conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
-
-		if(isset($_POST['unassigned-button'])) :
-		if ($conn->connect_error) {
-		    die("Connection failed: " . $conn->connect_error);
-		}
-		echo "<table border='1'>";
-		echo "	<tr>";
-		echo "		<th> ID </th>";
-		echo "		<th> Description </th>";
-		echo "		<th> Project ID </th>";
-		echo "		<th> Module ID </th>";
-		echo "		<th> Engineer ID </th>";
-		echo "		<th> Status </th>";
-		echo "		<th> Priority </th>";
-		echo "		<th> Reopenings </th>";
-		echo "		<th> Timestamp </th>";
-		echo "	</tr>"; 
-
-		$sql = "SELECT * FROM problem";
-		$result = $conn->query($sql);
-
-		if ($result->num_rows > 0) {
-		    while($row = $result->fetch_assoc()) {
-		    	echo "<tr>";
-		        echo "<td>" . $row["id"]. "</td> <td>" . $row["description"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["engineer_id"]. "</td> <td>" . $row["status"]. "</td> <td>" . $row["priority"]. "</td> <td>" . $row["reopenings"]. "</td> <td>" . $row["timestamp"]. "</td>";
-		        echo "</tr>";
-		    }
-		} else {
-		    echo "0 results";
-		}
-		endif;
-		$conn->close();
-	?>
-	</table>
+		<h1 class="main-heading"> Welcome Admin ID: <?php echo $_SESSION['user-name']; ?> </h1>
 	<?php
 		}
 		else
 		{
 			echo "<p class='delete-message'> You must be logged in to see this page </p>";
 		}
-	?>						
+	?>
 	</div>
 	<!-- The main content ends -->
 </div>
