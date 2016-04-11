@@ -129,3 +129,20 @@ input, select {
 .create-message {
 	color: green;
 }
+
+table {
+    width:80%;
+    margin: auto;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: center;
+}
+table th	{
+	background-color: #33adff;
+    color: black;
+}

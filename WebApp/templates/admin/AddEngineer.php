@@ -62,6 +62,7 @@
 		<h1 class="main-heading"> Add Engineer / Project Manager </h1>
 		<form method="post" action="">
 			<select name="project-name" id="project-name" onchange="trig(this.value)"> 
+				<option value="" selected="true" style="display:none;">Select project</option>
 				<?php
 
 					$dbhost = 'localhost';
