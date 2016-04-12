@@ -9,6 +9,16 @@
 	<link rel="stylesheet" type="text/css" href="../../styles/prettify.css">
 	<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
 	<!-- Importing ends here -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../Plugins/captcha/jquery.realperson.css"> 
+	<script type="text/javascript" src="../../Plugins/captcha/jquery.plugin.js"></script> 
+	<script type="text/javascript" src="../../Plugins/captcha/jquery.realperson.js"></script>
+<script>
+$(document).ready(function() {
+	$('#real-person').realperson({chars: $.realperson.alphanumeric});	
+});
+</script>
+
 </head>
 
 <body>
@@ -28,6 +38,7 @@
 		<form  method="post">
 			<input type="text" placeholder="Admin ID" name="admin"> <br/>
 			<input type="password" placeholder="Password" name="pass"> <br/>
+			<input type="text" placeholder="Captcha" name="captcha" id="real-person"> <br/>
 			<input type="submit" value="Sign In" class="submit-delete-button">
 		</form>
 		<?php
@@ -37,44 +48,57 @@
 				header("Location: Login.php");
 			}
 		?>
-	</div>
-	<?php   
-	    $dbhost = 'localhost';
-		$dbuser = 'root';
-		$dbpass = '';
-		$dbname = 'cmt';
-		$flag=0;
-
-	    $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
+	<?php
 	    if($_POST) :
-	    $pass=$_POST['pass'];
-	    $name=$_POST['admin'];
-	    $sqll = "select id from admin";
-	    $result_id = $conn->query($sqll);
-	    while ($row_id = mysqli_fetch_array($result_id))
-	    {
-	    	if($row_id['id']==$name)
-	    	{
-	    		$flag = 1;
-				$sql="select password from admin where id='$name'";
-	    		$result = $conn->query($sql);
-	    		$row = mysqli_fetch_array($result);
-	    			if (strcmp($pass,$row['name'])) {
-	    				$_SESSION['user-name'] = $name;
-	    				header("Location: Welcome.php");
-	    			}
-	    			else {
-	    				echo "<p class='delete-message'>Invalid Password</p>";
-	    			}
-	    	}
-	    }
-	    if($flag == 0)
-	    {
-	    	echo "<p class='delete-message'>Invalid ID</p>";
-	    }
-	    endif;
-	    $conn->close();	
+	    	function rpHash($value) { 
+	    		$hash = 5381; 
+	    		$value = strtoupper($value); 
+	    		for($i = 0; $i < strlen($value); $i++) { 
+	        	$hash = (($hash << 5) + $hash) + ord(substr($value, $i)); 
+	    		} 
+	    	return $hash; 
+			} 
+ 			if (rpHash($_POST['captcha']) == $_POST['captchaHash']) {
+			    $dbhost = 'localhost';
+				$dbuser = 'root';
+				$dbpass = '';
+				$dbname = 'cmt';
+				$flag=0;
+
+			    $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
+			    $pass=$_POST['pass'];
+			    $id=$_POST['admin'];
+			    $sqll = "select id from admin";
+			    $result_id = $conn->query($sqll);
+			    while ($row_id = mysqli_fetch_array($result_id))
+			    {
+			    	if($row_id['id']==$id)
+			    	{
+			    		$flag = 1;
+						$sql="select password from admin where id='$id'";
+			    		$result = $conn->query($sql);
+			    		$row = mysqli_fetch_array($result);
+			    			if ($pass==$row['password']) {
+			    				$_SESSION['user-name'] = $id;
+			    				header("Location: Welcome.php");
+			    			}
+			    			else {
+			    				echo "<p class='delete-message'>Invalid Password</p>";
+			    			}
+			    	}
+			    }
+			    if($flag == 0)
+			    {
+			    	echo "<p class='delete-message'>Invalid ID</p>";
+			    }
+			    $conn->close();
+			}
+			else {
+				echo "<p class='delete-message'>Invalid Captcha</p>";
+			}
+		endif;	
 	?>
+</div>
 	<!-- The main content ends -->
 </div>
 </body>
