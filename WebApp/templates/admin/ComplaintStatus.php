@@ -79,7 +79,7 @@
 
 		if ($result->num_rows > 0) {
 		    while($row = $result->fetch_assoc()) {
-		    	echo "<tr>";
+		    	echo "<tr class='invalid-row'>";
 		        echo "<td>" . $row["id"]. "</td> <td>" . $row["description"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["engineer_id"]. "</td> <td>" . $row["status"]. "</td> <td>" . $row["priority"]. "</td> <td>" . $row["reopenings"]. "</td> <td>" . $row["timestamp"]. "</td>";
 		        echo "</tr>";
 		    }
@@ -110,9 +110,18 @@
 
 		if ($result->num_rows > 0) {
 		    while($row = $result->fetch_assoc()) {
-		    	echo "<tr>";
-		        echo "<td>" . $row["id"]. "</td> <td>" . $row["description"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["engineer_id"]. "</td> <td>" . $row["status"]. "</td> <td>" . $row["priority"]. "</td> <td>" . $row["reopenings"]. "</td> <td>" . $row["timestamp"]. "</td>";
-		        echo "</tr>";
+		    	if($row["engineer_id"] == NULL)
+		    	{
+			    	echo "<tr class='invalid-row'>";
+			        echo "<td>" . $row["id"]. "</td> <td>" . $row["description"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["engineer_id"]. "</td> <td>" . $row["status"]. "</td> <td>" . $row["priority"]. "</td> <td>" . $row["reopenings"]. "</td> <td>" . $row["timestamp"]. "</td>";
+			        echo "</tr>";
+			    }
+			    else
+			    {
+			    	echo "<tr class='valid-row'>";
+			        echo "<td>" . $row["id"]. "</td> <td>" . $row["description"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["engineer_id"]. "</td> <td>" . $row["status"]. "</td> <td>" . $row["priority"]. "</td> <td>" . $row["reopenings"]. "</td> <td>" . $row["timestamp"]. "</td>";
+			        echo "</tr>";
+			    }
 		    }
 		} else {
 		    echo "0 results";

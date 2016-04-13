@@ -147,3 +147,11 @@ table th {
 	background-color: #33adff;
     color: black;
 }
+
+.invalid-row {
+	background-color: rgba(255, 0, 0, 0.1);
+}
+
+.valid-row {
+	background-color: rgba(0, 255, 0, 0.3);
+}
