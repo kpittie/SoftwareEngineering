@@ -63,7 +63,7 @@
 	<!-- This is the section where you'll add the main content of the page -->
 	<div id="main">
 		<?php
-			if(isset($_SESSION['user-name'])) {
+			if(isset($_SESSION['user-name']) && $_SESSION['user']=="admin") {
 		?>
 		<h1 class="main-heading"> Add Engineer / Project Manager </h1>
 		<form method="post" action="">

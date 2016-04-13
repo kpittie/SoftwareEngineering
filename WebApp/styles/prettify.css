@@ -133,6 +133,7 @@ input, select {
 table {
     width:80%;
     margin: auto;
+    margin-top: 25px;
 }
 table, th, td {
     border: 1px solid black;
