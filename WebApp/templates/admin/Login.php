@@ -1,5 +1,25 @@
 <?php
 	session_start();
+	if(isset($_SESSION['user-name'])) {
+		if($_SESSION['user']=="admin")
+		{
+			header("location: Welcome.php");			
+		}
+		else {
+			if($_SESSION['user']=="client")
+			{
+				header("location: ../client/welcome.php");
+			}
+			else if($_SESSION['user']=="engineer")
+			{
+				header("location: ../engineer/welcome.php");
+			}
+			else
+			{
+				header("location: ../pmanager/welcome.php");
+			}
+		}
+	}
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -35,6 +55,11 @@ $(document).ready(function() {
 	<!-- This is the section where you'll add the main content of the page -->
 	<div id="main">
 		<h1> Administrator Login </h1>
+		<?php
+			if(isset($_SESSION['user-name'])) {
+				echo "Log out of all other sessions";
+			}
+		?>
 		<form  method="post">
 			<input type="text" placeholder="Admin ID" name="admin"> <br/>
 			<input type="password" placeholder="Password" name="pass"> <br/>
@@ -78,6 +103,7 @@ $(document).ready(function() {
 			    		$row = mysqli_fetch_array($result);
 			    			if ($pass==$row['password']) {
 			    				$_SESSION['user-name'] = $id;
+			    				$_SESSION['user'] = "admin";
 			    				header("Location: Welcome.php");
 			    			}
 			    			else {
