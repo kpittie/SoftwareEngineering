@@ -46,6 +46,7 @@
 		<h1 class="main-heading"> Complaint Status </h1>
 		<form method="post">		
 			<input type="submit" value="Unassigned Complaints" class="unassigned-complaints-button" name="unassigned-button">
+			<input type="submit" value="All Complaints" class="all-complaints-button" name="all-complaints-button">
 		</form>
 
 		<?php
@@ -56,10 +57,41 @@
 
 		$conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
 
-		if(isset($_POST['unassigned-button'])) :
+		if(isset($_POST['unassigned-button'])) {
 		if ($conn->connect_error) {
 		    die("Connection failed: " . $conn->connect_error);
 		}
+		echo "<table border='1'>";
+		echo "	<tr>";
+		echo "		<th> ID </th>";
+		echo "		<th> Description </th>";
+		echo "		<th> Project ID </th>";
+		echo "		<th> Module ID </th>";
+		echo "		<th> Engineer ID </th>";
+		echo "		<th> Status </th>";
+		echo "		<th> Priority </th>";
+		echo "		<th> Reopenings </th>";
+		echo "		<th> Timestamp </th>";
+		echo "	</tr>"; 
+
+		$sql = "SELECT * FROM problem WHERE engineer_id IS NULL";
+		$result = $conn->query($sql);
+
+		if ($result->num_rows > 0) {
+		    while($row = $result->fetch_assoc()) {
+		    	echo "<tr>";
+		        echo "<td>" . $row["id"]. "</td> <td>" . $row["description"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["engineer_id"]. "</td> <td>" . $row["status"]. "</td> <td>" . $row["priority"]. "</td> <td>" . $row["reopenings"]. "</td> <td>" . $row["timestamp"]. "</td>";
+		        echo "</tr>";
+		    }
+		} else {
+		    echo "0 results";
+		}
+		}
+
+		else if(isset($_POST['all-complaints-button']) || (!isset($_POST['unassigned-button']))) {
+			if ($conn->connect_error) {
+			    die("Connection failed: " . $conn->connect_error);
+			}
 		echo "<table border='1'>";
 		echo "	<tr>";
 		echo "		<th> ID </th>";
@@ -85,7 +117,7 @@
 		} else {
 		    echo "0 results";
 		}
-		endif;
+		}
 		$conn->close();
 	?>
 	</table>

@@ -52,7 +52,6 @@ $(document).ready(function() {
 	    if($_POST) :
 	    	function rpHash($value) { 
 	    		$hash = 5381; 
-	    		$value = strtoupper($value); 
 	    		for($i = 0; $i < strlen($value); $i++) { 
 	        	$hash = (($hash << 5) + $hash) + ord(substr($value, $i)); 
 	    		} 
@@ -64,7 +63,6 @@ $(document).ready(function() {
 				$dbpass = '';
 				$dbname = 'cmt';
 				$flag=0;
-
 			    $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
 			    $pass=$_POST['pass'];
 			    $id=$_POST['admin'];

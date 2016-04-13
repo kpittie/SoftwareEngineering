@@ -1,5 +1,6 @@
-#unassigned-complaints-button {
-	width: 25%;	
+.unassigned-complaints-button {
+	width: 25%;
+	margin: auto;	
 }
 
 .small-button {
@@ -12,4 +13,9 @@
 
 .dynamic-inputs {
 	margin-top: -5px;
+}
+
+.all-complaints-button {
+	width: 25%;
+	margin: auto;
 }
