@@ -90,11 +90,15 @@
 .side-nav-items:hover {
 	background-color: white;
 	text-decoration: underline;
-	transition: color 0.4s, background-color 0.8s, text-decoration 0.8s;		
+	outline: 0.5px solid rgba(0,153,255,0.9);
+	outline-offset: -1px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	transition: box-shadow 0.4s, outline 0.4s, background-color 0.8s, text-decoration 0.8s;		
 }
 
 #side-nav ul li:hover a{ 
-	color: rgba(0,153,255,0.9);   
+	color: rgba(0,153,255,0.9);
+	transition: color 0.4s;   
 }
 
 #content {
@@ -168,7 +172,7 @@ table th {
 	background-color: rgba(0,153,255,0.9);
 	color: white;
 	border: 0.5px solid rgb(204,255,255);
-	height: 35px;    
+	height: 35px;  
 }
 
 [type=button] {
@@ -205,4 +209,5 @@ table th {
 
 [type=text],[type=password],select{
 	border: 1px solid rgba(0,153,255,0.9);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
