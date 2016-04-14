@@ -8,15 +8,15 @@
 		else {
 			if($_SESSION['user']=="client")
 			{
-				header("location: ../client/welcome.php");
+				header("location: ../client/Welcome.php");
 			}
 			else if($_SESSION['user']=="engineer")
 			{
-				header("location: ../engineer/welcome.php");
+				header("location: ../engineer/Welcome.php");
 			}
 			else
 			{
-				header("location: ../pmanager/welcome.php");
+				header("location: ../pmanager/Welcome.php");
 			}
 		}
 	}
@@ -24,7 +24,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title> Template </title>
+	<title> Admin Login </title>
 	<!-- Importing the CSS and the font for the website donot alter the section below -->
 	<link rel="stylesheet" type="text/css" href="../../styles/prettify.css">
 	<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
