@@ -27,7 +27,7 @@
 }
 #clock
 {
-position:absolute;
+	position:absolute;
 	left:500px;
 	top:5px;
 	width:200px;
@@ -75,9 +75,8 @@ position:absolute;
 .nav-link {
 	font-size: 1.2em;
 	text-decoration: none;
-	padding: 5px;
-	margin-top: 20px;
 	color: white;
+	vertical-align: -webkit-baseline-middle;
 }
 
 .side-nav-items {
@@ -85,10 +84,17 @@ position:absolute;
 	margin-top: 15px;
 	margin-bottom: 15px;
 	text-align: center;
+	height: 30px;
 }
 
 .side-nav-items:hover {
-	background-color: rgba(0,153,255,0.9);
+	background-color: white;
+	text-decoration: underline;
+	transition: color 0.4s, background-color 0.8s, text-decoration 0.8s;		
+}
+
+#side-nav ul li:hover a{ 
+	color: rgba(0,153,255,0.9);   
 }
 
 #content {
@@ -96,9 +102,11 @@ position:absolute;
 }
 
 input, select {
-	height: 25px;
+	height: 30px;
 	width: 35%;
 	margin: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 .main-heading {
