@@ -33,7 +33,7 @@
 			<li id="add-client" class="side-nav-items"> <a href="AddClient.php" class="nav-link"> Add Client </a> </li>
 			<li id="add-engineer" class="side-nav-items"> <a href="AddEngineer.php" class="nav-link"> Add Engineer / Project Manager </a> </li>
 			<li id="session-tracking" class="side-nav-items"> <a href="SessionTracking.php" class="nav-link"> Session Tracking </a> </li>
-			<li id="complaint-status" class="side-nav-items"> <a href="ComplaintStatus.php" class="nav-link"> Complaint Status </a> </li>
+			<li id="complaint-status" class="side-nav-items active"> <a href="ComplaintStatus.php" class="nav-link active-link"> Complaint Status </a> </li>
 		</ul>
 	</aside>
 	<!-- Side bar ends here -->
