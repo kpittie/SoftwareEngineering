@@ -106,7 +106,7 @@ input, select {
 }
 
 .submit-delete-button {
-	width: 10%;
+	width: 20%;
 	height: 25px;
 }
 
@@ -154,4 +154,46 @@ table th {
 
 .valid-row {
 	background-color: rgba(0, 255, 0, 0.3);
+}
+
+[type=submit] {
+	background-color: rgba(0,153,255,0.9);
+	color: white;
+	border: 0.5px solid rgb(204,255,255);    
+}
+
+[type=button] {
+	background-color: rgba(0,153,255,0.9);
+	color: white;
+	border: 0.5px solid rgb(204,255,255);
+}
+
+[type=submit]:hover{
+	background-color: white;
+	color: rgba(0,153,255,0.9);
+	text-decoration: underline;
+	border: 0.5px solid rgba(0,153,255,0.9);
+	transition: color 0.4s, background-color 0.8s, border 0.4s, text-decoration 0.8s;
+}
+
+[type=button]:hover{
+	background-color: white;
+	color: rgba(0,153,255,0.9);
+	text-decoration: underline;
+	border: 0.5px solid rgba(0,153,255,0.9);
+	transition: color 0.4s, background-color 0.8s, border 0.4s, text-decoration 0.8s;
+}
+
+[type=text]:invalid:focus{
+	background-color: rgba(255,0,0,0.3);
+	transition: background-color 0.5s;
+}
+
+[type=text]:valid{
+	background-color: rgba(0,255,0,0.3);
+	transition: background-color 0.5s;
+}
+
+[type=text],[type=password],select{
+	border: 1px solid rgba(0,153,255,0.9);
 }

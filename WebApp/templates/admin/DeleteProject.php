@@ -43,7 +43,7 @@
 		?>
 		<h1 class="main-heading"> Delete Project </h1>
 		<form method="post">
-			<input type="text" placeholder="Project ID" id="project-id" name="project-id">
+			<input type="text" pattern="^[0-9]{1,10}$" placeholder="Project ID" id="project-id" name="project-id">
 			<input type="submit" value="Delete" class="submit-delete-button">
 		</form>
 		<div id="message">

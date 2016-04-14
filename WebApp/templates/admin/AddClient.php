@@ -43,9 +43,9 @@
 		?>
 		<h1 class="main-heading"> Add Client </h1>
 		<form method="post">
-			<input type="text" placeholder="User ID" name="user-id"> <br/>
-			<input type="text" placeholder="User Name" name="user-name"> <br/>
-			<input type="password" placeholder="Password" name="pass"> <br/>
+			<input type="text" pattern="^[0-9]{1,10}$" required="required" placeholder="User ID" name="user-id"> <br/>
+			<input type="text" pattern="^[a-zA-Z]{3,25}$" required="required" placeholder="User Name" name="user-name"> <br/>
+			<input type="password" required="required" placeholder="Password" name="pass"> <br/>
 				<?php
 					$dbhost = 'localhost';
 					$dbuser = 'root';
@@ -92,7 +92,7 @@
 				}
 
 				else {
-					echo "DIE MOTHERFUCKER!";
+					echo "Failed";
 				}
 
 				$sql = "UPDATE project SET client_id=$id WHERE name='$pname'";
@@ -101,7 +101,7 @@
 					echo "<p class='create-message'> New project client created successfully </p>";
 				}
 				else {
-					echo "DIE MOTHERFUCKER";
+					echo "Failed";
 				}
 			endif;
 		mysqli_close($conn);

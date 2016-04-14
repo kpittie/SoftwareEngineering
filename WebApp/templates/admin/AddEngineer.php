@@ -67,7 +67,9 @@
 		?>
 		<h1 class="main-heading"> Add Engineer / Project Manager </h1>
 		<form method="post" action="">
-			<select name="project-name" id="project-name" onchange="trig(this.value)"> 
+			<input type="text" required="required" pattern="^[0-9]{1,10}$" placeholder="Engineer ID" id="engineer-id" name="engineer-id"> <br/>
+			<input type="password" required="required" placeholder="Password" id="password" name="password"> <br/>			
+			<select required="required" name="project-name" id="project-name" onchange="trig(this.value)"> 
 				<option value="" selected="true" style="display:none;">Select project</option>
 				<?php
 
@@ -87,9 +89,7 @@
 				</br>
 			<select id="module-name" name="module-name">
 			</select> <br/>
-			<input type="text" placeholder="Engineer ID" id="engineer-id" name="engineer-id"> <br/>
-			<input type="password" placeholder="Password" id="password" name="password"> <br/>
-			<label id="radio-label"> Project Manager: <input type="radio" class="radio-input" name="pmanager" value="y">Yes <input type="radio" name="pmanager" class="radio-input" value="n">No </label> <br/> 			
+			<label id="radio-label"> Project Manager: <input type="radio" required="required" class="radio-input" name="pmanager" value="y">Yes <input type="radio" name="pmanager" class="radio-input" value="n">No </label> <br/> 			
 			<input type="submit" value="Add Engineer" class="submit-delete-button">
 		</form>
 	<?php
