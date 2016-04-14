@@ -21,7 +21,7 @@
 		<ul id="top-nav-list">
 			<li class="top-nav-item" id="logo"> <img src="../../images/logo.png" alt="logo" id="logo-image"> </li> 
 			
-			<li class="top-nav-item" id="logout-button"> <a id="logout-link" href="login.php?logout=1"> Logout </a> </li>
+			<li class="top-nav-item" id="logout-button"> <a id="logout-link" href="Login.php?logout=1"> Logout </a> </li>
 		</ul>
 	</nav>
 	<!-- Top Nav Bar ends here -->
