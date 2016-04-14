@@ -97,14 +97,14 @@ if(isset($_SESSION['user-name'])) {
                 $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
                 $pass=$_POST['pass'];
                 $id=$_POST['client'];
-                $sqll = "select id from client";
+                $sqll = "select id from user";
                 $result_id = $conn->query($sqll);
                 while ($row_id = mysqli_fetch_array($result_id))
                 {
                     if($row_id['id']==$id)
                     {
                         $flag = 1;
-                        $sql="select password from client where id='$id'";
+                        $sql="select password from user where id='$id'";
                         $result = $conn->query($sql);
                         $row = mysqli_fetch_array($result);
                         if ($pass==$row['password']) {
