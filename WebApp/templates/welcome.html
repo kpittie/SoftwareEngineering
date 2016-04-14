@@ -231,14 +231,6 @@
         <li><a href="#services">SERVICES</a></li>
         <li><a href="#portfolio">PORTFOLIO</a></li>
         <li><a href="#contact">CONTACT</a></li>
-        <li><a href="#login" onclick="show()">LOGIN</a>
-            <ul class="nav" id="sub-nav" style="display:none;">
-              <li><a href="#administrator"> Administrator </a></li>
-              <li><a href="#client"> Client </a></li>
-              <li><a href="#engineer"> Engineer </a></li>
-              <li><a href="#projectmanager"> Project Manager </a></li>
-            </ul>
-          </li>
       </ul>
     </div>
   </div>
@@ -248,8 +240,10 @@
   <h1>CHANGE MANAGEMENT TOOL</h1> 
   <p>Quality Products and services</p> 
   <form class="form-inline">
-    <input type="email" class="form-control" size="50" placeholder="Email Address" required>
-    <button type="button" class="btn btn-danger">Subscribe</button>
+    <button type="button" class="btn btn-danger" onclick="location.href='admin/Login.php'">Administrator</button>
+    <button type="button" class="btn btn-danger" onclick="location.href='client/Login.php'">Client</button>
+    <button type="button" class="btn btn-danger" onclick="location.href='engineer/Login.php'">Engineer</button>
+    <button type="button" class="btn btn-danger" onclick="location.href='pmanager/Login.php'">Project Manager</button>
   </form>
 </div>
 

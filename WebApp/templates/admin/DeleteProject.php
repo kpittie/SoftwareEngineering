@@ -27,7 +27,7 @@
 	<aside id="side-nav">
 		<ul id="side-nav-list">
 			<li id="add-project" class="side-nav-items"> <a href="AddProject.php" class="nav-link"> Add Project </a> </li>
-			<li id="delete-project" class="side-nav-items"> <a href="DeleteProject.php" class="nav-link"> Delete Project </a> </li>
+			<li id="delete-project" class="side-nav-items active"> <a href="DeleteProject.php" class="nav-link active-link"> Delete Project </a> </li>
 			<li id="add-client" class="side-nav-items"> <a href="AddClient.php" class="nav-link"> Add Client </a> </li>
 			<li id="add-engineer" class="side-nav-items"> <a href="AddEngineer.php" class="nav-link"> Add Engineer / Project Manager </a> </li>
 			<li id="session-tracking" class="side-nav-items"> <a href="SessionTracking.php" class="nav-link"> Session Tracking </a> </li>
@@ -43,7 +43,7 @@
 		?>
 		<h1 class="main-heading"> Delete Project </h1>
 		<form method="post">
-			<input type="text" pattern="^[0-9]{1,10}$" placeholder="Project ID" id="project-id" name="project-id">
+			<input type="text" required="required" pattern="^[0-9]{1,10}$" placeholder="Project ID" id="project-id" name="project-id">
 			<input type="submit" value="Delete" class="submit-delete-button">
 		</form>
 		<div id="message">
