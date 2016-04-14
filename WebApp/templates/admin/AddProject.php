@@ -51,6 +51,7 @@
 			<div id="dynamicInput">
           		<input type="text" pattern="^[a-zA-Z]{1,100}$" required="required" name="Modules[]" placeholder="Module1" id="first-input">
           		<input type="button" value="+" onClick="addInput('dynamicInput');" class="small-button">
+          		<input type="button" value="-" onClick="deleteInput();" class="small-button">
      		</div>
 			<input type="submit" value="Add Project" class="submit-delete-button">
 		</form>

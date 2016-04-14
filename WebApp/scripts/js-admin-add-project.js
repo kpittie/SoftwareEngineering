@@ -1,4 +1,5 @@
 var counter = 1;
+var lastdiv = counter+1;
 var limit = 5;
 function addInput(divName){
      if (counter == limit)  {
@@ -10,4 +11,14 @@ function addInput(divName){
           document.getElementById(divName).appendChild(newdiv);
           counter++;
      }
+}
+
+function deleteInput(){
+	if(counter>1)
+	{
+		lastdiv = counter+1;
+		document.getElementById('dynamicInput').removeChild(document.getElementById('dynamicInput').children[lastdiv]);
+		counter--;
+		lastdiv--;
+	}
 }
