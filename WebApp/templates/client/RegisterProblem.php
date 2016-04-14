@@ -54,6 +54,7 @@ session_start();
             <form method="post">
 
                 <select id="project" name="project" class="form-center" required>
+                    <option selected="selected" disabled="disabled">Select a Project</option>
                     <?php
                     $dbhost = 'localhost';
                     $dbuser = 'root';
@@ -75,7 +76,7 @@ session_start();
                         echo '<option value="'.$id.'">'.$name.'</option>';
                     }
                     ?>
-                    <option selected="selected" disabled="disabled">Select a Project</option>
+
                 </select>
 
                 <select id="module" name="module" class="form-center" required>
@@ -110,14 +111,16 @@ session_start();
                 $moduleId = $_POST["module"];
                 $description = $_POST['description'];
                 $priority = $_POST['priority'];
-                $date=date("Y/m/d");
+                $timestamp=date("Y/m/d");
                 $status_complaint="U";
 
                 $engineerId=0;
 
                 $number_of_complaints=0;
-                $status_engineer="";
+                $status_engineer="Assigned";
                 $total_complaints=0;
+
+                $projectProblem=0;
                 $query="SELECT id,status,number_of_complaints,total_complaints FROM engineer where project_id=$projectId AND module_id=$moduleId";
                 $result = mysqli_query($conn, $query);
                 $flag=0;
@@ -129,6 +132,7 @@ session_start();
                             $number_of_complaints = 1;
                             $status_engineer="Assigned";
                             $total_complaints=$row["total_complaints"]+1;
+                            $status_complaint="A";
                             $flag=1;
                             break;
                         }
@@ -141,6 +145,7 @@ session_start();
                             $engineerId = $row["id"];
                             $number_of_complaints=$row["number_of_complaints"]+1;
                             $total_complaints=$row["total_complaints"]+1;
+                            $status_complaint="A";
                             break;
                         }
                     }
@@ -149,29 +154,30 @@ session_start();
                     echo "<p class='error-message'> No Engineer in the project!!! </p>";
                 }
 
-                
-                $sql = "INSERT INTO project (name) VALUES ('$name')";
+
+                $sql = "UPDATE engineer SET number_of_complaints=$number_of_complaints,status='$status_engineer',total_complaints=$total_complaints WHERE id=$engineerId";
 
                 if (mysqli_query($conn, $sql)) {
-                    echo "<p class='create-message'> New project created successfully </p>";
-                }
+                    echo "<p class='create-message'> Engineer Assigned </p>";
 
-                $sql = "SELECT id FROM project WHERE name='$name'";
-                $result = $conn->query($sql);
-                $ide = $result->fetch_assoc();
-                $id = $ide["id"];
-
-
-                $modules = $_POST["Modules"];
-
-                foreach ($modules as $module)
-                {
-                    $sql = "INSERT INTO module (name,project_id) VALUES ('$module',$id)";
+                    $sql = "INSERT into problem(description,project_id,module_id,engineer_id,timestamp,status,priority) VALUES  ('$description',$projectId,$moduleId,$engineerId,'$timestamp','$status_complaint','$priority')";
                     if (mysqli_query($conn, $sql)) {
-                        echo "<p class='create-message'> New modules created successfully </p>";
+                        $problem_id=mysqli_insert_id($conn);
+                        echo "<p class='create-message' >Problem Id:</p>";
+                        echo "<p class='create-message' id='prob_id'>$problem_id </p>";
                     }
+
+                    $sql = "UPDATE project SET problems=problems+1 WHERE id=$projectId";
+                    mysqli_query($conn,$sql);
+
                 }
-            endif;
+                else {
+                    echo "Error in Submission: ";
+                }
+
+
+
+               endif;
             mysqli_close($conn);
             ?>
             <?php
