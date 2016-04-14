@@ -141,6 +141,9 @@ input, select {
 .create-message {
 	color: green;
 }
+.error-message {
+	color: red;
+}
 
 table {
     width:80%;

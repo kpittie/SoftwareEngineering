@@ -19,3 +19,9 @@
 	width: 25%;
 	margin: auto;
 }
+
+.form-center{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
