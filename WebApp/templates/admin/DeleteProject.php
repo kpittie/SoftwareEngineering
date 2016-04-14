@@ -46,36 +46,70 @@
 			<input type="text" required="required" pattern="^[0-9]{1,10}$" placeholder="Project ID" id="project-id" name="project-id">
 			<input type="submit" value="Delete" class="submit-delete-button">
 		</form>
+
+		<table>
+			<tr>
+				<th> ID </th>
+				<th> Project Name </th>
+			</tr>
+		<?php
+			$dbhost = 'localhost';
+			$dbuser = 'root';
+			$dbpass = '';
+			$dbname = 'cmt';
+
+			$conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
+
+			if($conn->connect_error)
+			{
+				die("connection failed: ". $conn->connect_error);
+			}
+
+			$sql = "SELECT * FROM PROJECT";
+			$result = $conn->query($sql);
+			while($row = $result->fetch_assoc())
+			{
+				echo "<tr>";
+				echo "<td>".$row['id']."</td>";
+				echo "<td>".$row['name']."</td>";
+				echo "</tr>";
+			}
+		?>
+		</table>
+
 		<div id="message">
 				<?php
-					$dbhost = 'localhost';
-					$dbuser = 'root';
-					$dbpass = '';
-					$dbname = 'cmt';
-
-					$conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
-
-					if($conn->connect_error)
-					{
-						die("connection failed: ". $conn->connect_error);
-					}
-
 					if($_POST) :
-  							$id = !isset($_POST['project-id']) ? 0 : $_POST['project-id'];
-							$sql = "DELETE FROM project WHERE id=$id";	
-							if(mysqli_query($conn, $sql))
+							$flag = 0;
+  							$id = $_POST['project-id'];
+  							$sqll = "SELECT * from project";
+  							$result = $conn->query($sqll);
+  							while($row = $result->fetch_assoc()) {
+  								if($row["id"] == $id) {
+  									$flag = 1;
+  									break;	
+  								}
+  							}
+  							if($flag == 1)
+  							{
+	  							$sql = "DELETE FROM project WHERE id=$id";	
+								if(mysqli_query($conn, $sql))
+								{
+									echo "<p class='delete-message'> The project was deleted </p>";
+								}
+								$sql = "DELETE FROM module WHERE project_id=$id";
+								if(mysqli_query($conn, $sql))
+								{
+									echo "<p class='delete-message'> The associated modules have been deleted </p>";
+								}
+								header ('location: DeleteProject.php');
+  							}
+							else
 							{
-								echo "<p class='delete-message'> The project was deleted </p>";
-							}
-							$sql = "DELETE FROM module WHERE project_id=$id";
-							if(mysqli_query($conn, $sql))
-							{
-								echo "<p class='delete-message'> The associated modules have been deleted </p>";
+								echo "<p class='delete-message'> Incorrect ID entered or the project has already been deleted </p>";
 							}
 						mysqli_close($conn);
 					endif;
-				?>
-	<?php
 		}
 		else
 		{
