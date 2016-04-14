@@ -61,9 +61,9 @@ $(document).ready(function() {
 			}
 		?>
 		<form  method="post">
-			<input type="text" placeholder="Admin ID" name="admin"> <br/>
-			<input type="password" placeholder="Password" name="pass"> <br/>
-			<input type="text" placeholder="Captcha" name="captcha" id="real-person"> <br/>
+			<input type="text" pattern="^[0-9]{3}$" required='required' placeholder="Admin ID" name="admin"> <br/>
+			<input type="password" required='required' placeholder="Password" name="pass"> <br/>
+			<input type="text" pattern="^[a-zA-Z0-9]{6}$" required='required' placeholder="Captcha" name="captcha" id="real-person"> <br/>
 			<input type="submit" value="Sign In" class="submit-delete-button">
 		</form>
 		<?php

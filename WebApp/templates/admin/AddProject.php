@@ -29,12 +29,12 @@
 	<!-- Side bar is below make changes to li(id), li(content) rest should not be changed and donot remove any classes or ids except for the ones that contain the names of the list items -->
 	<aside id="side-nav">
 		<ul id="side-nav-list">
-			<li id="add-project" class="side-nav-items"> <a href="http://localhost:80/SoftwareEngineering/WebApp/templates/admin/AddProject.php" class="nav-link"> Add Project </a> </li>
-			<li id="delete-project" class="side-nav-items"> <a href="http://localhost:80/SoftwareEngineering/WebApp/templates/admin/DeleteProject.php" class="nav-link"> Delete Project </a> </li>
-			<li id="add-client" class="side-nav-items"> <a href="http://localhost:80/SoftwareEngineering/WebApp/templates/admin/AddClient.php" class="nav-link"> Add Client </a> </li>
-			<li id="add-engineer" class="side-nav-items"> <a href="http://localhost:80/SoftwareEngineering/WebApp/templates/admin/AddEngineer.php" class="nav-link"> Add Engineer / Project Manager </a> </li>
-			<li id="session-tracking" class="side-nav-items"> <a href="http://localhost:80/SoftwareEngineering/WebApp/templates/admin/SessionTracking.php" class="nav-link"> Session Tracking </a> </li>
-			<li id="complaint-status" class="side-nav-items"> <a href="http://localhost:80/SoftwareEngineering/WebApp/templates/admin/ComplaintStatus.php" class="nav-link"> Complaint Status </a> </li>
+			<li id="add-project" class="side-nav-items"> <a href="AddProject.php" class="nav-link"> Add Project </a> </li>
+			<li id="delete-project" class="side-nav-items"> <a href="DeleteProject.php" class="nav-link"> Delete Project </a> </li>
+			<li id="add-client" class="side-nav-items"> <a href="AddClient.php" class="nav-link"> Add Client </a> </li>
+			<li id="add-engineer" class="side-nav-items"> <a href="AddEngineer.php" class="nav-link"> Add Engineer / Project Manager </a> </li>
+			<li id="session-tracking" class="side-nav-items"> <a href="SessionTracking.php" class="nav-link"> Session Tracking </a> </li>
+			<li id="complaint-status" class="side-nav-items"> <a href="ComplaintStatus.php" class="nav-link"> Complaint Status </a> </li>
 		</ul>
 	</aside>
 	<!-- Side bar ends here -->
@@ -47,10 +47,11 @@
 		<h1 class="main-heading"> Add Project </h1>
 		<p class="message"></p><br/>
 		<form method="post">
-			<input type="text" placeholder="Project" id="project-name" name="project-name"> <br/>
+			<input type="text" pattern="^[a-zA-Z]{1,100}$" required="required" placeholder="Project" id="project-name" name="project-name"> <br/>
 			<div id="dynamicInput">
-          		<input type="text" name="Modules[]" placeholder="Module1" id="first-input">
+          		<input type="text" pattern="^[a-zA-Z]{1,100}$" required="required" name="Modules[]" placeholder="Module1" id="first-input">
           		<input type="button" value="+" onClick="addInput('dynamicInput');" class="small-button">
+          		<input type="button" value="-" onClick="deleteInput();" class="small-button">
      		</div>
 			<input type="submit" value="Add Project" class="submit-delete-button">
 		</form>
