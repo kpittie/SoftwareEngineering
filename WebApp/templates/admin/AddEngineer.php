@@ -83,11 +83,11 @@
 		              $result = $conn->query($sql);
 		            while ($row = mysqli_fetch_array($result)) {
 		            echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';
-		            }      
-		            
+		            }
+				    echo '</select>';
 		            $conn->close();
                 ?>
-				</select>
+				
 				</br>
 			<select id="module-name" name="module-name">
 			</select> <br/>
