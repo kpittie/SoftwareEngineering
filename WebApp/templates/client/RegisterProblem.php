@@ -18,8 +18,31 @@ session_start();
 
     <link rel="stylesheet" type="text/css" href="../../styles/admin.css">
 
-    <script src="../../scripts/js-admin-add-project.js"> </script>
-</head>
+    <script>
+        function trig(pid) {
+            if (pid == "") {
+                document.getElementById("module").innerHTML = "";
+                return;
+            } else {
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else {
+                    // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        document.getElementById("module").innerHTML = xmlhttp.responseText;
+                    }
+                };
+                xmlhttp.open("GET","fetch_modules.php?q="+pid,true);
+                xmlhttp.send();
+            }
+        }
+        </script>
+
+        </head>
 
 <body>
 <div id="container">
@@ -53,8 +76,8 @@ session_start();
             <p class="message"></p><br/>
             <form method="post">
 
-                <select id="project" name="project" class="form-center" required>
-                    <option selected="selected" disabled="disabled">Select a Project</option>
+                <select value="" id="project" name="project" class="form-center" onchange="trig(this.value) required>
+                    <option selected="selected" >Select a Project</option>
                     <?php
                     $dbhost = 'localhost';
                     $dbuser = 'root';
@@ -80,16 +103,7 @@ session_start();
                 </select>
 
                 <select id="module" name="module" class="form-center" required>
-                    <?php
-                    $query= "SELECT module.id,module.name FROM module INNER JOIN project on module.project_id=project.id where project.client_id= " .$_SESSION['user-name']. " ";
-                    $result=mysqli_query($conn,$query);
-                    while($row=mysqli_fetch_assoc($result)){
-                        $id = $row['id'];
-                        $name = $row['name'];
-                        echo '<option value="'.$id.'">'.$name.'</option>';
-                    }
-                    ?>
-                    <option selected="selected" disabled="disabled">Select a Module</option>
+                    <option selected="selected" >Select a Module</option>
                 </select>
                 <br/>
                 <textarea name="description" id="description" rows="10" cols="50" class="form-center">
