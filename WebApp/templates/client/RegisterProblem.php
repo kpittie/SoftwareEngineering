@@ -23,7 +23,7 @@ session_start();
             if (pid == "") {
                 document.getElementById("module").innerHTML = "";
                 return;
-            } else {
+            } else { 
                 if (window.XMLHttpRequest) {
                     // code for IE7+, Firefox, Chrome, Opera, Safari
                     xmlhttp = new XMLHttpRequest();
@@ -40,7 +40,7 @@ session_start();
                 xmlhttp.send();
             }
         }
-        </script>
+    </script>
 
         </head>
 
@@ -76,35 +76,27 @@ session_start();
             <p class="message"></p><br/>
             <form method="post">
 
-                <select value="" id="project" name="project" class="form-center" onchange="trig(this.value) required>
-                    <option selected="selected" >Select a Project</option>
-                    <?php
+            <select required="required" name="project" id="project" onchange="trig(this.value)"> 
+                <option value="" selected="true" style="display:none;">Select project</option>
+                <?php
+
                     $dbhost = 'localhost';
                     $dbuser = 'root';
                     $dbpass = '';
-                    $dbname = 'cmt';
-
-                    $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
-
-                    if($conn->connect_error)
-                    {
-                        die("connection failed: ". $conn->connect_error);
-                    }
-
-                    $query= "SELECT id,name FROM project where client_id= " .$_SESSION['user-name']. " ";
-                    $result=mysqli_query($conn,$query);
-                    while($row=mysqli_fetch_assoc($result)){
-                        $id = $row['id'];
-                        $name = $row['name'];
-                        echo '<option value="'.$id.'">'.$name.'</option>';
-                    }
-                    ?>
-
+                    $dbname = 'cmt';                           
+                      $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
+                      $sql = "select * from  project";         
+                      $result = $conn->query($sql);
+                    while ($row = mysqli_fetch_array($result)) {
+                    echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';
+                    }      
+                    
+                    $conn->close();
+                ?>
                 </select>
-
-                <select id="module" name="module" class="form-center" required>
-                    <option selected="selected" >Select a Module</option>
-                </select>
+                </br>
+            <select id="module" name="module">
+            </select>
                 <br/>
                 <textarea name="description" id="description" rows="10" cols="50" class="form-center">
                     Problem Description
@@ -188,11 +180,7 @@ session_start();
                 else {
                     echo "Error in Submission: ";
                 }
-
-
-
                endif;
-            mysqli_close($conn);
             ?>
             <?php
         }
