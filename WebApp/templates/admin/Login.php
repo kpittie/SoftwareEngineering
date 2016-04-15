@@ -28,6 +28,7 @@
 	<!-- Importing the CSS and the font for the website donot alter the section below -->
 	<link rel="stylesheet" type="text/css" href="../../styles/prettify.css">
 	<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+	<link rel="icon" type="image/png" href="../../images/logo.png">
 	<!-- Importing ends here -->
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="../../Plugins/captcha/jquery.realperson.css"> 
