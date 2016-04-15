@@ -8,7 +8,7 @@ session_start();
     <title>Login/Sign-In</title>
     
     
-    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="../styles/normalize.css">
 
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 <meta charset="utf-8">
@@ -16,7 +16,7 @@ session_start();
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="../styles/style.css">
 		
 
     
@@ -255,7 +255,7 @@ exit;
 </div>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
-        <script src="js/index.js"></script>
+        <script src="../scripts/index.js"></script>
 
     
     
