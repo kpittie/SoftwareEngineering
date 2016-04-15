@@ -57,7 +57,15 @@ if(isset($_SESSION['user-name'])) {
         </ul>
     </nav>
     <!-- Top Nav Bar ends here -->
-
+    <aside id="side-nav">
+        <ul id="side-nav-list">
+            <li id="admin" class="side-nav-items "> <a href="../admin/Login.php" class="nav-link"> Administrator </a> </li>
+            <li id="client" class="side-nav-items active"> <a href="Login.php" class="nav-link active-link"> Client </a> </li>
+            <li id="engineer" class="side-nav-items"> <a href="../engineer/Login.php" class="nav-link"> Engineer </a> </li>
+            <li id="pmanager" class="side-nav-items"> <a href="../pmanager/Login.php" class="nav-link">Project Manager </a> </li>
+        </ul>
+    </aside>
+    <!-- Side bar ends here -->
     <!-- This is the section where you'll add the main content of the page -->
     <div id="main">
         <h1> Client Login </h1>
