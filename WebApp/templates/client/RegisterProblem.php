@@ -83,9 +83,10 @@ session_start();
                     $dbhost = 'localhost';
                     $dbuser = 'root';
                     $dbpass = '';
-                    $dbname = 'cmt';                           
+                    $dbname = 'cmt';  
+                    $username = $_SESSION['user-name'];                         
                       $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
-                      $sql = "select * from  project";         
+                      $sql = "select * from project WHERE client_id=$username";         
                       $result = $conn->query($sql);
                     while ($row = mysqli_fetch_array($result)) {
                     echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';
