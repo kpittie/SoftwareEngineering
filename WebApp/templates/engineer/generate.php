@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by NOTEPAD++.
+ * User: INDRANIL OJHA
+ * Date: 14-04-2016
+ * Time: 1:10 PM
+ */
 session_start();
 header('Content-type: image/jpeg'); 
 
@@ -19,6 +25,6 @@ $y2=rand(1,100);
 imageline($image,$x1,$y1,$x2,$y2,$text_color);
 }
 
-imagettftext($image,$font_size,0,15,30,$text_color,'captcha4.ttf',$text);
+imagettftext($image,$font_size,0,15,30,$text_color,'../../Plugins/captcha4.ttf',$text);
 imagejpeg($image);
 ?>

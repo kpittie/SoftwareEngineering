@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by NOTEPAD++
+ * User: INDRANIL OJHA
+ * Date: 14-04-2016
+ * Time: 1:10 PM
+ */
 session_start();
 ?>
 <!DOCTYPE html>
@@ -8,7 +14,7 @@ session_start();
     <title>Login/Sign-In</title>
     
     
-    <link rel="stylesheet" href="../styles/normalize.css">
+    <link rel="stylesheet" href="../../styles/normalize.css">
 
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 <meta charset="utf-8">
@@ -16,7 +22,7 @@ session_start();
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../../styles/style.css">
 		
 
     
@@ -96,10 +102,10 @@ if(isset($_SESSION[id]))
 echo '<nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-	<a class="navbar-brand" href="#myPage"><img class="img-circle" src="logo.png" width="50px" height="38px"></a>
+	<a class="navbar-brand" href="#myPage"><img class="img-circle" src="../../images/logo.png" width="50px" height="38px"></a>
       <a class="navbar-brand" href="#">ENGINEER\'S PORTAL</a>
 	 <a class="navbar-brand" href="#myPage"> <div id="clock">
-	<object width="200" height="50" data="clock.swf"></object>
+	<object width="200" height="50" data="../../images/clock.swf"></object>
 	</div></a>
     </div>
     <ul class="nav navbar-nav navbar-right">
@@ -123,14 +129,14 @@ echo "<div class='jumbotron text-center'>";
 	
 		echo '<table width="28%"  border="0" align="center">
   <tr>
-    <td width="7%" height="65" valign="bottom"><img src="images/b1.jpg" width="50" height="50" align="middle"></td>
+    <td width="7%" height="65" valign="bottom"><img src="../../images/b1.jpg" width="50" height="50" align="middle"></td>
     <td width="93%"valign="bottom" bordercolor="#0000FF"> <a href="ongoing.php"><h3>ONGOING  PROBLEMS </h3></a></td>
   </tr>
   <tr>
   <td></td>
   </tr>
   <tr>
-    <td height="58" valign="bottom"><img src="images/b2.jpg" width="43" height="43" align="absmiddle"></td>
+    <td height="58" valign="bottom"><img src="../../images/b2.jpg" width="43" height="43" align="absmiddle"></td>
     <td valign="bottom" bordercolor="#0000FF"> <a href="completed.php" ><h3>&nbsp&nbspCOMPLETED PROBLEMS</h3></a></td>
   </tr>
 </table>';
@@ -255,7 +261,7 @@ exit;
 </div>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
-        <script src="../scripts/index.js"></script>
+        <script src="../../scripts/index.js"></script>
 
     
     

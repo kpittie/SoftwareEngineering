@@ -203,7 +203,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#myPage"><img class="img-circle" src="logo.png" width="50px" height="40px"></a>
+      <a class="navbar-brand" href="#myPage"><img class="img-circle" src="../images/logo.png" width="50px" height="40px"></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
@@ -306,21 +306,21 @@
   <div class="row text-center slideanim">
       <div class="col-sm-4">
       <div class="thumbnail">
-        <img src="images/satish.png" alt="SATISH C.J." width="400" height="300">
+        <img src="../images/satish.png" alt="SATISH C.J." width="400" height="300">
         <p><strong>Mr. Satish C.J.</strong></p>
         <p>FACULTY IN CHARGE</p>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="thumbnail">
-        <img src="images/aarushi.jpg" alt="AARUSHI ARYA" width="400" height="300">
+        <img src="../images/aarushi.jpg" alt="AARUSHI ARYA" width="400" height="300">
         <p><strong>AARUSHI ARYA</strong></p>
         <p>Project Manager</p>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="thumbnail">
-        <img src="images/harsh.jpg" alt="HARSH SAXENA" width="400" height="300">
+        <img src="../images/harsh.jpg" alt="HARSH SAXENA" width="400" height="300">
         <p><strong>HARSH SAXENA</strong></p>
         <p>13BCE0093</p>
       </div>
@@ -330,21 +330,21 @@
   <div class="row text-center slideanim">
     <div class="col-sm-4">
       <div class="thumbnail">
-        <img src="images/indranil.jpg" alt="INDRANIL OJHA" width="400" height="300">
+        <img src="../images/indranil.jpg" alt="INDRANIL OJHA" width="400" height="300">
         <p><strong>INDRANIL OJHA</strong></p>
         <p>13BCE0857</p>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="thumbnail">
-        <img src="images/karan.jpg" alt="KARAN PITTIE" width="400" height="300">
+        <img src="../images/karan.jpg" alt="KARAN PITTIE" width="400" height="300">
         <p><strong>KARAN PITTIE</strong></p>
         <p>13BCE0360</p>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="thumbnail">
-        <img src="images/mohit.jpg" alt="VARUN MANOCHA" width="400" height="300">
+        <img src="../images/mohit.jpg" alt="VARUN MANOCHA" width="400" height="300">
         <p><strong>VARUN MANOCHA</strong></p>
         <p>13BCE0141</p>
       </div>
@@ -353,21 +353,21 @@
   <div class="row text-center slideanim">
     <div class="col-sm-4">
       <div class="thumbnail">
-        <img src="images/apoorv.jpg" alt="APOORV  SHARMA" width="400" height="300">
+        <img src="../images/apoorv.jpg" alt="APOORV  SHARMA" width="400" height="300">
         <p><strong>APOORV SHARMA</strong></p>
         <p>13BCE0589</p>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="thumbnail">
-        <img src="images/gagandeep.jpg" alt="GAGANDEEP SINGH" width="400" height="300">
+        <img src="../images/gagandeep.jpg" alt="GAGANDEEP SINGH" width="400" height="300">
         <p><strong>GAGANDEEP SINGH</strong></p>
         <p>13BCE0822</p>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="thumbnail">
-        <img src="images/thirumurugan.jpg" alt="THIRUMURUGAN S.S." width="400" height="300">
+        <img src="../images/thirumurugan.jpg" alt="THIRUMURUGAN S.S." width="400" height="300">
         <p><strong>THIRUMURUGAN S.S.</strong></p>
         <p>13BCE0293</p>
       </div>
@@ -376,21 +376,21 @@
   <div class="row text-center slideanim">
     <div class="col-sm-4">
       <div class="thumbnail">
-        <img src="images/mohit.jpg" alt="MOHIT AWASTHI" width="400" height="300">
+        <img src="../images/mohit.jpg" alt="MOHIT AWASTHI" width="400" height="300">
         <p><strong>MOHIT AWASTHI</strong></p>
         <p>13BCE0855</p>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="thumbnail">
-        <img src="images/ambikan.jpg" alt="AMBIKAN S.S." width="400" height="300">
+        <img src="../images/ambikan.jpg" alt="AMBIKAN S.S." width="400" height="300">
         <p><strong>AMBIKAN S</strong></p>
         <p>13BCE0767</p>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="thumbnail">
-        <img src="images/jahnavi.jpg" alt="JAHNAVI JAISWAL" width="400" height="300">
+        <img src="../images/jahnavi.jpg" alt="JAHNAVI JAISWAL" width="400" height="300">
         <p><strong>JAHNAVI JAISWAL</strong></p>
         <p>13BCE0604</p>
       </div>
