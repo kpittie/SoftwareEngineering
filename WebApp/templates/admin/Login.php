@@ -55,6 +55,7 @@ $(document).ready(function() {
 	<!-- Side bar is below make changes to li(id), li(content) rest should not be changed and donot remove any classes or ids except for the ones that contain the names of the list items -->
 	<aside id="side-nav">
 		<ul id="side-nav-list">
+			<li id="home" class="side-nav-items"> <a href="../index.php" class="nav-link"> Home </a> </li>
 			<li id="admin" class="side-nav-items active"> <a href="Login.php" class="nav-link active-link"> Administrator </a> </li>
 			<li id="client" class="side-nav-items"> <a href="../client/Login.php" class="nav-link"> Client </a> </li>
 			<li id="engineer" class="side-nav-items"> <a href="../engineer/Login.php" class="nav-link"> Engineer </a> </li>

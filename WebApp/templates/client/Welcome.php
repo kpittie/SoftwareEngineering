@@ -11,7 +11,7 @@ session_start();
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title> Client </title>
+    <title> Welcome </title>
     <!-- Importing the CSS and the font for the website donot alter the section below -->
     <link rel="stylesheet" type="text/css" href="../../styles/prettify.css">
     <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
@@ -36,10 +36,11 @@ session_start();
     <!-- Side nav bar is below make changes  -->
     <aside id="side-nav">
         <ul id="side-nav-list">
-            <li id="register-problem" class="side-nav-items"> <a href="RegisterProblem.php" class="nav-link"> Register Problem </a> </li>
-            <li id="cancel-problem" class="side-nav-items"> <a href="CancelProblem.php" class="nav-link"> Cancel Problem </a> </li>
-            <li id="reopen-problem" class="side-nav-items"> <a href="ReopenProblem.php" class="nav-link"> Reopen Problem </a> </li>
-            <li id="problem-status" class="side-nav-items"> <a href="ProblemStatus.php" class="nav-link"> Problem Status </a> </li>
+            <li id="home" class="side-nav-items"> <a href="Welcome.php" class="nav-link"> Home </a> </li>
+            <li id="register-problem" class="side-nav-items"> <a href="RegisterProblem.php" class="nav-link"> Register Complaint </a> </li>
+            <li id="cancel-problem" class="side-nav-items"> <a href="CancelProblem.php" class="nav-link"> Cancel Complaint </a> </li>
+            <li id="reopen-problem" class="side-nav-items"> <a href="ReopenProblem.php" class="nav-link"> Reopen Complaint </a> </li>
+            <li id="problem-status" class="side-nav-items"> <a href="ProblemStatus.php" class="nav-link"> Complaint Status </a> </li>
         </ul>
     </aside>
     <!-- Side bar ends here -->

@@ -59,6 +59,7 @@ if(isset($_SESSION['user-name'])) {
     <!-- Top Nav Bar ends here -->
     <aside id="side-nav">
         <ul id="side-nav-list">
+            <li id="home" class="side-nav-items"> <a href="../index.php" class="nav-link"> Home </a> </li>
             <li id="admin" class="side-nav-items "> <a href="../admin/Login.php" class="nav-link"> Administrator </a> </li>
             <li id="client" class="side-nav-items active"> <a href="Login.php" class="nav-link active-link"> Client </a> </li>
             <li id="engineer" class="side-nav-items"> <a href="../engineer/Login.php" class="nav-link"> Engineer </a> </li>
