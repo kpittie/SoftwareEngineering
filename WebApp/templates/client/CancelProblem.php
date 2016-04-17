@@ -41,7 +41,7 @@
 		<?php
 			if(isset($_SESSION['user-name']) && $_SESSION['user']=="client"){
 		?>
-		<h1 class="main-heading"> Delete Project </h1>
+		<h1 class="main-heading"> Cancel Complaint </h1>
 		<form method="post">
 			<input type="text" required="required" pattern="^[0-9]{1,10}$" placeholder="Problem ID" id="problem-id" name="problem-id">
 			<input type="submit" value="Delete" class="submit-delete-button">
