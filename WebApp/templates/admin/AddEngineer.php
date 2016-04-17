@@ -89,7 +89,7 @@
                 ?>
 				
 				</br>
-			<select id="module-name" name="module-name">
+			<select id="module-name" name="module-name" required="required">
 			</select> <br/>
 			<label id="radio-label"> Project Manager: <input type="radio" required="required" class="radio-input" name="pmanager" value="y">Yes <input type="radio" name="pmanager" class="radio-input" value="n">No </label> <br/> 			
 			<input type="submit" value="Add Engineer" class="submit-delete-button">
@@ -113,11 +113,13 @@
 			$id = $_POST["engineer-id"];
 			$pass = $_POST["password"];
 			$pmanager = $_POST["pmanager"];
+			$flag = 0;
+			$flage = 0;
 
 			$sql = "INSERT INTO engineer (id,password,project_id,module_id,project_manager) VALUES ('$id','$pass','$pid','$mid','$pmanager')";
 			
 			if (mysqli_query($conn, $sql)) {
-		    echo "<p class='create-message'> New engineer created successfully </p>";
+		    	$flag = 1;
 			} 
 
 			if($pmanager == 'y')
@@ -125,8 +127,17 @@
 			$sql = "UPDATE project SET manager_id = $id WHERE id = $pid";
 				if (mysqli_query($conn, $sql)) 
 				{
-			    	echo "<p class='create-message'> New engineer created successfully </p>";
+			    	$flage = 1;
 				}
+			}
+
+			if($flag==1 && $flage==1)
+			{
+				echo "<p class='create-message'> New engineer created successfully </p>";
+			}
+			else
+			{
+				echo "<p class='delete-message'> Failed </p>";
 			}
 			endif;
 		mysqli_close($conn);

@@ -48,9 +48,9 @@
 		<h1 class="main-heading"> Add Project </h1>
 		<p class="message"></p><br/>
 		<form method="post">
-			<input type="text" pattern="^[a-zA-Z]{1,100}$" required="required" placeholder="Project" id="project-name" name="project-name"> <br/>
+			<input type="text" pattern="^[a-zA-Z\s]{1,100}$" required="required" placeholder="Project" id="project-name" name="project-name"> <br/>
 			<div id="dynamicInput">
-          		<input type="text" pattern="^[a-zA-Z]{1,100}$" required="required" name="Modules[]" placeholder="Module1" id="first-input">
+          		<input type="text" pattern="^[a-zA-Z\s]{1,100}$" required="required" name="Modules[]" placeholder="Module1" id="first-input">
           		<input type="button" value="+" onClick="addInput('dynamicInput');" class="small-button">
           		<input type="button" value="-" onClick="deleteInput();" class="small-button">
      		</div>
@@ -62,6 +62,8 @@
 		$dbuser = 'root';
 		$dbpass = '';
 		$dbname = 'cmt';
+		$flag = 0;
+		$flage = 0;
 
 		$conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
 
@@ -75,7 +77,7 @@
 			$sql = "INSERT INTO project (name) VALUES ('$name')";
 			
 			if (mysqli_query($conn, $sql)) {
-		    echo "<p class='create-message'> New project created successfully </p>";
+				$flag = 1;
 			} 
 
 			$sql = "SELECT id FROM project WHERE name='$name'";
@@ -89,8 +91,17 @@
 			{
 				$sql = "INSERT INTO module (name,project_id) VALUES ('$module',$id)";
 				if (mysqli_query($conn, $sql)) {
-			    echo "<p class='create-message'> New modules created successfully </p>";
+			    	$flage = 1;
 				}
+			}
+
+			if($flag==1 && $flage==1)
+			{
+				echo "<p class='create-message'> New project and corresponding modules created successfully </p>";
+			}
+			else
+			{
+				echo "<p class='delete-message'> Failed </p>";
 			}
 			endif;	
 		mysqli_close($conn);

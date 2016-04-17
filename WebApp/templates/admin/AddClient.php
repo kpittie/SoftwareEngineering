@@ -45,7 +45,7 @@
 		<h1 class="main-heading"> Add Client </h1>
 		<form method="post">
 			<input type="text" pattern="^[0-9]{1,10}$" required="required" placeholder="User ID" name="user-id"> <br/>
-			<input type="text" pattern="^[a-zA-Z]{3,25}$" required="required" placeholder="User Name" name="user-name"> <br/>
+			<input type="text" pattern="^[a-zA-Z\s]{3,25}$" required="required" placeholder="User Name" name="user-name"> <br/>
 			<input type="password" required="required" placeholder="Password" name="pass"> <br/>
 				<?php
 					$dbhost = 'localhost';
@@ -85,25 +85,30 @@
 				$pass = $_POST['pass'];
 				$name = $_POST['user-name'];
 				$pname = $_POST['project-name'];
+				$flag = 0;
+				$flage = 0;
 
 				$sql = "INSERT INTO user (id,name,password) VALUES ($id,'$name','$pass')";
 
 				if (mysqli_query($conn, $sql)) {
-		    		echo "<p class='create-message'> New client created successfully </p>";
-				}
-
-				else {
-					echo "Failed";
+					$flag = 1;
 				}
 
 				$sql = "UPDATE project SET client_id=$id WHERE name='$pname'";
 
 				if(mysqli_query($conn, $sql)) {
-					echo "<p class='create-message'> New project client created successfully </p>";
+					$flage = 1;
 				}
-				else {
-					echo "Failed";
+
+				if($flag==1 && $flage==1)
+				{
+					echo "<p class='create-message'> New client created successfully </p>";
 				}
+				else
+				{
+					echo "<p class='delete-message'> Failed </p>";
+				}
+
 			endif;
 		mysqli_close($conn);
 		?>

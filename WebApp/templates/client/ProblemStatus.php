@@ -42,21 +42,12 @@
 	<input type="text" name="pid"/> <br/>
 	<input type="submit" value="Search">
 	</form>
-	</div>
-
-	<!-- This is the section where you'll add the main content of the page -->
-
-	
-	<!-- The main content ends -->
-
-
-
-<?php
+	<?php
 if($_POST):
- $con = mysqli_connect("localhost","root","","test");
+ $conn = mysqli_connect("localhost","root","","cmt");
  $id=$_POST['pid'];
  $query = "select * from problem where id = $id";
- $result = mysqli_query($con,$query);
+ $result = mysqli_query($conn,$query);
  if (mysqli_num_rows($result)==1)
  {
  while($row= mysqli_fetch_assoc($result))
@@ -71,12 +62,12 @@ if($_POST):
 				echo "<td> Reopening: </td>";
 			echo "</tr>";
 			echo "<tr>";
-				echo"<td> $row[project_id]</td>";
-				echo"<td> $row[engineer_id]</td>";
-				echo"<td> $row[timestamp]</td>";
-				echo"<td> $row[status]</td>";
-				echo"<td> $row[priority]</td>";
-				echo"<td> $row[reopening]</td>";
+				echo"<td>". $row['project_id']."</td>";
+				echo"<td>". $row['engineer_id']."</td>";
+				echo"<td>". $row['timestamp']."</td>";
+				echo"<td>". $row['status']."</td>";
+				echo"<td>". $row['priority']."</td>";
+				echo"<td>". $row['reopenings']."</td>";
 			echo"</tr>";
 		echo"</table>";
 	}
@@ -86,9 +77,13 @@ if($_POST):
 	echo "<b>Sorry no such record found!!</b>";
 	}
 endif;
-	?>		
+	?>	
+	</div>
 
-</div1> 
+	<!-- This is the section where you'll add the main content of the page -->
+
+	
+	<!-- The main content ends -->	
 
 	</div>
 </body>

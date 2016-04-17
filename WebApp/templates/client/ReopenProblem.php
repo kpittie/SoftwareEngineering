@@ -10,10 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="../../styles/admin.css">
 	<script src="../../scripts/js-admin-add-project.js"> </script>
 <style>
- div1 {
-		margin: auto;
-		}
-		
+ 
 input[type=submit]
 		{
 			width:25%;
@@ -61,10 +58,10 @@ input[type=submit]
 
 <?php
 if($_POST):
- $con = mysqli_connect("localhost","root","","test");
+ $conn = mysqli_connect("localhost","root","","cmt");
  $id=$_POST["pid"];
  $query = "select * from problem where id = $id";
- $result = mysqli_query($con,$query);
+ $result = mysqli_query($conn,$query);
  if (mysqli_num_rows($result)==1)
  {
  while($row= mysqli_fetch_assoc($result))
@@ -84,7 +81,7 @@ if($_POST):
 				echo"<td> $row[timestamp]</td>";
 				echo"<td> $row[status]</td>";
 				echo"<td> $row[priority]</td>";
-				echo"<td> $row[reopening]</td>";
+				echo"<td> $row[reopenings]</td>";
 			echo"</tr>";
 		echo"</table>";
 		echo "<br>";
@@ -92,7 +89,7 @@ if($_POST):
 		echo "Description<br>";
 		echo "<textarea name=description cols=50 rows=10></textarea>";
 		echo "<br><br>";
-		echo  "<input type= submit value= submit></input>";
+		echo  "<input type= submit value= submit>";
 		
 		
 	}
