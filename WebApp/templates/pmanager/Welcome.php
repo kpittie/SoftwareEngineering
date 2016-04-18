@@ -28,7 +28,7 @@
 	<!-- Side bar is below make changes to li(id), li(content) rest should not be changed and donot remove any classes or ids except for the ones that contain the names of the list items -->
 	<aside id="side-nav">
 		<ul id="side-nav-list">
-			<li id="home" class="side-nav-items"> <a href="Welcome.php" class="nav-link"> Home </a> </li>
+			<li id="home" class="side-nav-items active"> <a href="Welcome.php" class="nav-link"> Home </a> </li>
 			<li id="review-engineer" class="side-nav-items"> <a href="ReviewEngineer.php" class="nav-link"> Review Engineer </a> </li>
 			<li id="complaint-status" class="side-nav-items"> <a href="ComplaintStatus.php" class="nav-link"> Complaint Status </a> </li>
 		</ul>
