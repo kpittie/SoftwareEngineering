@@ -10,7 +10,6 @@ session_start();
 <!DOCTYPE html>
 <html >
   <head>
-    <meta charset="UTF-8">
     <title>Login/Sign-In</title>
     
     
@@ -56,7 +55,6 @@ session_start();
 
 include("db_connect.php");
 extract($_POST);
-session_start();
 
 
 if(!isset($_SESSION['secure']))
@@ -67,10 +65,10 @@ $_SESSION['secure']=rand(1000,9999);
 if(isset($submit))
 {
 	
-	$rs=mysql_query("select * from engineer where id='$loginid' and password='$pass'");
+	$rs=mysqli_query($connect,"select * from engineer where id='$loginid' and password='$pass'");
 	//print_r($rs);
 	 
-	if(mysql_num_rows($rs)<1)
+	if(mysqli_num_rows($rs)<1)
 	{
 		$found="N";
 		 
@@ -79,8 +77,8 @@ if(isset($submit))
     {
         if($_SESSION['secure']==$_POST['secure'])
         {
-        $_SESSION[id]=$loginid;
-		$_SESSION['secure']=rand(1000,9999);
+        $_SESSION['id']=$loginid;
+		    $_SESSION['secure']=rand(1000,9999);
 		
         }
         else{
@@ -96,7 +94,7 @@ if(isset($submit))
 <?php
 
 
-if(isset($_SESSION[id]))
+if(isset($_SESSION['id']))
 {
 
 echo '<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -120,7 +118,7 @@ echo '<nav class="navbar navbar-inverse navbar-fixed-top">
     echo '<div class="container">';
    
   echo "<br><br><br><br>";
-	echo "<b>&nbsp&nbsp&nbsp&nbsp&nbsp<span class='glyphicon glyphicon-user'></span>&nbspWELCOME ENGINEER&nbsp".$_SESSION[id]."</b><br><br></div>";
+	echo "<b>&nbsp&nbsp&nbsp&nbsp&nbsp<span class='glyphicon glyphicon-user'></span>&nbspWELCOME ENGINEER&nbsp".$_SESSION['id']."</b><br><br></div>";
 
 	
 	
