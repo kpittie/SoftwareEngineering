@@ -88,8 +88,9 @@
 				$pname = $_POST['project-name'];
 				$flag = 0;
 				$flage = 0;
+				$encrypted_pass = crypt($pass, '$2a$'.$id);
 
-				$sql = "INSERT INTO user (id,name,password) VALUES ($id,'$name','$pass')";
+				$sql = "INSERT INTO user (id,name,password) VALUES ($id,'$name','$encrypted_pass')";
 
 				if (mysqli_query($conn, $sql)) {
 					$flag = 1;

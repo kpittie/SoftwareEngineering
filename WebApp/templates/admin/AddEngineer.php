@@ -116,8 +116,9 @@
 			$pmanager = $_POST["pmanager"];
 			$flag = 0;
 			$flage = 0;
+			$encrypted_pass = crypt($pass, '$2a$'.$id);
 
-			$sql = "INSERT INTO engineer (id,password,project_id,module_id,project_manager) VALUES ('$id','$pass','$pid','$mid','$pmanager')";
+			$sql = "INSERT INTO engineer (id,password,project_id,module_id,project_manager) VALUES ('$id','$encrypted_pass','$pid','$mid','$pmanager')";
 			
 			if (mysqli_query($conn, $sql)) {
 		    	$flag = 1;
