@@ -117,7 +117,7 @@ if(isset($_SESSION['user-name'])) {
                         $passhash=crypt($pass,'$2a$'.$id);
                         $result = $conn->query($sql);
                         $row = mysqli_fetch_array($result);
-                        if (password_verify($passhash,$row['password'])) {
+                        if ($passhash==$row['password']) {
                             $_SESSION['user-name'] = $id;
                             $_SESSION['user'] = "client";
                             header("Location: Welcome.php");
