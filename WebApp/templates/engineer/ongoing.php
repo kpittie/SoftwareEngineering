@@ -72,20 +72,20 @@
 <?php
 
 include ("db_connect.php");
-if(isset($_SESSION[id]))
+if(isset($_SESSION['id']))
 {
 echo "<br><br><br><br>";
 
-$pid=$_SESSION[id];
+$pid=$_SESSION['id'];
 //echo $pid;
 $query= "select id,description,timestamp,status,priority from problem where status='n' or status='O' and id=$pid";
 
-$result=mysql_query($query);
+$result=mysqli_query($connect,$query);
 //var_dump($result);
 echo "<table>";
 echo "<th>Problem ID</th><th>Description</th><th>Timestamp</th><th>Status</th><th>Priority</th>";
 
-while($row=mysql_fetch_array($result))
+while($row=mysqli_fetch_array($result))
 	{ 
 	
     echo "<tr>";
