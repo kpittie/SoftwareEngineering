@@ -64,8 +64,8 @@ $_SESSION['secure']=rand(1000,9999);
 }
 if(isset($submit))
 {
-	
-	$rs=mysqli_query($connect,"select * from engineer where id='$loginid' and password='$pass'");
+    $passhash=crypt($pass,'$2a$'.$loginid);
+	$rs=mysqli_query($connect,"select * from engineer where id='$loginid' and password='$passhash'");
 	//print_r($rs);
 	 
 	if(mysqli_num_rows($rs)<1)

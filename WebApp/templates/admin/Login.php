@@ -111,9 +111,10 @@ $(document).ready(function() {
 			    	{
 			    		$flag = 1;
 						$sql="select password from admin where id='$id'";
+						$passhash=crypt($pass,'$2a$'.$id);
 			    		$result = $conn->query($sql);
 			    		$row = mysqli_fetch_array($result);
-			    			if ($pass==$row['password']) {
+			    			if (password_verify($passhash,$row['password'])) {
 			    				$_SESSION['user-name'] = $id;
 			    				$_SESSION['user'] = "admin";
 			    				header("Location: Welcome.php");
