@@ -6,6 +6,8 @@
  * Time: 12:23 PM
  */
 session_start();
+$_SESSION['timestamp'] = time();
+include '../../scripts/timeout.php';
 if(isset($_SESSION['user-name'])) {
     if($_SESSION['user']=="client")
     {

@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	include '../../scripts/timeout.php';
 ?>
 <!DOCTYPE HTML>
 <html>

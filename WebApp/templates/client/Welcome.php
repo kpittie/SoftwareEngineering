@@ -6,7 +6,7 @@
  * Time: 1:10 PM
  */
 session_start();
-
+include '../../scripts/timeout.php';
 ?>
 <!DOCTYPE HTML>
 <html>
