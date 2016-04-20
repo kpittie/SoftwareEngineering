@@ -20,9 +20,9 @@
 	<!-- This is the top nav bar donot make changes here -->
 	<nav id="top-nav">
 		<ul id="top-nav-list">
-			<li class="top-nav-item" id="logo"> <img src="../../images/logo.png" alt="logo" id="logo-image"> </li>
-			
-			<li class="top-nav-item" id="logout-button"> <a id="logout-link" href="login.php?logout=1"> Logout </a> </li>
+			<li class="top-nav-item" id="logo"> <img src="../../images/logo.png" alt="logo" id="logo-image"> </li> 
+			<li class="top-nav-item" id="digital-clock"> <div id="clockDisplay" class="clockStyle"> </div> </li>
+			<li class="top-nav-item" id="logout-button"> <a id="logout-link" href="Login.php?logout=1"> Logout </a> </li>
 		</ul>
 	</nav>
 	<!-- Top Nav Bar ends here -->
@@ -143,5 +143,6 @@
 	</div>
 	<!-- The main content ends -->
 </div>
+<script src="../../scripts/timer.js"></script>
 </body>
 </html>	

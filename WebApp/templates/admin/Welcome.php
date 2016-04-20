@@ -13,7 +13,6 @@
 	<!-- Importing ends here -->
 
 	<link rel="stylesheet" type="text/css" href="../../styles/admin.css">
-	<script src="../../scripts/js-admin-add-project.js"> </script>
 </head>	
 
 <body>
@@ -22,7 +21,7 @@
 	<nav id="top-nav">
 		<ul id="top-nav-list">
 			<li class="top-nav-item" id="logo"> <img src="../../images/logo.png" alt="logo" id="logo-image"> </li> 
-			
+			<li class="top-nav-item" id="digital-clock"> <div id="clockDisplay" class="clockStyle"> </div> </li>
 			<li class="top-nav-item" id="logout-button"> <a id="logout-link" href="Login.php?logout=1"> Logout </a> </li>
 		</ul>
 	</nav>
@@ -58,5 +57,7 @@
 	</div>
 	<!-- The main content ends -->
 </div>
+
+<script src="../../scripts/timer.js"></script>
 </body>
 </html>	

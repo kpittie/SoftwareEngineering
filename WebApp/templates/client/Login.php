@@ -54,8 +54,8 @@ if(isset($_SESSION['user-name'])) {
     <!-- This is the top nav bar -->
     <nav id="top-nav">
         <ul id="top-nav-list">
-            <li class="top-nav-item" id="logo"> <img src="../../images/logo.png" alt="logo" id="logo-image"> </li>
-
+            <li class="top-nav-item" id="logo"> <img src="../../images/logo.png" alt="logo" id="logo-image"> </li> 
+            <li class="top-nav-item" id="digital-clock"> <div id="clockDisplay" class="clockStyle"> </div> </li>
         </ul>
     </nav>
     <!-- Top Nav Bar ends here -->
@@ -143,5 +143,6 @@ if(isset($_SESSION['user-name'])) {
     </div>
     <!-- The main content ends -->
 </div>
+<script src="../../scripts/timer.js"></script>
 </body>
 </html>

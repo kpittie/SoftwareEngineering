@@ -8,23 +8,12 @@
 	height: 100vh;
 }
 
-#top-nav {
-	border: 1px solid black;
-	position: fixed;
-	width: 100%;
-  	z-index: 9999;
-  	background-color: #ffffff;
-}
-
-.top-nav-item {
-	display: inline;
-}
-
 #logo-image {
 	height: 75px;
 	width: 75px;
 	margin-left: 0;
 }
+
 #clock
 {
 	position:absolute;
@@ -36,17 +25,24 @@
 
 #top-nav-list {
 	list-style: none;
+	border: 1px solid black;
+	position: fixed;
+	width: 100%;
+  	background-color: #ffffff;
+  	height: 80px;
 }
 
 #logout-button {
 	margin-left: 85%;
+	margin-top: -10px;
+	margin-right: 20px;
 }
 
 #logout-link {
 	color: #33adff;
 	text-decoration: none;
 	font-size: 1.2em;
-	margin: 5px;
+	float: right;
 }
 
 #logout-link:hover {
@@ -225,4 +221,25 @@ table th {
 
 .active-link {
 	color: rgba(0,153,255,0.9);	
+}
+
+@font-face {
+	font-family: myFirstFont;
+	src: url('digital-7.ttf');
+}
+
+.clockStyle{
+	background-color: #ffffff;
+	padding: 6px;
+    color: #33adff;
+	font-family: myFirstFont;
+	font-size: 25px;
+	letter-spacing: 2px;
+	display: inline;
+	font-weight: bold;
+}
+
+#digital-clock {
+	margin-left: 50%;
+	margin-top: -35px;
 }
