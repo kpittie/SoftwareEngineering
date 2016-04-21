@@ -27,31 +27,10 @@
 		        }
 		        xmlhttp.onreadystatechange = function() {
 		            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-		                document.getElementById("module-name").innerHTML = xmlhttp.responseText;
+		                document.getElementById("additional-tech").innerHTML = xmlhttp.responseText;
 		            }
 		        };
 		        xmlhttp.open("GET","fetch_modules.php?q="+pid,true);
-		        xmlhttp.send();
-		    }
-		}
-		function trigp(pid) {
-		    if (pid == "") {
-		        document.getElementById("module-name").innerHTML = "";
-		        return;
-		    } else { 
-		        if (window.XMLHttpRequest) {
-		            // code for IE7+, Firefox, Chrome, Opera, Safari
-		            xmlhttp = new XMLHttpRequest();
-		        } else {
-		            // code for IE6, IE5
-		            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		        }
-		        xmlhttp.onreadystatechange = function() {
-		            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-		                document.getElementById("project-manager").innerHTML = xmlhttp.responseText;
-		            }
-		        };
-		        xmlhttp.open("GET","fetch_pmanager_status.php?q="+pid,true);
 		        xmlhttp.send();
 		    }
 		}
@@ -112,9 +91,8 @@
                 ?>
 				
 				</br>
-			<select id="module-name" name="module-name" required="required" onchange="trigp(this.value);">
-			</select> <br/>
-			<div id="project-manager" name="project-manager">
+
+			<div id="additional-tech" name="additional-tech">
 			</div> <br/>			
 			<input type="submit" value="Add Engineer" class="submit-delete-button">
 		</form>
