@@ -94,7 +94,6 @@ include '../../scripts/timeout.php';
                     echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';
                     }      
                     
-                    $conn->close();
                 ?>
                 </select>
                 </br>
@@ -131,7 +130,7 @@ include '../../scripts/timeout.php';
 
                 $projectProblem=0;
                 $query="SELECT id,status,number_of_complaints,total_complaints FROM engineer where project_id=$projectId AND module_id=$moduleId";
-                $result = mysqli_query($conn, $query);
+                $result = mysqli_query($conn,$query);
                 $flag=0;
                 if (mysqli_num_rows($result) > 0) {
                     //all possible engineers for the particular project and module

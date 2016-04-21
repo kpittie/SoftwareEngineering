@@ -34,6 +34,27 @@
 		        xmlhttp.send();
 		    }
 		}
+		function trigp(pid) {
+		    if (pid == "") {
+		        document.getElementById("module-name").innerHTML = "";
+		        return;
+		    } else { 
+		        if (window.XMLHttpRequest) {
+		            // code for IE7+, Firefox, Chrome, Opera, Safari
+		            xmlhttp = new XMLHttpRequest();
+		        } else {
+		            // code for IE6, IE5
+		            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		        }
+		        xmlhttp.onreadystatechange = function() {
+		            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+		                document.getElementById("project-manager").innerHTML = xmlhttp.responseText;
+		            }
+		        };
+		        xmlhttp.open("GET","fetch_pmanager_status.php?q="+pid,true);
+		        xmlhttp.send();
+		    }
+		}
 	</script>
 </head>
 
@@ -72,7 +93,7 @@
 		<form method="post" action="">
 			<input type="text" required="required" pattern="^[0-9]{1,10}$" placeholder="Engineer ID" id="engineer-id" name="engineer-id"> <br/>
 			<input type="password" required="required" placeholder="Password" id="password" name="password"> <br/>			
-			<select required="required" name="project-name" id="project-name" onchange="trig(this.value)"> 
+			<select required="required" name="project-name" id="project-name" onchange="trig(this.value);"> 
 				<option value="" selected="true" style="display:none;">Select project</option>
 				<?php
 
@@ -91,9 +112,10 @@
                 ?>
 				
 				</br>
-			<select id="module-name" name="module-name" required="required">
+			<select id="module-name" name="module-name" required="required" onchange="trigp(this.value);">
 			</select> <br/>
-			<label id="radio-label"> Project Manager: <input type="radio" required="required" class="radio-input" name="pmanager" value="y">Yes <input type="radio" name="pmanager" class="radio-input" value="n">No </label> <br/> 			
+			<div id="project-manager" name="project-manager">
+			</div> <br/>			
 			<input type="submit" value="Add Engineer" class="submit-delete-button">
 		</form>
 	<?php
@@ -135,6 +157,10 @@
 			}
 
 			if($flag==1 && $flage==1)
+			{
+				echo "<p class='create-message'> New engineer created successfully </p>";
+			}
+			else if($flag==1)
 			{
 				echo "<p class='create-message'> New engineer created successfully </p>";
 			}

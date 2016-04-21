@@ -18,10 +18,10 @@ function renderTime() {
 	if(m<10){
 		m="0"+m;
 	}
-		if(s<10){
+	if(s<10){
 		s="0"+s;
 	}
-
+	
 	var myClock = document.getElementById('clockDisplay');
 	myClock.textContent = h+":"+m+":"+s+" "+diem;
 
