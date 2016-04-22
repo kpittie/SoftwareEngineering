@@ -12,7 +12,7 @@
      }
      echo "<table border='1'>";
      echo "    <tr>";
-     echo "         <th> ID </th>";
+     echo "         <th> Engineer ID </th>";
      echo "         <th> Project ID </th>";
      echo "         <th> Module ID </th>";
      echo "         <th> Number of Complaints </th>";
