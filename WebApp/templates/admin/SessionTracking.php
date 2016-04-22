@@ -96,8 +96,16 @@
 
 		if ($result->num_rows > 0) {
 		    while($row = $result->fetch_assoc()) {
+		    	if($row['project_manager']=='y')
+		    	{
+		    		$pmanstatus = 'Yes';
+		    	}
+		    	else
+		    	{
+		    		$pmanstatus = 'No';
+		    	}
 		    	echo "<tr>";
-		        echo "<td>" . $row["id"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["number_of_complaints"]. "</td> <td>" . $row["project_manager"]. "</td>";
+		        echo "<td>" . $row["id"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["number_of_complaints"]. "</td> <td>" . $pmanstatus . "</td>";
 		        echo "</tr>";
 		    }
 		} else {
