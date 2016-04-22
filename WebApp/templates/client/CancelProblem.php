@@ -107,7 +107,7 @@
   							}
 							else
 							{
-								echo "<p class='delete-message'> Incorrect ID entered or the project has already been deleted </p>";
+								echo "<p class='delete-message'> Incorrect ID entered or the problem has already been deleted </p>";
 							}
 						mysqli_close($conn);
 					endif;

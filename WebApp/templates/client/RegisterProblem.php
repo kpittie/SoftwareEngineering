@@ -78,7 +78,7 @@ include '../../scripts/timeout.php';
             <p class="message"></p><br/>
             <form method="post">
 
-            <select required="required" name="project" id="project" onchange="trig(this.value)"> 
+            <select required="required" name="project" id="project" onchange="trig(this.value)">
                 <option value="" selected="true" style="display:none;">Select project</option>
                 <?php
 
@@ -97,13 +97,13 @@ include '../../scripts/timeout.php';
                 ?>
                 </select>
                 </br>
-            <select id="module" name="module">
+            <select id="module" name="module" required>
             </select>
                 <br/>
                 <textarea name="description" id="description" rows="10" cols="50" class="form-center">
                     Problem Description
                 </textarea>
-                <select id="priority" name="priority" class="form-center"required>
+                <select id="priority" name="priority" class="form-center" required>
                     <option selected="selected" disabled="disabled">Select Priority</option>
                     <option value="H">High</option>
                     <option value="M">Medium</option>

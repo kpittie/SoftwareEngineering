@@ -1,3 +1,13 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Harsh Saxena
+ * Date: 14-04-2016
+ * Time: 02:30 PM
+ */
+session_start();
+include '../../scripts/timeout.php';
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -40,7 +50,7 @@
 	<div id="main">
 	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
 	Enter the problem id:
-	<input type="text" name="pid"/> <br/>
+	<input type="text" name="pid" pattern="^[0-9]{1,10}$" required/> <br/>
 	<input type="submit" value="Search">
 	</form>
 	<?php

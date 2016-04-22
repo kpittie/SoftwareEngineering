@@ -1,3 +1,13 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Harsh Saxena
+ * Date: 14-04-2016
+ * Time: 02:30 PM
+ */
+session_start();
+include '../../scripts/timeout.php';
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -49,9 +59,10 @@ input[type=submit]
 
 	<!-- This is the section where you'll add the main content of the page -->
 	<div id="main">
+		<h1 class="main-heading"> Reopen Complaint </h1>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
 	Enter the problem id:
-	<input type="text" name="pid">
+	<input type="text" name="pid" pattern="^[0-9]{1,10}$" required>
 	<input type="submit" value="Search">
 	</form>	
 	<!-- The main content ends -->
@@ -61,7 +72,33 @@ input[type=submit]
 if($_POST):
  $conn = mysqli_connect("localhost","root","","cmt");
  $id=$_POST["pid"];
- $query = "select * from problem where id = $id";
+	$username = $_SESSION['user-name'];
+	$query = "select problem.id,problem.engineer_id,problem.status,problem.timestamp,problem.project_id,problem.priority,problem.reopenings from problem inner join project on problem.project_id=project.id where project.client_id=$username and  problem.status='C' or problem.status='c' ";
+    $result = mysqli_query($conn,$query);
+    if (mysqli_num_rows($result)==1) {
+		while ($row = mysqli_fetch_assoc($result)) {
+			echo "<table>";
+			echo "<tr>";
+			echo "<td> Project Id: </td>";
+			echo "<td> Engineer Id: </td>";
+			echo "<td> Time-stamp Id: </td>";
+			echo "<td> Status: </td>";
+			echo "<td> Priority: </td>";
+			echo "<td> Reopening: </td>";
+			echo "</tr>";
+			echo "<tr>";
+			echo "<td> $row[project_id]</td>";
+			echo "<td> $row[engineer_id]</td>";
+			echo "<td> $row[timestamp]</td>";
+			echo "<td> $row[status]</td>";
+			echo "<td> $row[priority]</td>";
+			echo "<td> $row[reopenings]</td>";
+			echo "</tr>";
+			echo "</table>";
+		}
+	}
+	echo "<br>";
+	$query = "select problem.id,problem.engineer_id,problem.status,problem.timestamp,problem.project_id,problem.priority,problem.reopenings from problem inner join project on problem.project_id=project.id where project.client_id=$username and problem.id = $id and  problem.status='C' or problem.status='c' ";
  $result = mysqli_query($conn,$query);
  if (mysqli_num_rows($result)==1)
  {
@@ -107,7 +144,7 @@ if($_POST):
 <script>
 function func()
 {
-confirm("Are you sure you want to delete the above project?");
+confirm("Are you sure you want to delete the above problem?");
 }
 
 
