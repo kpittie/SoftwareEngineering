@@ -77,13 +77,27 @@
 		echo "		<th> Timestamp </th>";
 		echo "	</tr>"; 
 
-		$sql = "SELECT * FROM problem WHERE engineer_id IS NULL";
+		$sql = "SELECT * FROM problem WHERE engineer_id IS NULL OR status='U'";
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {
 		    while($row = $result->fetch_assoc()) {
+		    	if($row["status"] == 'U')
+		    		$status = "Unassigned";
+		    	else if($row["status"] == 'A')
+		    		$status = "Assigned";
+		    	else
+		    		$status = "Ongoing";
+
+		    	if($row["priority"] == 'H')
+		    		$priority = "High";
+		    	else if($row["priority"] == 'L')
+		    		$priority = "Low";
+		    	else
+		    		$priority = "Medium";
+
 		    	echo "<tr class='invalid-row'>";
-		        echo "<td>" . $row["id"]. "</td> <td>" . $row["description"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["engineer_id"]. "</td> <td>" . $row["status"]. "</td> <td>" . $row["priority"]. "</td> <td>" . $row["reopenings"]. "</td> <td>" . $row["timestamp"]. "</td>";
+		        echo "<td>" . $row["id"]. "</td> <td>" . $row["description"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["engineer_id"]. "</td> <td>" . $status. "</td> <td>" . $priority. "</td> <td>" . $row["reopenings"]. "</td> <td>" . $row["timestamp"]. "</td>";
 		        echo "</tr>";
 		    }
 		} else {
@@ -113,16 +127,30 @@
 
 		if ($result->num_rows > 0) {
 		    while($row = $result->fetch_assoc()) {
-		    	if($row["engineer_id"] == NULL)
+		    	if($row["status"] == 'U')
+		    		$status = "Unassigned";
+		    	else if($row["status"] == 'A')
+		    		$status = "Assigned";
+		    	else
+		    		$status = "Ongoing";
+
+		    	if($row["priority"] == 'H')
+		    		$priority = "High";
+		    	else if($row["priority"] == 'L')
+		    		$priority = "Low";
+		    	else
+		    		$priority = "Medium";
+		    	
+		    	if($row["engineer_id"] == NULL || $row["status"] == 'U')
 		    	{
 			    	echo "<tr class='invalid-row'>";
-			        echo "<td>" . $row["id"]. "</td> <td>" . $row["description"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["engineer_id"]. "</td> <td>" . $row["status"]. "</td> <td>" . $row["priority"]. "</td> <td>" . $row["reopenings"]. "</td> <td>" . $row["timestamp"]. "</td>";
+			        echo "<td>" . $row["id"]. "</td> <td>" . $row["description"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["engineer_id"]. "</td> <td>" . $status. "</td> <td>" . $priority. "</td> <td>" . $row["reopenings"]. "</td> <td>" . $row["timestamp"]. "</td>";
 			        echo "</tr>";
 			    }
 			    else
 			    {
 			    	echo "<tr class='valid-row'>";
-			        echo "<td>" . $row["id"]. "</td> <td>" . $row["description"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["engineer_id"]. "</td> <td>" . $row["status"]. "</td> <td>" . $row["priority"]. "</td> <td>" . $row["reopenings"]. "</td> <td>" . $row["timestamp"]. "</td>";
+			        echo "<td>" . $row["id"]. "</td> <td>" . $row["description"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["engineer_id"]. "</td> <td>" . $status. "</td> <td>" . $priority. "</td> <td>" . $row["reopenings"]. "</td> <td>" . $row["timestamp"]. "</td>";
 			        echo "</tr>";
 			    }
 		    }

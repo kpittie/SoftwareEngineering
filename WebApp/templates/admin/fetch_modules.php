@@ -10,6 +10,7 @@
      $sql = "select * from module where project_id=$pid";
      $find=mysqli_query($conn,$sql);
      echo '<select id="module-name" name="module-name" required="required">';  
+     echo '<option value="" selected="true" style="display:none;">Select Module</option>';
      while($row=mysqli_fetch_array($find))
      { 
        echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';
