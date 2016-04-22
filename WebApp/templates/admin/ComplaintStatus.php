@@ -77,7 +77,7 @@
 		echo "		<th> Timestamp </th>";
 		echo "	</tr>"; 
 
-		$sql = "SELECT * FROM problem WHERE engineer_id IS NULL OR status='U'";
+		$sql = "SELECT * FROM problem WHERE engineer_id IS NULL OR status='U' ORDER BY priority='H' DESC, priority='M' DESC, priority='L' DESC";
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {
@@ -122,7 +122,7 @@
 		echo "		<th> Timestamp </th>";
 		echo "	</tr>"; 
 
-		$sql = "SELECT * FROM problem";
+		$sql = "SELECT * FROM problem ORDER BY priority='H' DESC, priority='M' DESC, priority='L' DESC";
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {
