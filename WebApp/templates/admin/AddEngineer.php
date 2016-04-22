@@ -144,7 +144,7 @@
 			}
 			else
 			{
-				echo "<p class='delete-message'> Failed </p>";
+				echo "<p class='delete-message'> Failed (Engineer with the specified ID may already exist) </p>";
 			}
 			endif;
 		mysqli_close($conn);

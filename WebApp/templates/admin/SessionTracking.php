@@ -11,6 +11,29 @@
 	<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
 	<link rel="icon" type="image/png" href="../../images/logo.png">
 	<!-- Importing ends here -->
+	<script>
+		function trig(pid) {
+		    if (pid == "") {
+		        document.getElementById("engineer-status").innerHTML = "";
+		        return;
+		    } else { 
+		        if (window.XMLHttpRequest) {
+		            // code for IE7+, Firefox, Chrome, Opera, Safari
+		            xmlhttp = new XMLHttpRequest();
+		        } else {
+		            // code for IE6, IE5
+		            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		        }
+		        xmlhttp.onreadystatechange = function() {
+		            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+		                document.getElementById("engineer-status").innerHTML = xmlhttp.responseText;
+		            }
+		        };
+		        xmlhttp.open("GET","fetch_status.php?q="+pid,true);
+		        xmlhttp.send();
+		    }
+		}
+	</script>
 </head>
 
 <body>
@@ -56,9 +79,8 @@
 		              $sql = "select * from  engineer";         
 		              $result = $conn->query($sql);
 
-
-                 	echo "<select name='engineer-id' id='engineer-id'>"; 
-
+                 	echo "<select name='engineer-id' id='engineer-id' onchange='trig(this.value);'>"; 
+                 	echo '<option value="" selected="true" style="display:none;">Select Engineer ID</option>';  
 		            while ($row = mysqli_fetch_array($result)) {
 		            echo '<option value="'.$row['id'].'">'.$row['id'].'</option>';
 		            }      
@@ -66,55 +88,9 @@
 		           	echo '</select>';
 		           	$conn->close();
                 ?>
- <br/> 			
-		<input type="submit" value="Show" class="submit-delete-button" name="show-button">
+ 		<br/>
+ 		<div id="engineer-status"></div> 			
 		</form>
-		<?php
-		$dbhost = 'localhost';
-		$dbuser = 'root';
-		$dbpass = '';
-		$dbname = 'cmt';
-
-		$conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
-
-		if(isset($_POST['show-button'])) :
-		$engineer_id = $_POST['engineer-id'];
-		if ($conn->connect_error) {
-		    die("Connection failed: " . $conn->connect_error);
-		}
-		echo "<table border='1'>";
-		echo "	<tr>";
-		echo "		<th> ID </th>";
-		echo "		<th> Project ID </th>";
-		echo "		<th> Module ID </th>";
-		echo "		<th> Number of Complaints </th>";
-		echo "		<th> Project Manager </th>";
-		echo "	</tr>"; 
-
-		$sql = "SELECT * FROM engineer WHERE id=$engineer_id";
-		$result = $conn->query($sql);
-
-		if ($result->num_rows > 0) {
-		    while($row = $result->fetch_assoc()) {
-		    	if($row['project_manager']=='y')
-		    	{
-		    		$pmanstatus = 'Yes';
-		    	}
-		    	else
-		    	{
-		    		$pmanstatus = 'No';
-		    	}
-		    	echo "<tr>";
-		        echo "<td>" . $row["id"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["number_of_complaints"]. "</td> <td>" . $pmanstatus . "</td>";
-		        echo "</tr>";
-		    }
-		} else {
-		    echo "0 results";
-		}
-		endif;
-		$conn->close();
-	?>
-	</table>
 	<?php
 		}
 		else
