@@ -34,6 +34,37 @@
 		    }
 		}
 	</script>
+	<style>
+	#engineer-status {
+		width: 30%;
+		margin: auto;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.49);
+		background-image: url("../../images/texture.jpg");
+		margin-top: 20px;
+	}
+	dl {
+		border: 3px double #ccc;
+		padding: 0.5em;
+	}
+	dt {
+		float: left;
+		clear: left;
+		text-align: left;
+		font-weight: bold;
+		color: #33adff;
+		width: 200px;
+		font-size: 1.2em;
+		margin-top: 1em;
+	}
+	dt:after {
+		content: ":";
+	}
+	dd {
+		margin: 1em 0 0 110px;
+		padding: 0 0 1em 0;
+		font-size: 1.2em;
+	}
+	</style>
 </head>
 
 <body>

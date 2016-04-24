@@ -160,11 +160,11 @@ table th {
 }
 
 .invalid-row {
-	background-color: rgba(255, 0, 0, 0.7);
+	background-color: rgba(255, 0, 0, 0.5);
 }
 
 .valid-row {
-	background-color: rgba(0, 255, 0, 0.7);
+	background-color: rgba(0, 255, 0, 0.5);
 }
 
 [type=submit] {
