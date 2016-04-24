@@ -136,7 +136,7 @@
 
 			if($flag==1 && $flage==1)
 			{
-				echo "<p class='create-message'> New engineer created successfully </p>";
+				echo "<p class='create-message'> New Project Manager created successfully </p>";
 			}
 			else if($flag==1)
 			{

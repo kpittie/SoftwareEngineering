@@ -7,7 +7,7 @@ function addInput(divName){
      }
      else {
           var newdiv = document.createElement('div');
-          newdiv.innerHTML = "<br><input type='text' pattern='^[a-zA-Z]{1,100}$' required='required' name='Modules[]' placeholder='Module "+(counter+1)+"' class='dynamic-inputs'>";
+          newdiv.innerHTML = "<br><input type='text' pattern='^[a-zA-Z0-9\\\s]{1,100}$' required='required' name='Modules[]' placeholder='Module "+(counter+1)+"' class='dynamic-inputs'>";
           document.getElementById(divName).appendChild(newdiv);
           counter++;
      }

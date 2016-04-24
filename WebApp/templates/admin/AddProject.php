@@ -50,9 +50,9 @@
 		<h1 class="main-heading"> Add Project </h1>
 		<p class="message"></p><br/>
 		<form method="post">
-			<input type="text" pattern="^[a-zA-Z\s]{1,100}$" required="required" placeholder="Project" id="project-name" name="project-name"> <br/>
+			<input type="text" pattern="^[a-zA-Z0-9\s]{1,100}$" required="required" placeholder="Project" id="project-name" name="project-name"> <br/>
 			<div id="dynamicInput">
-          		<input type="text" pattern="^[a-zA-Z\s]{1,100}$" required="required" name="Modules[]" placeholder="Module1" id="first-input">
+          		<input type="text" pattern="^[a-zA-Z0-9\s]{1,100}$" required="required" name="Modules[]" placeholder="Module1" id="first-input">
           		<input type="button" value="+" onClick="addInput('dynamicInput');" class="small-button">
           		<input type="button" value="-" onClick="deleteInput();" class="small-button">
      		</div>
