@@ -100,9 +100,7 @@ include '../../scripts/timeout.php';
             <select id="module" name="module" required>
             </select>
                 <br/>
-                <textarea name="description" id="description" rows="10" cols="50" class="form-center">
-                    Problem Description
-                </textarea>
+                <textarea name="description" id="description" rows="10" cols="50" class="form-center" placeholder="Problem Description" required></textarea>
                 <select id="priority" name="priority" class="form-center" required>
                     <option selected="selected" disabled="disabled">Select Priority</option>
                     <option value="H">High</option>
