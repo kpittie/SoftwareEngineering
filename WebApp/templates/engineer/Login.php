@@ -24,8 +24,6 @@ session_start();
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="../../styles/style.css">
 		
-		
-		
 
     
     <style>
@@ -53,15 +51,12 @@ session_start();
   </head>
 
   <body>
-  
-  
-	
 <?php
 
 
 include("db_connect.php");
 extract($_POST);
-
+session_start();
 
 
 if(!isset($_SESSION['secure']))
@@ -101,7 +96,7 @@ if(isset($submit))
 <?php
 
 
-if(isset($_SESSION['id']))
+if(isset($_SESSION[id]))
 {
 
 echo '<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -125,7 +120,7 @@ echo '<nav class="navbar navbar-inverse navbar-fixed-top">
     echo '<div class="container">';
    
   echo "<br><br><br><br>";
-	echo "<b>&nbsp&nbsp&nbsp&nbsp&nbsp<span class='glyphicon glyphicon-user'></span>&nbspWELCOME ENGINEER&nbsp".$_SESSION['id']."</b><br><br></div>";
+	echo "<b>&nbsp&nbsp&nbsp&nbsp&nbsp<span class='glyphicon glyphicon-user'></span>&nbspWELCOME ENGINEER&nbsp".$_SESSION[id]."</b><br><br></div>";
 
 	
 	
@@ -160,7 +155,7 @@ exit;
       <ul class="logmod__tabs">
         
         <li data-tabtar="lgm-2"><a href="#">LOGIN</a></li>
-		<li data-tabtar="lgm-1"><a href="#">HELP</a></li>
+		<li data-tabtar="lgm-1"><a href="#">GUIDE</a></li>
 		
       </ul>
       <div class="logmod__tab-wrapper">
@@ -169,12 +164,7 @@ exit;
           <span class="logmod__heading-subtitle">Engineer Login Portal allows engineers to see <strong>ongoing and completed problems</strong></span>
         </div>
         <div class="logmod__form">
-          &nbsp&nbsp&nbsp&nbsp<div class="btn-group">
-   <a href="../admin/Login.php" class="btn btn-primary" role="button">ADMIN </a>
-   <a href="../client/Login.php" class="btn btn-primary" role="button">CLIENT </a>
-    <a href="Login.php" class="btn btn-primary active" role="button">ENGINEER </a>
-	<a href="../pmanager/Login.php" class="btn btn-primary" role="button">PROJECT MANAGER</a>
-  </div>
+          <p>&nbsp&nbsp&nbsp&nbsp&nbsp Sign In with Your Username and Password</p>
         </div> 
         <div class="logmod__alter">
           <div class="logmod__alter-container">
