@@ -56,7 +56,7 @@ session_start();
 
 include("db_connect.php");
 extract($_POST);
-session_start();
+
 
 
 if(!isset($_SESSION['secure']))
@@ -96,7 +96,7 @@ if(isset($submit))
 <?php
 
 
-if(isset($_SESSION[id]))
+if(isset($_SESSION['id']))
 {
 
 echo '<nav class="navbar navbar-inverse navbar-fixed-top">
