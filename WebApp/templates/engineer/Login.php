@@ -10,6 +10,7 @@ session_start();
 <!DOCTYPE html>
 <html >
   <head>
+    <meta charset="UTF-8">
     <title>Login/Sign-In</title>
     
     
@@ -22,6 +23,8 @@ session_start();
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="../../styles/style.css">
+		
+		
 		
 
     
@@ -50,11 +53,15 @@ session_start();
   </head>
 
   <body>
+  
+  
+	
 <?php
 
 
 include("db_connect.php");
 extract($_POST);
+
 
 
 if(!isset($_SESSION['secure']))
@@ -64,11 +71,11 @@ $_SESSION['secure']=rand(1000,9999);
 }
 if(isset($submit))
 {
-    $passhash=crypt($pass,'$2a$'.$loginid);
-	$rs=mysqli_query($connect,"select * from engineer where id='$loginid' and password='$passhash'");
+	
+	$rs=mysql_query("select * from engineer where id='$loginid' and password='$pass'");
 	//print_r($rs);
 	 
-	if(mysqli_num_rows($rs)<1)
+	if(mysql_num_rows($rs)<1)
 	{
 		$found="N";
 		 
@@ -77,8 +84,8 @@ if(isset($submit))
     {
         if($_SESSION['secure']==$_POST['secure'])
         {
-        $_SESSION['id']=$loginid;
-		    $_SESSION['secure']=rand(1000,9999);
+        $_SESSION[id]=$loginid;
+		$_SESSION['secure']=rand(1000,9999);
 		
         }
         else{
@@ -153,7 +160,7 @@ exit;
       <ul class="logmod__tabs">
         
         <li data-tabtar="lgm-2"><a href="#">LOGIN</a></li>
-		<li data-tabtar="lgm-1"><a href="#">GUIDE</a></li>
+		<li data-tabtar="lgm-1"><a href="#">HELP</a></li>
 		
       </ul>
       <div class="logmod__tab-wrapper">
@@ -162,7 +169,12 @@ exit;
           <span class="logmod__heading-subtitle">Engineer Login Portal allows engineers to see <strong>ongoing and completed problems</strong></span>
         </div>
         <div class="logmod__form">
-          <p>&nbsp&nbsp&nbsp&nbsp&nbsp Sign In with Your Username and Password</p>
+          &nbsp&nbsp&nbsp&nbsp<div class="btn-group">
+   <a href="../admin/Login.php" class="btn btn-primary" role="button">ADMIN </a>
+   <a href="../client/Login.php" class="btn btn-primary" role="button">CLIENT </a>
+    <a href="Login.php" class="btn btn-primary active" role="button">ENGINEER </a>
+	<a href="../pmanager/Login.php" class="btn btn-primary" role="button">PROJECT MANAGER</a>
+  </div>
         </div> 
         <div class="logmod__alter">
           <div class="logmod__alter-container">
