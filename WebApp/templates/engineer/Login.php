@@ -10,6 +10,7 @@ session_start();
 <!DOCTYPE html>
 <html >
   <head>
+    <meta charset="UTF-8">
     <title>Login/Sign-In</title>
     
     
@@ -57,6 +58,7 @@ include("db_connect.php");
 extract($_POST);
 
 
+
 if(!isset($_SESSION['secure']))
 {
 
@@ -64,11 +66,11 @@ $_SESSION['secure']=rand(1000,9999);
 }
 if(isset($submit))
 {
-    $passhash=crypt($pass,'$2a$'.$loginid);
-	$rs=mysqli_query($connect,"select * from engineer where id='$loginid' and password='$passhash'");
+	
+	$rs=mysql_query("select * from engineer where id='$loginid' and password='$pass'");
 	//print_r($rs);
 	 
-	if(mysqli_num_rows($rs)<1)
+	if(mysql_num_rows($rs)<1)
 	{
 		$found="N";
 		 
@@ -77,8 +79,8 @@ if(isset($submit))
     {
         if($_SESSION['secure']==$_POST['secure'])
         {
-        $_SESSION['id']=$loginid;
-		    $_SESSION['secure']=rand(1000,9999);
+        $_SESSION[id]=$loginid;
+		$_SESSION['secure']=rand(1000,9999);
 		
         }
         else{
@@ -118,7 +120,7 @@ echo '<nav class="navbar navbar-inverse navbar-fixed-top">
     echo '<div class="container">';
    
   echo "<br><br><br><br>";
-	echo "<b>&nbsp&nbsp&nbsp&nbsp&nbsp<span class='glyphicon glyphicon-user'></span>&nbspWELCOME ENGINEER&nbsp".$_SESSION['id']."</b><br><br></div>";
+	echo "<b>&nbsp&nbsp&nbsp&nbsp&nbsp<span class='glyphicon glyphicon-user'></span>&nbspWELCOME ENGINEER&nbsp".$_SESSION[id]."</b><br><br></div>";
 
 	
 	
@@ -135,7 +137,7 @@ echo "<div class='jumbotron text-center'>";
   </tr>
   <tr>
     <td height="58" valign="bottom"><img src="../../images/b2.jpg" width="43" height="43" align="absmiddle"></td>
-    <td valign="bottom" bordercolor="#0000FF"> <a href="completed.php" ><h3>&nbsp&nbspCOMPLETED PROBLEMS</h3></a></td>
+    <td valign="bottom" bordercolor="#0000FF"> <a href="complete.php" ><h3>&nbsp&nbspCOMPLETED PROBLEMS</h3></a></td>
   </tr>
 </table>';
 echo "</div>";

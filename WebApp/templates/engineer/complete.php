@@ -2,10 +2,10 @@
 /**
  * Created by NOTEPAD++
  * User: THIRUMURGAN S.S.
- * Date: 14-04-2016
- * Time: 1:10 PM
+ * Date: 13-04-2016
+ * Time: 12:30 PM
  */
-	session_start();
+	session_start($id);
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -77,22 +77,25 @@ if(isset($_SESSION['id']))
 echo "<br><br><br><br>";
 
 $pid=$_SESSION['id'];
-//echo $pid;
+
 $query= "select id,description,timestamp,status,priority from problem where status='c' and id=$pid";
 
-$result=mysqli_query($connect,$query);
-//var_dump($result);
+$result=mysql_query($query);
 echo "<table>";
 echo "<th>Problem ID</th><th>Description</th><th>Timestamp</th><th>Status</th><th>Priority</th>";
-
-while($row=mysqli_fetch_array($result))
+if($result!=0)
+ {
+  while($row=mysql_fetch_array($result))
 	{ 
 	
     echo "<tr>";
     echo "<td>".$row['id']."</td>"."<td>".$row['description']."</td>"."<td>".$row['timestamp']."</td>"."<td>".$row['status']."</td>"."<td>".$row['priority']."</td>"."</tr>"; 
 	
     }
-echo "</table>";
+  echo "</table>";
+ }
+ else
+   echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<h3>No Problems are completed to show</h3>";	 
 }
 else
 {
