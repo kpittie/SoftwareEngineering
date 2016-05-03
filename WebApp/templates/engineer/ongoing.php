@@ -19,6 +19,14 @@
       <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	  <link rel="stylesheet" type="text/css" href="../../styles/prettify1.css">
 	  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+	  <!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+		<!-- Latest compiled JavaScript -->
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	  <style>
 	  .jumbotron {
       background-color:  #ccffe6;
@@ -34,6 +42,11 @@
 	height:43px;
        }
 	  </style>
+<script>
+	function func(pid) {
+		document.getElementById('pid').value = pid;
+	}
+</script>
 </head>
 
 <body>
@@ -83,13 +96,14 @@ $query= "select id,description,timestamp,status,priority from problem where stat
 $result=mysqli_query($connect,$query);
 //var_dump($result);
 echo "<table>";
-echo "<th>Problem ID</th><th>Description</th><th>Timestamp</th><th>Status</th><th>Priority</th><th></th>";
+echo "<th>Problem ID</th><th>Description</th><th>Timestamp</th><th>Status</th><th>Priority</th><th>Submit Solution</th>";
 
 while($row=mysqli_fetch_array($result))
 	{ 
 	
     echo "<tr>";
-    echo "<td>".$row['id']."</td>"."<td>".$row['description']."</td>"."<td>".$row['timestamp']."</td>"."<td>".$row['status']."</td>"."<td>".$row['priority']."</td><td><input type='submit'></td></tr>";
+    $pid = $row['id'];
+    echo "<td>".$row['id']."</td>"."<td>".$row['description']."</td>"."<td>".$row['timestamp']."</td>"."<td>".$row['status']."</td>"."<td>".$row['priority']."</td><td><button class='' name='first-click' data-toggle='modal' data-target='#myModal' onclick='func($row[id])'>Submit Solution</button></td></tr>";
     }
 echo "</table>";
 }
@@ -100,7 +114,52 @@ echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<h3>You need to <a href='Login.php'>LOG
 }
 
 ?>
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Solution</h4>
+      </div>
+      <div class="modal-body">
+	    <form method="post">
+	    	<input type="hidden" id="pid" name="pid">
+	    	<textarea id="solution" name="solution" rows="10" cols="50" placeholder="Enter the solution comments"></textarea> <br>
+	    	<input type="text" name="hours" placeholder="Number of Hours"> <br>
+	    	<hr>
+	    	<input type="submit" name="submit-solution" value="Submit Solution">
+	    </form>
+	   </div>
+	 </div>
+  </div>
 </div>
 
+<?php
+	if(isset($_POST['submit-solution']))
+	{
+		$solution = $_POST['solution'];
+		$hours = $_POST['hours'];
+		$pid = $_POST['pid'];
+		$id = $_SESSION['id'];
+		$sql = "UPDATE problem SET solution_comment='$solution', number_of_hours=$hours, status='C' WHERE id=$pid";
+		mysqli_query($connect, $sql);
+		$sql = "UPDATE engineer SET number_of_complaints=number_of_complaints-1 WHERE id=";
+		mysqli_query($connect,$sql);
+		$sql = "SELECT number_of_complaints from engineer WHERE id=$id";
+		$result = mysqli_query($connect, $sql);
+		$row = mysqli_fetch_array($result);
+			if($row['number_of_complaints'] == 0)
+			{
+				$sql = "UPDATE engineer SET status='unassigned' WHERE id=$id";
+				mysqli_query($connect,$sql);
+			}
+		header("location: ongoing.php");
+	}
+?>
+
+
+</div>
 </body>
 </html>	
