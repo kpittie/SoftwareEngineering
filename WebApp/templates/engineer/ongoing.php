@@ -78,19 +78,18 @@ echo "<br><br><br><br>";
 
 $pid=$_SESSION['id'];
 //echo $pid;
-$query= "select id,description,timestamp,status,priority from problem where status='n' or status='O' and id=$pid";
+$query= "select id,description,timestamp,status,priority from problem where status='A' and engineer_id=$pid";
 
 $result=mysqli_query($connect,$query);
 //var_dump($result);
 echo "<table>";
-echo "<th>Problem ID</th><th>Description</th><th>Timestamp</th><th>Status</th><th>Priority</th>";
+echo "<th>Problem ID</th><th>Description</th><th>Timestamp</th><th>Status</th><th>Priority</th><th></th>";
 
 while($row=mysqli_fetch_array($result))
 	{ 
 	
     echo "<tr>";
-    echo "<td>".$row['id']."</td>"."<td>".$row['description']."</td>"."<td>".$row['timestamp']."</td>"."<td>".$row['status']."</td>"."<td>".$row['priority']."</td>"."</tr>"; 
-	
+    echo "<td>".$row['id']."</td>"."<td>".$row['description']."</td>"."<td>".$row['timestamp']."</td>"."<td>".$row['status']."</td>"."<td>".$row['priority']."</td><td><input type='submit'></td></tr>";
     }
 echo "</table>";
 }

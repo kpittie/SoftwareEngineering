@@ -27,6 +27,12 @@ input[type=submit]
 			margin:auto;
 		}
 		</style>
+
+<script>
+	function hide() {
+		document.getElementById("first-table").style.display = "none";
+	}
+</script>
 	</head>
 
 <body>
@@ -63,22 +69,23 @@ input[type=submit]
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
 	Enter the problem id:
 	<input type="text" name="pid" pattern="^[0-9]{1,10}$" required>
-	<input type="submit" value="Search">
+	<input name="first-button" type="submit" value="Search" onclick="hide()">
 	</form>	
 	<!-- The main content ends -->
 
 
 <?php
-if($_POST):
  $conn = mysqli_connect("localhost","root","","cmt");
- $id=$_POST["pid"];
 	$username = $_SESSION['user-name'];
-	$query = "select problem.id,problem.engineer_id,problem.status,problem.timestamp,problem.project_id,problem.priority,problem.reopenings from problem inner join project on problem.project_id=project.id where project.client_id=$username and  problem.status='C' or problem.status='c' ";
+	if(!$_POST):
+	$query = "select problem.id,problem.description,problem.engineer_id,problem.status,problem.timestamp,problem.project_id,problem.priority,problem.reopenings from problem inner join project on problem.project_id=project.id where project.client_id=$username and  problem.status='C' or problem.status='c' ";
     $result = mysqli_query($conn,$query);
-    if (mysqli_num_rows($result)==1) {
+    if (mysqli_num_rows($result)>0) {
 		while ($row = mysqli_fetch_assoc($result)) {
-			echo "<table>";
+			echo "<table id='first-table'>";
 			echo "<tr>";
+			echo "<td> Problem ID </td>";
+			echo "<td> Description </td>";
 			echo "<td> Project Id: </td>";
 			echo "<td> Engineer Id: </td>";
 			echo "<td> Time-stamp Id: </td>";
@@ -87,6 +94,8 @@ if($_POST):
 			echo "<td> Reopening: </td>";
 			echo "</tr>";
 			echo "<tr>";
+			echo "<td> $row[id] </td>";
+			echo "<td> $row[description] </td>";
 			echo "<td> $row[project_id]</td>";
 			echo "<td> $row[engineer_id]</td>";
 			echo "<td> $row[timestamp]</td>";
@@ -98,7 +107,10 @@ if($_POST):
 		}
 	}
 	echo "<br>";
-	$query = "select problem.id,problem.engineer_id,problem.status,problem.timestamp,problem.project_id,problem.priority,problem.reopenings from problem inner join project on problem.project_id=project.id where project.client_id=$username and problem.id = $id and  problem.status='C' or problem.status='c' ";
+	endif;
+	if(isset($_POST['first-button'])):
+	$id=$_POST["pid"];
+	$query = "select problem.id,problem.description,problem.engineer_id,problem.status,problem.timestamp,problem.project_id,problem.priority,problem.reopenings from problem inner join project on problem.project_id=project.id where project.client_id=$username and problem.id = $id and  problem.status='C' or problem.status='c' ";
  $result = mysqli_query($conn,$query);
  if (mysqli_num_rows($result)==1)
  {
@@ -106,6 +118,8 @@ if($_POST):
 	{ 
 		echo "<table>";
 			echo "<tr>";
+				echo "<td> Problem ID </td>";
+				echo "<td> Description </td>";
 				echo "<td> Project Id: </td>";
 				echo "<td> Engineer Id: </td>";
 				echo "<td> Time-stamp Id: </td>";
@@ -114,6 +128,8 @@ if($_POST):
 				echo "<td> Reopening: </td>";
 			echo "</tr>";
 			echo "<tr>";
+				echo "<td> $row[id] </td>";
+				echo "<td> $row[description] </td>";
 				echo"<td> $row[project_id]</td>";
 				echo"<td> $row[engineer_id]</td>";
 				echo"<td> $row[timestamp]</td>";
@@ -123,13 +139,12 @@ if($_POST):
 			echo"</tr>";
 		echo"</table>";
 		echo "<br>";
-		echo "<form action= reopen.php method= POST>";
+		echo "<form method= POST>";
+		echo "<input type='hidden' value='$id' name='pid'>";
 		echo "Description<br>";
-		echo "<textarea name=description cols=50 rows=10></textarea>";
+		echo "<textarea name='description' cols=50 rows=10></textarea>";
 		echo "<br><br>";
-		echo  "<input type= submit value= submit>";
-		
-		
+		echo  "<input name='update-button' type='submit' value='Submit'>";
 	}
 	}
  else
@@ -137,21 +152,23 @@ if($_POST):
 	echo "<b>Sorry no such record found!!</b>";
 	}
 	endif;
+	if(isset($_POST['update-button'])):
+		$description = $_POST['description'];
+		$timestamp=date("Y/m/d");
+		$id = $_POST['pid'];
+		$sql = "UPDATE problem SET description = '$description', status = 'A', priority = 'H', reopenings = reopenings + 1, timestamp = $timestamp WHERE id=$id";
+		if(mysqli_query($conn,$sql))
+		{
+			echo "The problem has been reopened successfully.";
+		}
+		else
+		{
+			echo "Unable to reopen problem.";	
+		}
+	endif;
 ?>		
 
-
-	</div>
-<script>
-function func()
-{
-confirm("Are you sure you want to delete the above problem?");
-}
-
-
-
-</script>
-	
-	
+	</div>	
 </body>
 <script src="../../scripts/timer.js"></script>
 </html>	

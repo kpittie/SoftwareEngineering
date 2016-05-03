@@ -56,25 +56,35 @@
 		$eng_id = $_POST['engineer-id'];
 		echo "<table border='1'>";
 		echo "	<tr>";
-		echo "		<th> Problem ID </th>";
-		echo "		<th> No. of hours worked on problem </th>";
-		echo "		<th> Problem Status </th>";
+		echo "		<th> Engineer ID </th>";
+		echo "		<th> Project ID </th>";
+		echo "		<th> Module ID </th>";
+		echo "		<th> Active Complaints </th>";
+		echo "		<th> Total Complaints </th>";
+		echo "		<th> Status </th>";
 		echo "  </tr>";
-	
+		
+		$user = $_SESSION['user-name'];
 
-		$sql = "SELECT * FROM problem WHERE engineer_id = $eng_id";
-		$result = $conn->query($sql);
+		$conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
+		$sql = "SELECT project_id FROM engineer WHERE id=$user";
+		$result = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_array($result);
+		$pid = $row['project_id'];
 
-		if ($result->num_rows > 0) {
-		    while($row = $result->fetch_assoc()) {
+
+		$sql = "SELECT * FROM engineer WHERE id=$eng_id AND project_id=$pid";
+		$result = mysqli_query($conn,$sql);
+		    while($row = mysqli_fetch_assoc($result)) {
 		    	echo "<tr>";
-		        echo "<td>" . $row["engineer_id"]. "</td> <td>" . $row["number_of_hours"]. "</td> <td>" . $row["status"]. "</td>";
+		        echo "<td>" . $row["id"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>". $row["number_of_complaints"]."</td><td>".$row["total_complaints"]."</td><td>".$row["status"]."</td>";
 		        echo "</tr>";
 		    }
-		} else {
-		    echo "0 results";
-		}
 		
+		 /*else {
+		    echo "Engineer doesnt belong to the project";
+		}
+		*/
 		$conn->close();
 	?>
 	</table>

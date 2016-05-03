@@ -54,6 +54,39 @@ include '../../scripts/timeout.php';
 	<input type="submit" value="Search">
 	</form>
 	<?php
+	 $conn = mysqli_connect("localhost","root","","cmt");
+	$username = $_SESSION['user-name'];
+		if(!$_POST):
+	$query = "select problem.id,problem.description,problem.engineer_id,problem.status,problem.timestamp,problem.project_id,problem.priority,problem.reopenings from problem inner join project on problem.project_id=project.id where project.client_id=$username";
+    $result = mysqli_query($conn,$query);
+    echo "	<table id='first-table'>";
+	echo "<tr>";
+	echo "<td> Problem ID </td>";
+	echo "<td> Description </td>";
+	echo "<td> Project Id: </td>";
+	echo "<td> Engineer Id: </td>";
+	echo "<td> Time-stamp Id: </td>";
+	echo "<td> Status: </td>";
+	echo "<td> Priority: </td>";
+	echo "<td> Reopening: </td>";
+	echo "</tr>";
+    if (mysqli_num_rows($result)>0) {
+		while ($row = mysqli_fetch_assoc($result)) {
+			echo "<tr>";
+			echo "<td> $row[id] </td>";
+			echo "<td> $row[description] </td>";
+			echo "<td> $row[project_id]</td>";
+			echo "<td> $row[engineer_id]</td>";
+			echo "<td> $row[timestamp]</td>";
+			echo "<td> $row[status]</td>";
+			echo "<td> $row[priority]</td>";
+			echo "<td> $row[reopenings]</td>";
+			echo "</tr>";
+		}
+		echo "</table>";
+	}
+	echo "<br>";
+	endif;
 if($_POST):
  $conn = mysqli_connect("localhost","root","","cmt");
  $id=$_POST['pid'];
@@ -64,22 +97,27 @@ if($_POST):
  while($row= mysqli_fetch_assoc($result))
 	{ 
 		echo "<table>";
-			echo "<tr>";
-				echo "<td> Project Id: </td>";
-				echo "<td> Engineer Id: </td>";
-				echo "<td> Time-stamp Id: </td>";
-				echo "<td> Status: </td>";
-				echo "<td> Priority: </td>";
-				echo "<td> Reopening: </td>";
+	echo "<tr>";
+	echo "<td> Problem ID </td>";
+	echo "<td> Description </td>";
+	echo "<td> Project Id: </td>";
+	echo "<td> Engineer Id: </td>";
+	echo "<td> Time-stamp Id: </td>";
+	echo "<td> Status: </td>";
+	echo "<td> Priority: </td>";
+	echo "<td> Reopening: </td>";
+	echo "</tr>";
 			echo "</tr>";
 			echo "<tr>";
-				echo"<td>". $row['project_id']."</td>";
-				echo"<td>". $row['engineer_id']."</td>";
-				echo"<td>". $row['timestamp']."</td>";
-				echo"<td>". $row['status']."</td>";
-				echo"<td>". $row['priority']."</td>";
-				echo"<td>". $row['reopenings']."</td>";
-			echo"</tr>";
+			echo "<td> $row[id] </td>";
+			echo "<td> $row[description] </td>";
+			echo "<td> $row[project_id]</td>";
+			echo "<td> $row[engineer_id]</td>";
+			echo "<td> $row[timestamp]</td>";
+			echo "<td> $row[status]</td>";
+			echo "<td> $row[priority]</td>";
+			echo "<td> $row[reopenings]</td>";
+			echo "</tr>";
 		echo"</table>";
 	}
 	}

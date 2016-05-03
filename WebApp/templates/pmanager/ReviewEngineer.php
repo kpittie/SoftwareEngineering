@@ -40,14 +40,42 @@
 			if(isset($_SESSION['user-name'])&& $_SESSION['user']=="pmanager"){
 		?>
 		<h1 class="main-heading"> Review Engineer </h1>
-
 		<form action= "ReviewEngineerExtd.php" method="post">
-			
 			<input type="text" placeholder="Engineer ID" name="engineer-id"> <br/>
-				
-           
 			<input type="submit" value="Submit" class="submit-delete-button">
 		</form>
+	<?php
+		$dbhost = 'localhost';
+		$dbuser = 'root';
+		$dbpass = '';
+		$dbname = 'cmt';
+		$user = $_SESSION['user-name'];
+
+		$conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
+		$sql = "SELECT project_id FROM engineer WHERE id=$user";
+		$result = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_array($result);
+		$pid = $row['project_id'];
+
+		$sql = "SELECT * FROM engineer WHERE project_id=$pid";
+		$result = mysqli_query($conn,$sql);
+		echo "<table border='1'>";
+		echo "	<tr>";
+		echo "		<th> Engineer ID </th>";
+		echo "		<th> Project ID </th>";
+		echo "		<th> Module ID </th>";
+		echo "		<th> Active Complaints </th>";
+		echo "		<th> Total Complaints </th>";
+		echo "		<th> Status </th>";
+		echo "  </tr>";
+
+		while($row = mysqli_fetch_array($result)){
+				echo "<tr>";
+		        echo "<td>" . $row["id"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>". $row["number_of_complaints"]."</td><td>".$row["total_complaints"]."</td><td>".$row["status"]."</td>";
+		        echo "</tr>";
+		}
+		echo "</table>";
+	?>
 	</div>
 	<?php } ?>
 	<!-- The main content ends -->

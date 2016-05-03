@@ -48,7 +48,7 @@
 		<form method="post">
 			<input type="text" pattern="^[0-9]{1,10}$" required="required" placeholder="User ID" name="user-id"> <br/>
 			<input type="text" pattern="^[a-zA-Z\s]{3,25}$" required="required" placeholder="User Name" name="user-name"> <br/>
-			<input type="password" required="required" placeholder="Password" name="pass"> <br/>
+			<input type="password" pattern=".{8,}" required="required" placeholder="Password" name="pass"> <br/>
 				<?php
 					$dbhost = 'localhost';
 					$dbuser = 'root';
@@ -111,11 +111,8 @@
 				{
 					echo "<p class='delete-message'> Failed </p>";
 				}
-
 			endif;
 		mysqli_close($conn);
-		?>
-		<?php
 		}
 		else {
 			echo "<p class='delete-message'> You must be logged in to see this page </p>";

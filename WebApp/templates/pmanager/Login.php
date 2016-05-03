@@ -75,7 +75,7 @@ $(document).ready(function() {
 			}
 		?>
 		<form  method="post">
-			<input type="text" pattern="^[0-9]{3}$" required='required' placeholder="Manager ID" name="pmanager"> <br/>
+			<input type="text" pattern="^[0-9]{1,10}$" required='required' placeholder="Manager ID" name="pmanager"> <br/>
 			<input type="password" required='required' placeholder="Password" name="pass"> <br/>
 			<input type="text" pattern="^[a-zA-Z0-9]{6}$" required='required' placeholder="Captcha" name="captcha" id="real-person"> <br/>
 			<input type="submit" value="Sign In" class="submit-delete-button">

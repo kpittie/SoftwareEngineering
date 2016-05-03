@@ -105,7 +105,13 @@
 								{
 									echo "<p class='delete-message'> The associated modules have been deleted </p>";
 								}
-								header ('location: DeleteProject.php');
+								$sql = "DELETE FROM engineer WHERE project_id=$id";
+								if(mysqli_query($conn,$sql))
+								{
+									echo "<p class='delete-message'> The corresponding engineers have been removed </p>"; 
+								}
+								echo "<p class='create-message'> Please wait while we fetch the latest content for you </p>";
+								echo '<meta http-equiv="refresh" content="2;url=DeleteProject.php">';
   							}
 							else
 							{
