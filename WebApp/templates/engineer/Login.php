@@ -10,7 +10,6 @@ session_start();
 <!DOCTYPE html>
 <html >
   <head>
-    <meta charset="UTF-8">
     <title>Login/Sign-In</title>
     
     
@@ -23,96 +22,84 @@ session_start();
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="../../styles/style.css">
-		
+    
 
     
     <style>
-	#side1
-	{
-	float:right;
-	}
-	.jumbotron {
+  #side1
+  {
+  float:right;
+  }
+  .jumbotron {
       background-color:  #ccffe6;
       color: #fff;
       padding: 160px 35px;
       font-family: Montserrat, sans-serif;
   }
 #clock{
-	position:absolute;
-	left:500px;
-	top:0px;
-	width:190px;
-	height:43px;
+  position:absolute;
+  left:500px;
+  top:0px;
+  width:190px;
+  height:43px;
 }
   
   
-	</style>
+  </style>
     
   </head>
 
   <body>
 <?php
-
-
 include("db_connect.php");
 extract($_POST);
-
-
-
 if(!isset($_SESSION['secure']))
 {
-
 $_SESSION['secure']=rand(1000,9999);
 }
 if(isset($submit))
 {
-	
-	$rs=mysql_query("select * from engineer where id='$loginid' and password='$pass'");
-	//print_r($rs);
-	 
-	if(mysql_num_rows($rs)<1)
-	{
-		$found="N";
-		 
-	}
-	else
+    $passhash=crypt($pass,'$2a$'.$loginid);
+  $rs=mysqli_query($connect,"select * from engineer where id='$loginid' and password='$passhash'");
+  //print_r($rs);
+   
+  if(mysqli_num_rows($rs)<1)
+  {
+    $found="N";
+     
+  }
+  else
     {
         if($_SESSION['secure']==$_POST['secure'])
         {
-        $_SESSION[id]=$loginid;
-		$_SESSION['secure']=rand(1000,9999);
-		
+        $_SESSION['id']=$loginid;
+        $_SESSION['secure']=rand(1000,9999);
+    
         }
         else{
             $abc="N";
             $_SESSION['secure']=rand(1000,9999);
             }
     }
-
 }
-
-
 ?>
 <?php
-
-
 if(isset($_SESSION['id']))
 {
-
 echo '<nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-	<a class="navbar-brand" href="#myPage"><img class="img-circle" src="../../images/logo.png" width="50px" height="38px"></a>
+  <a class="navbar-brand" href="#myPage"><img class="img-circle" src="../../images/logo.png" width="50px" height="38px"></a>
       <a class="navbar-brand" href="#">ENGINEER\'S PORTAL</a>
-	 <a class="navbar-brand" href="#myPage"> <div id="clock">
-	<object width="200" height="50" data="../../images/clock.swf"></object>
-	</div></a>
+   <a class="navbar-brand" href="#myPage"> <div id="clock">
+  <object width="200" height="50" data="../../images/clock.swf"></object>
+  </div></a>
     </div>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="signout1.php"><span class="glyphicon glyphicon-home">Home</span></a></li>
      
     </ul>
-	<ul class="nav navbar-nav navbar-right">
+  <ul class="nav navbar-nav navbar-right">
       <li><a href="signout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>
@@ -120,14 +107,13 @@ echo '<nav class="navbar navbar-inverse navbar-fixed-top">
     echo '<div class="container">';
    
   echo "<br><br><br><br>";
-	echo "<b>&nbsp&nbsp&nbsp&nbsp&nbsp<span class='glyphicon glyphicon-user'></span>&nbspWELCOME ENGINEER&nbsp".$_SESSION[id]."</b><br><br></div>";
-
-	
-	
-	
+  echo "<b>&nbsp&nbsp&nbsp&nbsp&nbsp<span class='glyphicon glyphicon-user'></span>&nbspWELCOME ENGINEER&nbsp".$_SESSION['id']."</b><br><br></div>";
+  
+  
+  
 echo "<div class='jumbotron text-center'>";
-	
-		echo '<table width="28%"  border="0" align="center">
+  
+    echo '<table width="28%"  border="0" align="center">
   <tr>
     <td width="7%" height="65" valign="bottom"><img src="../../images/b1.jpg" width="50" height="50" align="middle"></td>
     <td width="93%"valign="bottom" bordercolor="#0000FF"> <a href="ongoing.php"><h3>ONGOING  PROBLEMS </h3></a></td>
@@ -137,16 +123,13 @@ echo "<div class='jumbotron text-center'>";
   </tr>
   <tr>
     <td height="58" valign="bottom"><img src="../../images/b2.jpg" width="43" height="43" align="absmiddle"></td>
-    <td valign="bottom" bordercolor="#0000FF"> <a href="complete.php" ><h3>&nbsp&nbspCOMPLETED PROBLEMS</h3></a></td>
+    <td valign="bottom" bordercolor="#0000FF"> <a href="completed.php" ><h3>&nbsp&nbspCOMPLETED PROBLEMS</h3></a></td>
   </tr>
 </table>';
 echo "</div>";
 exit;
-		
-
+    
 }
-
-
 ?>
     <div class="logmod">
   <div class="logmod__wrapper">
@@ -155,8 +138,8 @@ exit;
       <ul class="logmod__tabs">
         
         <li data-tabtar="lgm-2"><a href="#">LOGIN</a></li>
-		<li data-tabtar="lgm-1"><a href="#">GUIDE</a></li>
-		
+    <li data-tabtar="lgm-1"><a href="#">GUIDE</a></li>
+    
       </ul>
       <div class="logmod__tab-wrapper">
       <div class="logmod__tab lgm-1">
@@ -202,35 +185,35 @@ exit;
               <div class="input full">
                 <label class="string optional" for="user-pw">Password *</label>
                 <input class="string optional" maxlength="255" id="user-pw" name="pass" placeholder="Password" type="password" size="50" />
-                						<span class="hide-password">Show</span>
+                            <span class="hide-password">Show</span>
               </div>
             </div>
-			<div class="sminputs">
-			<div class="input string optional">
+      <div class="sminputs">
+      <div class="input string optional">
                 <label class="string optional" for="user-pw-repeat">CAPTCHA *</label>
                 <input class="string optional" maxlength="255"  name="secure" placeholder="CAPTCHA" type="text" size="50" />
               </div>
-			  <div class="input string optional">
+        <div class="input string optional">
                 
                 <img src="generate.php" alt="captcha" id="a2" title="Enter CAPTCHA!!">
               </div>
-			  </div>
-			 
+        </div>
+       
             <div class="simform__actions">
-			<?php
-		  if(isset($found))
-		  {
-		  	echo "<b>Invalid Username or Password</b>";
-		  }
-		  ?>
-		  
+      <?php
+      if(isset($found))
+      {
+        echo "<b>Invalid Username or Password</b>";
+      }
+      ?>
+      
               <input class="sumbit" name="submit" type="submit" value="Log In" />
               <?php
-			if(isset($abc))
-			{
-			echo '<b>Incorrect Captcha</b>';
-			}
-			?>
+      if(isset($abc))
+      {
+      echo '<b>Incorrect Captcha</b>';
+      }
+      ?>
             </div> 
           </form>
         </div> 

@@ -2,10 +2,10 @@
 /**
  * Created by NOTEPAD++
  * User: THIRUMURGAN S.S.
- * Date: 13-04-2016
- * Time: 12:30 PM
+ * Date: 14-04-2016
+ * Time: 1:10 PM
  */
-	session_start($id);
+	session_start();
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -70,39 +70,31 @@
 
 
 <?php
-
 include ("db_connect.php");
 if(isset($_SESSION['id']))
 {
 echo "<br><br><br><br>";
-
 $pid=$_SESSION['id'];
-
-$query= "select id,description,timestamp,status,priority from problem where status='c' and id=$pid";
-
-$result=mysql_query($query);
+//echo $pid;
+$query= "select id,description,timestamp,status,priority from problem where status='C' OR status='c' and id=$pid";
+$result=mysqli_query($connect,$query);
+//var_dump($result);
 echo "<table>";
 echo "<th>Problem ID</th><th>Description</th><th>Timestamp</th><th>Status</th><th>Priority</th>";
-if($result!=0)
- {
-  while($row=mysql_fetch_array($result))
+while($row=mysqli_fetch_array($result))
 	{ 
 	
     echo "<tr>";
     echo "<td>".$row['id']."</td>"."<td>".$row['description']."</td>"."<td>".$row['timestamp']."</td>"."<td>".$row['status']."</td>"."<td>".$row['priority']."</td>"."</tr>"; 
 	
     }
-  echo "</table>";
- }
- else
-   echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<h3>No Problems are completed to show</h3>";	 
+echo "</table>";
 }
 else
 {
 echo "<br>";
 echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<h3>You need to <a href='Login.php'>LOGIN</a> first</h3>";
 }
-
 ?>
 </div>
 
