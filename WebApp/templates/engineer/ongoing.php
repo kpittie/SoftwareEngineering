@@ -41,10 +41,17 @@
 	width:190px;
 	height:43px;
        }
+
+       .modal-form{
+       	width: 80%;
+       	margin: auto;
+       	text-align: center;
+       }
 	  </style>
 <script>
 	function func(pid) {
 		document.getElementById('pid').value = pid;
+		document.getElementById('problem-id').innerHTML = pid;
 	}
 </script>
 </head>
@@ -121,13 +128,13 @@ echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<h3>You need to <a href='Login.php'>LOG
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Solution</h4>
+        <h4 class="modal-title">Solution: <p style="display: inline" id="problem-id"></p></h4>
       </div>
       <div class="modal-body">
-	    <form method="post">
+	    <form method="post" class="modal-form">
 	    	<input type="hidden" id="pid" name="pid">
-	    	<textarea id="solution" name="solution" rows="10" cols="50" placeholder="Enter the solution comments"></textarea> <br>
-	    	<input type="text" name="hours" placeholder="Number of Hours"> <br>
+	    	<textarea id="solution" name="solution" rows="10" cols="50" placeholder="Enter the solution comments" required></textarea> <br> <hr>
+	    	<input type="text" pattern="^[0-9]{1,10}$" name="hours" placeholder="Number of Hours" required> <br>
 	    	<hr>
 	    	<input type="submit" name="submit-solution" value="Submit Solution">
 	    </form>
