@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2016 at 07:06 PM
+-- Generation Time: May 04, 2016 at 07:49 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
 --
 
 INSERT INTO `admin` (`id`, `password`) VALUES
-(123, '$2Cw51.ICu1Nw');
+(123, '$2lH9Bbg1vo/g');
 
 -- --------------------------------------------------------
 
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `module` (
   `project_id` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_project_module` (`project_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=68 ;
 
 -- --------------------------------------------------------
 
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `problem` (
   KEY `fk_project_problem` (`project_id`),
   KEY `fk_module_problem` (`module_id`),
   KEY `fk_engineer_problem` (`engineer_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1236 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1250 ;
 
 -- --------------------------------------------------------
 
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `project` (
   PRIMARY KEY (`id`,`name`),
   KEY `fk_manager_project` (`manager_id`),
   KEY `fk_client_project` (`client_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
 
 -- --------------------------------------------------------
 

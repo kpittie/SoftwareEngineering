@@ -11,8 +11,11 @@
 	<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
 	<link rel="icon" type="image/png" href="../../images/logo.png">
 	<!-- Importing ends here -->
-
 	<link rel="stylesheet" type="text/css" href="../../styles/admin.css">
+	<link rel="stylesheet" href="../../Plugins/modal/reveal.css">
+	<script src="../../Plugins/modal/jquery-1.4.4.min.js" type="text/javascript"></script>
+	<script src="../../Plugins/modal/jquery.reveal.js" type="text/javascript"></script>
+	<script type="text/javascript" src="../../Plugins/graphs/jquery.canvasjs.min.js"></script>
 </head>
 
 <body>
@@ -64,28 +67,30 @@
 		if ($conn->connect_error) {
 		    die("Connection failed: " . $conn->connect_error);
 		}
-		echo "<table border='1'>";
-		echo "	<tr>";
-		echo "		<th> ID </th>";
-		echo "		<th> Description </th>";
-		echo "		<th> Project ID </th>";
-		echo "		<th> Module ID </th>";
-		echo "		<th> Engineer ID </th>";
-		echo "		<th> Status </th>";
-		echo "		<th> Priority </th>";
-		echo "		<th> Reopenings </th>";
-		echo "		<th> Timestamp </th>";
-		echo "	</tr>"; 
 
 		$sql = "SELECT * FROM problem WHERE engineer_id IS NULL OR status='U' ORDER BY priority='H' DESC, priority='M' DESC, priority='L' DESC";
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {
+			echo "<table border='1'>";
+			echo "	<tr>";
+			echo "		<th> ID </th>";
+			echo "		<th> Description </th>";
+			echo "		<th> Project ID </th>";
+			echo "		<th> Module ID </th>";
+			echo "		<th> Engineer ID </th>";
+			echo "		<th> Status </th>";
+			echo "		<th> Priority </th>";
+			echo "		<th> Reopenings </th>";
+			echo "		<th> Timestamp </th>";
+			echo "	</tr>"; 
 		    while($row = $result->fetch_assoc()) {
 		    	if($row["status"] == 'U')
 		    		$status = "Unassigned";
 		    	else if($row["status"] == 'A')
 		    		$status = "Assigned";
+		    	else if($row["status"] == 'C')
+		    		$status = "Completed";
 		    	else
 		    		$status = "Ongoing";
 
@@ -97,11 +102,30 @@
 		    		$priority = "Medium";
 
 		    	echo "<tr class='invalid-row'>";
-		        echo "<td>" . $row["id"]. "</td> <td>" . $row["description"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["engineer_id"]. "</td> <td>" . $status. "</td> <td>" . $priority. "</td> <td>" . $row["reopenings"]. "</td> <td>" . $row["timestamp"]. "</td>";
+		        echo "<td>" . $row["id"]. "</td> <td>" . $row["description"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["engineer_id"]. "</td> <td><strong>" . $status. "</strong></td> <td>" . $priority. "</td> <td>" . $row["reopenings"]. "</td> <td>" . $row["timestamp"]. "</td>";
 		        echo "</tr>";
 		    }
+		echo "<button class='show-button' onclick='show()'><a href='#' class='link-show' data-reveal-id='myModal2'>Visualize</a></button>";    
+				
+		$sql = "SELECT count(*) FROM problem WHERE priority='H' AND status='U'";
+		$result = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_array($result);
+		$high_count = $row["count(*)"];
+		echo "<input type='hidden' value=$high_count id='high-count'>";
+
+		$sql = "SELECT count(*) FROM problem WHERE priority='M' AND status='U'";
+		$result = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_array($result);
+		$medium_count = $row["count(*)"];
+		echo "<input type='hidden' value=$medium_count id='medium-count'>";
+
+		$sql = "SELECT count(*) FROM problem WHERE priority='L' AND status='U'";
+		$result = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_array($result);
+		$low_count = $row["count(*)"];
+		echo "<input type='hidden' value=$low_count id='low-count'>";
 		} else {
-		    echo "0 results";
+		    echo "<br/><br/><hr><br/><strong>0 results</strong>";
 		}
 		}
 
@@ -122,7 +146,7 @@
 		echo "		<th> Timestamp </th>";
 		echo "	</tr>"; 
 
-		$sql = "SELECT * FROM problem ORDER BY priority='H' DESC, priority='M' DESC, priority='L' DESC";
+		$sql = "SELECT * FROM problem ORDER BY status='U' DESC, status='A' DESC, status='C' DESC, priority='H' DESC, priority='M' DESC, priority='L' DESC";
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {
@@ -130,7 +154,9 @@
 		    	if($row["status"] == 'U')
 		    		$status = "Unassigned";
 		    	else if($row["status"] == 'A')
-		    		$status = "Assigned";
+		    		$status = "Assigned/Ongoing";
+		    	else if($row["status"] == 'C')
+		    		$status = "Completed";
 		    	else
 		    		$status = "Ongoing";
 
@@ -141,22 +167,46 @@
 		    	else
 		    		$priority = "Medium";
 		    	
-		    	if($row["engineer_id"] == NULL || $row["status"] == 'U')
+		    	if($row["engineer_id"] == NULL || $row["status"] == 'U' || $row["status"] == 'u')
 		    	{
 			    	echo "<tr class='invalid-row'>";
-			        echo "<td>" . $row["id"]. "</td> <td>" . $row["description"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["engineer_id"]. "</td> <td>" . $status. "</td> <td>" . $priority. "</td> <td>" . $row["reopenings"]. "</td> <td>" . $row["timestamp"]. "</td>";
+			        echo "<td>" . $row["id"]. "</td> <td>" . $row["description"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["engineer_id"]. "</td> <td><strong>" . $status. "</strong></td> <td>" . $priority. "</td> <td>" . $row["reopenings"]. "</td> <td>" . $row["timestamp"]. "</td>";
+			        echo "</tr>";
+			    }
+			    else if($row["status"] == 'C' || $row["status"] == 'c')
+			    {
+			    	echo "<tr class='completed-row'>";
+			        echo "<td>" . $row["id"]. "</td> <td>" . $row["description"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["engineer_id"]. "</td> <td><strong>" . $status. "</strong></td> <td>" . $priority. "</td> <td>" . $row["reopenings"]. "</td> <td>" . $row["timestamp"]. "</td>";
 			        echo "</tr>";
 			    }
 			    else
 			    {
 			    	echo "<tr class='valid-row'>";
-			        echo "<td>" . $row["id"]. "</td> <td>" . $row["description"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["engineer_id"]. "</td> <td>" . $status. "</td> <td>" . $priority. "</td> <td>" . $row["reopenings"]. "</td> <td>" . $row["timestamp"]. "</td>";
+			        echo "<td>" . $row["id"]. "</td> <td>" . $row["description"]. "</td> <td>" . $row["project_id"]. "</td> <td>" . $row["module_id"]. "</td> <td>" . $row["engineer_id"]. "</td> <td><strong>" . $status. "</strong></td> <td>" . $priority. "</td> <td>" . $row["reopenings"]. "</td> <td>" . $row["timestamp"]. "</td>";
 			        echo "</tr>";
 			    }
 		    }
+		echo "<button class='show-button' onclick='showall()'><a class='link-show' href='#' data-reveal-id='myModal'>Visualize</a></button>";    
 		} else {
-		    echo "0 results";
+		    echo "<br><br><hr><br><strong>0 results</strong>";
 		}
+		$sql = "SELECT count(*) FROM problem WHERE status='U'";
+		$result = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_array($result);
+		$unassigned_count = $row["count(*)"];
+		echo "<input type='hidden' value=$unassigned_count id='unassigned-count'>";
+
+		$sql = "SELECT count(*) FROM problem WHERE status='A'";
+		$result = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_array($result);
+		$assigned_count = $row["count(*)"];
+		echo "<input type='hidden' value=$assigned_count id='assigned-count'>";
+
+		$sql = "SELECT count(*) FROM problem WHERE status='C'";
+		$result = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_array($result);
+		$completed_count = $row["count(*)"];
+		echo "<input type='hidden' value=$completed_count id='completed-count'>";
 		}
 		$conn->close();
 	?>
@@ -171,6 +221,93 @@
 	</div>
 	<!-- The main content ends -->
 </div>
+<div id="myModal" class="reveal-modal">
+    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="myModal2" class="reveal-modal">
+	<div id="chartContainer2" style="height: 300px; width: 100%;"></div>
+	<a class="close-reveal-modal">&#215;</a>
+</div>
 <script src="../../scripts/timer.js"></script>
 </body>
+
+<script type="text/javascript">
+	function showall() {
+	var unassigned_count = document.getElementById("unassigned-count").value;
+	var assigned_count = document.getElementById("assigned-count").value;
+	var completed_count = document.getElementById("completed-count").value;
+	var chart = new CanvasJS.Chart("chartContainer",
+	{
+		title:{
+			text: "Complaints Stats"
+		},
+                animationEnabled: true,
+		legend:{
+			verticalAlign: "center",
+			horizontalAlign: "left",
+			fontSize: 10,
+			fontFamily: "Helvetica"        
+		},
+		theme: "theme1",
+		data: [
+		{        
+			type: "pie",       
+			indexLabelFontFamily: "Garamond",       
+			indexLabelFontSize: 20,
+			indexLabel: "{label} {y}",
+			startAngle:-20,      
+			showInLegend: true,
+			toolTipContent:"{legendText} {y}",
+			dataPoints: [
+				{  y: unassigned_count, legendText:"Unassigned Complaints", label: "Unassigned Complaints: " },
+				{  y: assigned_count, legendText:"Assigned Complaints", label: "Assigned Complaints: " },
+				{  y: completed_count, legendText:"Completed Complaints", label: "Completed Complaints: " }
+			]
+		}
+		]
+	});
+	chart.render();
+}
+</script>
+
+<script>
+function show() {
+	var high_count = document.getElementById("high-count").value;
+	var medium_count = document.getElementById("medium-count").value;
+	var low_count = document.getElementById("low-count").value;
+	var chart = new CanvasJS.Chart("chartContainer2",
+	{
+		title:{
+			text: "Unassigned Complaints Stats"
+		},
+                animationEnabled: true,
+		legend:{
+			verticalAlign: "center",
+			horizontalAlign: "left",
+			fontSize: 10,
+			fontFamily: "Helvetica"        
+		},
+		theme: "theme2",
+		data: [
+		{        
+			type: "pie",       
+			indexLabelFontFamily: "Garamond",       
+			indexLabelFontSize: 20,
+			indexLabel: "{label} {y}",
+			startAngle:-20,      
+			showInLegend: true,
+			toolTipContent:"{legendText} {y}",
+			dataPoints: [
+				{  y: high_count, legendText:"High Priority Complaints", label: "High Priority Complaints: " },
+				{  y: medium_count, legendText:"Medium Priority Complaints", label: "Medium Priority Complaints: " },
+				{  y: low_count, legendText:"Low Priority Complaints", label: "Low Priority Complaints: " }
+			]
+		}
+		]
+	});
+	chart.render();
+}
+</script>
 </html>	

@@ -50,6 +50,8 @@
 }
 
 #side-nav {
+	z-index: -1;
+	position: fixed;
 	height: 100vh;
 	float: left;
 	width: 25%;
@@ -165,6 +167,10 @@ table th {
 
 .valid-row {
 	background-color: rgba(0, 255, 0, 0.5);
+}
+
+.completed-row {
+	background-color: rgba(0, 0, 102, 0.5);
 }
 
 [type=submit] {

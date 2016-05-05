@@ -162,11 +162,9 @@ echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<h3>You need to <a href='Login.php'>LOG
 				$sql = "UPDATE engineer SET status='unassigned' WHERE id=$id";
 				mysqli_query($connect,$sql);
 			}
-		header("location: ongoing.php");
+		header("Location: ongoing.php");
 	}
 ?>
-
-
 </div>
 </body>
-</html>	
+</html>
