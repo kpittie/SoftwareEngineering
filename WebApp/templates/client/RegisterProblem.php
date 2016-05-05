@@ -155,31 +155,32 @@ include '../../scripts/timeout.php';
                             break;
                         }
                     }
+                    $sql = "UPDATE engineer SET number_of_complaints=$number_of_complaints,status='$status_engineer',total_complaints=$total_complaints WHERE id=$engineerId";
+
+                    if (mysqli_query($conn, $sql)) {
+                        echo "<p class='create-message'> Engineer Assigned </p>";
+
+                        $sql = "INSERT into problem(description,project_id,module_id,engineer_id,timestamp,status,priority) VALUES  ('$description',$projectId,$moduleId,$engineerId,'$timestamp','$status_complaint','$priority')";
+                        if (mysqli_query($conn, $sql)) {
+                            $problem_id=mysqli_insert_id($conn);
+                            echo "<p class='create-message' >Problem Id:</p>";
+                            echo "<p class='create-message' id='prob_id'>$problem_id </p>";
+                        }
+
+                        $sql = "UPDATE project SET problems=problems+1 WHERE id=$projectId";
+                        mysqli_query($conn,$sql);
+
+                    }
+                    else {
+                        echo "Error in Submission: ";
+                    }
                 }
                 else{
                     echo "<p class='error-message'> No Engineer in the project!!! </p>";
                 }
 
 
-                $sql = "UPDATE engineer SET number_of_complaints=$number_of_complaints,status='$status_engineer',total_complaints=$total_complaints WHERE id=$engineerId";
-
-                if (mysqli_query($conn, $sql)) {
-                    echo "<p class='create-message'> Engineer Assigned </p>";
-
-                    $sql = "INSERT into problem(description,project_id,module_id,engineer_id,timestamp,status,priority) VALUES  ('$description',$projectId,$moduleId,$engineerId,'$timestamp','$status_complaint','$priority')";
-                    if (mysqli_query($conn, $sql)) {
-                        $problem_id=mysqli_insert_id($conn);
-                        echo "<p class='create-message' >Problem Id:</p>";
-                        echo "<p class='create-message' id='prob_id'>$problem_id </p>";
-                    }
-
-                    $sql = "UPDATE project SET problems=problems+1 WHERE id=$projectId";
-                    mysqli_query($conn,$sql);
-
-                }
-                else {
-                    echo "Error in Submission: ";
-                }
+                
                endif;
             ?>
             <?php
