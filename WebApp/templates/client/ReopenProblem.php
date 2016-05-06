@@ -153,10 +153,9 @@ input[type=submit]
 	}
 	endif;
 	if(isset($_POST['update-button'])):
-		$description = $_POST['description'];
 		$timestamp=date("Y/m/d");
 		$id = $_POST['pid'];
-		$sql = "UPDATE problem SET description = '$description', status = 'A', priority = 'H', reopenings = reopenings + 1, timestamp = $timestamp WHERE id=$id";
+		$sql = "UPDATE problem SET status = 'A', priority = 'H', reopenings = reopenings + 1, timestamp = $timestamp WHERE id=$id";
 		if(mysqli_query($conn,$sql))
 		{
 			echo "The problem has been reopened successfully.";

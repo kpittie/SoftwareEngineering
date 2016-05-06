@@ -235,9 +235,9 @@
 
 <script type="text/javascript">
 	function showall() {
-	var unassigned_count = document.getElementById("unassigned-count").value;
-	var assigned_count = document.getElementById("assigned-count").value;
-	var completed_count = document.getElementById("completed-count").value;
+	var unassigned_count = +document.getElementById("unassigned-count").value;
+	var assigned_count = +document.getElementById("assigned-count").value;
+	var completed_count = +document.getElementById("completed-count").value;
 	var chart = new CanvasJS.Chart("chartContainer",
 	{
 		title:{
@@ -255,7 +255,7 @@
 		{        
 			type: "pie",       
 			indexLabelFontFamily: "Garamond",       
-			indexLabelFontSize: 20,
+			indexLabelFontSize: 11,
 			indexLabel: "{label} {y}",
 			startAngle:-20,      
 			showInLegend: true,
@@ -272,42 +272,42 @@
 }
 </script>
 
-<script>
-function show() {
-	var high_count = document.getElementById("high-count").value;
-	var medium_count = document.getElementById("medium-count").value;
-	var low_count = document.getElementById("low-count").value;
-	var chart = new CanvasJS.Chart("chartContainer2",
-	{
-		title:{
-			text: "Unassigned Complaints Stats"
-		},
-                animationEnabled: true,
-		legend:{
-			verticalAlign: "center",
-			horizontalAlign: "left",
-			fontSize: 10,
-			fontFamily: "Helvetica"        
-		},
-		theme: "theme2",
-		data: [
-		{        
-			type: "pie",       
-			indexLabelFontFamily: "Garamond",       
-			indexLabelFontSize: 20,
-			indexLabel: "{label} {y}",
-			startAngle:-20,      
-			showInLegend: true,
-			toolTipContent:"{legendText} {y}",
-			dataPoints: [
-				{  y: high_count, legendText:"High Priority Complaints", label: "High Priority Complaints: " },
-				{  y: medium_count, legendText:"Medium Priority Complaints", label: "Medium Priority Complaints: " },
-				{  y: low_count, legendText:"Low Priority Complaints", label: "Low Priority Complaints: " }
-			]
-		}
-		]
-	});
-	chart.render();
-}
-</script>
-</html>	
+<script type="text/javascript">
+  function show() {
+  	var c = +document.getElementById("high-count").value;
+  	var b = +document.getElementById("medium-count").value;
+  	var a = +document.getElementById("low-count").value;
+    var chart = new CanvasJS.Chart("chartContainer2",
+    {
+      title:{
+        text: "Unassigned Complaints Stats"    
+      },
+      animationEnabled: true,
+      axisY: {
+        title: "Unassigned Complaints"
+      },
+      legend: {
+        verticalAlign: "bottom",
+        horizontalAlign: "center"
+      },
+      theme: "theme2",
+      data: [
+
+      {        
+        type: "column",  
+        showInLegend: true, 
+        legendMarkerColor: "grey",
+        legendText: "Complaints",
+        dataPoints: [      
+        {y: a, label: "Low"},
+        {y: b,  label: "Medium" },
+        {y: c,  label: "High"}       
+        ]
+      }   
+      ]
+    });
+    chart.render();
+  }
+  </script>
+
+  </html>	
