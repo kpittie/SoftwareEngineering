@@ -63,7 +63,7 @@
 			
 			<li id="add-engineer" class="side-nav-items"> <a href="ongoing.php" class="nav-link"> Ongoing Problems </a> </li>
 			<br>
-			<li id="session-tracking" class="side-nav-items"> <a href="complete.php" class="nav-link"> Completed Problems </a> </li>
+			<li id="session-tracking" class="side-nav-items"> <a href="completed.php" class="nav-link"> Completed Problems </a> </li>
 			
 		</ul>
 </aside>
@@ -99,26 +99,26 @@ $pid=$_SESSION['id'];
 $query= "select id,description,timestamp,status,priority from problem where status='C' and engineer_id=$pid";
 
 $result=mysqli_query($connect,$query);
-if(!$result)
-	
-{echo "<br>";
-echo "&nbsp&nbsp&nbsp&nbsp&nbsp<h3> There are no Completed Problems To Display</h3>";
-}
 
-else
-{	
- echo "<table>";
- echo "<th>Problem ID</th><th>Description</th><th>Timestamp</th><th>Status</th><th>Priority</th>";
+if(mysqli_num_rows($result) > 0)
+ {	
+  echo "<table>";
+  echo "<th>Problem ID</th><th>Description</th><th>Timestamp</th><th>Status</th><th>Priority</th>";
 
- while($row=mysqli_fetch_array($result))
+  while($row=mysqli_fetch_array($result))
 	{ 
 	
     echo "<tr>";
     $pid = $row['id'];
     echo "<td>".$row['id']."</td>"."<td>".$row['description']."</td>"."<td>".$row['timestamp']."</td>"."<td>".$row['status']."</td>"."<td>".$row['priority']."</td></tr>";
     }
-echo "</table>";
-}
+  echo "</table>";
+ }
+else
+	{echo "<br>";
+     echo "&nbsp&nbsp&nbsp&nbsp&nbsp<h3> There are no Completed Problems To Display</h3>";
+     }
+
 }
 else
 {
