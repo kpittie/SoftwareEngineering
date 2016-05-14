@@ -95,7 +95,9 @@ if(isset($_SESSION['id']))
 echo "<br><br><br><br>";
 
 $pid=$_SESSION['id'];
+//echo $pid;
 $query= "select id,description,timestamp,status,priority from problem where status='C' and engineer_id=$pid";
+
 $result=mysqli_query($connect,$query);
 
 if(mysqli_num_rows($result) > 0)
