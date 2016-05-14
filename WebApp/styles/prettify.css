@@ -52,7 +52,7 @@
 
 #side-nav {
 	z-index: 1;
-	position: fixed;
+ 	position: fixed;
 	height: 100vh;
 	float: left;
 	width: 25%;
@@ -171,8 +171,8 @@ table th {
 }
 
 .completed-row {
-	background-color: rgba(0, 0, 102, 0.5);
-}
+ 	background-color: rgba(0, 0, 102, 0.5);
+ }
 
 [type=submit] {
 	background-color: rgba(0,153,255,0.9);

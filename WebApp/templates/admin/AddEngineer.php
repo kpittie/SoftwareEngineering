@@ -35,6 +35,11 @@
 		    }
 		}
 	</script>
+	<script>
+	    function redirect() {
+               window.location="UpdateEngineer.php";
+        }
+	</script>
 </head>
 
 <body>
@@ -69,7 +74,9 @@
 			if(isset($_SESSION['user-name']) && $_SESSION['user']=="admin") {
 		?>
 		<h1 class="main-heading"> Add Engineer / Project Manager </h1>
+		<div id='engineer'>
 		<form method="post" action="">
+			<input type='submit' value='Update' name='update-button' class='submit-delete-button' onclick='redirect()'> <br/>
 			<input type="text" required="required" pattern="^[0-9]{1,10}$" placeholder="Engineer ID" id="engineer-id" name="engineer-id"> <br/>
 			<input type="password" required="required" pattern=".{8,}" placeholder="Password" id="password" name="password"> <br/>			
 			<select required="required" name="project-name" id="project-name" onchange="trig(this.value);"> 
@@ -96,6 +103,7 @@
 			</div> <br/>			
 			<input type="submit" value="Add Engineer" class="submit-delete-button">
 		</form>
+	</div>
 	<?php
 		$dbhost = 'localhost';
 		$dbuser = 'root';
@@ -125,7 +133,7 @@
 		    	$flag = 1;
 			} 
 
-			if($pmanager == 'y')
+			if($pmanager == 'y' && $flag==1)
 			{
 			$sql = "UPDATE project SET manager_id = $id WHERE id = $pid";
 				if (mysqli_query($conn, $sql)) 

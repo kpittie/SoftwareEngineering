@@ -92,11 +92,11 @@
 <?php
 
 include ("db_connect.php");
-if(isset($_SESSION['id']))
+if(isset($_SESSION['user-name']))
 {
 echo "<br><br><br><br>";
 
-$pid=$_SESSION['id'];
+$pid=$_SESSION['user-name'];
 //echo $pid;
 $query= "select id,description,timestamp,status,priority from problem where status='A' and engineer_id=$pid";
 
@@ -133,9 +133,9 @@ echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<h3>You need to <a href='Login.php'>LOG
       <div class="modal-body">
 	    <form method="post" class="modal-form">
 	    	<input type="hidden" id="pid" name="pid">
-	    	<textarea id="solution" name="solution" rows="10" cols="50" placeholder="Enter the solution comments" required></textarea> <br> <hr>
-	    	<input type="text" pattern="^[0-9]{1,10}$" name="hours" placeholder="Number of Hours" required> <br>
+			<textarea id="solution" name="solution" rows="10" cols="50" placeholder="Enter the solution comments" required></textarea> <br>
 	    	<hr>
+	    	<input type="text" pattern="^[0-9]{1,10}$" name="hours" placeholder="Number of Hours" required> <br>
 	    	<input type="submit" name="submit-solution" value="Submit Solution">
 	    </form>
 	   </div>
@@ -149,7 +149,7 @@ echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<h3>You need to <a href='Login.php'>LOG
 		$solution = $_POST['solution'];
 		$hours = $_POST['hours'];
 		$pid = $_POST['pid'];
-		$id = $_SESSION['id'];
+		$id = $_SESSION['user-name'];
 		$sql = "UPDATE problem SET solution_comment='$solution', number_of_hours=$hours, status='C' WHERE id=$pid";
 		mysqli_query($connect, $sql);
 		$sql = "UPDATE engineer SET number_of_complaints=number_of_complaints-1 WHERE id=";
@@ -162,9 +162,11 @@ echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<h3>You need to <a href='Login.php'>LOG
 				$sql = "UPDATE engineer SET status='unassigned' WHERE id=$id";
 				mysqli_query($connect,$sql);
 			}
-		header("Location:ongoing.php");
+		header("location: ongoing.php");
 	}
 ?>
+
+
 </div>
 </body>
-</html>
+</html>	
