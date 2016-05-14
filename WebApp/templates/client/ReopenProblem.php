@@ -112,7 +112,7 @@ input[type=submit]
 	$id=$_POST["pid"];
 	$query = "select problem.id,problem.description,problem.engineer_id,problem.status,problem.timestamp,problem.project_id,problem.priority,problem.reopenings from problem inner join project on problem.project_id=project.id where project.client_id=$username and problem.id = $id and  problem.status='C' or problem.status='c' ";
  $result = mysqli_query($conn,$query);
- if (mysqli_num_rows($result)==1)
+ if (mysqli_num_rows($result)>0)
  {
  while($row= mysqli_fetch_assoc($result))
 	{ 
@@ -154,8 +154,9 @@ input[type=submit]
 	endif;
 	if(isset($_POST['update-button'])):
 		$timestamp=date("Y/m/d");
+		$description = $_POST['description'];
 		$id = $_POST['pid'];
-		$sql = "UPDATE problem SET status = 'A', priority = 'H', reopenings = reopenings + 1, timestamp = $timestamp WHERE id=$id";
+		$sql = "UPDATE problem SET status = 'A', priority = 'H', reopenings = reopenings + 1, timestamp = $timestamp, description = '$description' WHERE id=$id";
 		if(mysqli_query($conn,$sql))
 		{
 			echo "The problem has been reopened successfully.";

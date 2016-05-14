@@ -48,7 +48,7 @@
 	transition: background-color 0.8s, border 0.4s, text-decoration 0.8s;
 }
 
-.link-show:hover{
+.show-button:hover .link-show{
 	color: rgba(0,153,255,0.9);
 	transition: color 0.4s;
 }

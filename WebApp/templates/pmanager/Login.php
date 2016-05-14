@@ -105,7 +105,7 @@ $(document).ready(function() {
 			    $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
 			    $pass=$_POST['pass'];
 			    $id=$_POST['pmanager'];
-			    $sqll = "select id from engineer";
+			    $sqll = "select id from engineer where project_manager='y'";
 			    $result_id = $conn->query($sqll);
 			    while ($row_id = mysqli_fetch_array($result_id))
 			    {
@@ -119,6 +119,10 @@ $(document).ready(function() {
 			    			if ($passhash==$row['password']) {
 			    				$_SESSION['user-name'] = $id;
 			    				$_SESSION['user'] = "pmanager";
+			    				$sql = "select project_id from engineer where id='$id'";
+			    				$result = mysqli_query($conn,$sql);	
+			    				$row = mysqli_fetch_array($result);
+			    				$_SESSION['project-id'] = $row['project_id'];
 			    				header("Location: Welcome.php");
 			    			}
 			    			else {

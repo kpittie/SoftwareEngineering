@@ -68,7 +68,8 @@
 		echo "		<th> Status </th>";
 		echo "	</tr>"; 
 
-		$sql = "SELECT * FROM problem,project WHERE problem.project_id=project.id AND engineer_id IS NULL";
+		$pid = $_SESSION['project-id'];
+		$sql = "SELECT * FROM problem,project WHERE problem.project_id=project.id AND engineer_id IS NULL AND project.id='$pid'";
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {
@@ -86,20 +87,21 @@
 			if ($conn->connect_error) {
 			    die("Connection failed: " . $conn->connect_error);
 			}
-		echo "<table border='1'>";
-		echo "	<tr>";
-		echo "		<th> Project Name </th>";
-		echo "		<th> Description </th>";
-		echo "		<th> Project ID </th>";
-		echo "		<th> Module ID </th>";
-		echo "		<th> Engineer ID </th>";
-		echo "		<th> Status </th>";
-		echo "	</tr>"; 
-
-		$sql = "SELECT * FROM problem,project WHERE problem.project_id=project.id";
+		$pid = $_SESSION['project-id'];	
+		$sql = "SELECT * FROM problem,project WHERE problem.project_id=project.id AND project.id='$pid'";
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {
+			echo "<table border='1'>";
+			echo "	<tr>";
+			echo "		<th> Project Name </th>";
+			echo "		<th> Description </th>";
+			echo "		<th> Project ID </th>";
+			echo "		<th> Module ID </th>";
+			echo "		<th> Engineer ID </th>";
+			echo "		<th> Status </th>";
+			echo "	</tr>"; 
+
 		    while($row = $result->fetch_assoc()) {
 		    	if($row["engineer_id"] == NULL)
 		    	{

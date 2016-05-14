@@ -133,23 +133,22 @@
 			if ($conn->connect_error) {
 			    die("Connection failed: " . $conn->connect_error);
 			}
-		echo "<table border='1'>";
-		echo "	<tr>";
-		echo "		<th> ID </th>";
-		echo "		<th> Description </th>";
-		echo "		<th> Project ID </th>";
-		echo "		<th> Module ID </th>";
-		echo "		<th> Engineer ID </th>";
-		echo "		<th> Status </th>";
-		echo "		<th> Priority </th>";
-		echo "		<th> Reopenings </th>";
-		echo "		<th> Timestamp </th>";
-		echo "	</tr>"; 
-
 		$sql = "SELECT * FROM problem ORDER BY status='U' DESC, status='A' DESC, status='C' DESC, priority='H' DESC, priority='M' DESC, priority='L' DESC";
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {
+			echo "<table border='1'>";
+			echo "	<tr>";
+			echo "		<th> ID </th>";
+			echo "		<th> Description </th>";
+			echo "		<th> Project ID </th>";
+			echo "		<th> Module ID </th>";
+			echo "		<th> Engineer ID </th>";
+			echo "		<th> Status </th>";
+			echo "		<th> Priority </th>";
+			echo "		<th> Reopenings </th>";
+			echo "		<th> Timestamp </th>";
+			echo "	</tr>"; 
 		    while($row = $result->fetch_assoc()) {
 		    	if($row["status"] == 'U')
 		    		$status = "Unassigned";

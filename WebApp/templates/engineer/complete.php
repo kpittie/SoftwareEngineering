@@ -75,8 +75,7 @@ if(isset($_SESSION['id']))
 {
 echo "<br><br><br><br>";
 $pid=$_SESSION['id'];
-//echo $pid;
-$query= "select id,description,timestamp,status,priority from problem where status='C' OR status='c' and id=$pid";
+$query= "select id,description,timestamp,status,priority from problem where status='C' AND engineer_id=$pid";
 $result=mysqli_query($connect,$query);
 //var_dump($result);
 echo "<table>";

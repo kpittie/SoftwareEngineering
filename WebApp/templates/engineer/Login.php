@@ -123,7 +123,7 @@ echo "<div class='jumbotron text-center'>";
   </tr>
   <tr>
     <td height="58" valign="bottom"><img src="../../images/b2.jpg" width="43" height="43" align="absmiddle"></td>
-    <td valign="bottom" bordercolor="#0000FF"> <a href="completed.php" ><h3>&nbsp&nbspCOMPLETED PROBLEMS</h3></a></td>
+    <td valign="bottom" bordercolor="#0000FF"> <a href="complete.php" ><h3>&nbsp&nbspCOMPLETED PROBLEMS</h3></a></td>
   </tr>
 </table>';
 echo "</div>";
